@@ -29,6 +29,10 @@ function LoginScreen({ navigation }) {
     if (loginData.id.length < 1 || loginData.passWord.length < 1) {
       return;
       //아이디 비밀번호 최소글자 설정 필요
+      }
+      
+    const onClose = () => {
+        setModal(current => !current);
     }
 
     const recv = await sendLoginRequest(loginData.id, loginData.passWord);
@@ -44,9 +48,7 @@ function LoginScreen({ navigation }) {
   };
 
 
-  const onClose = () => {
-    setModal(current => !current);
-  }
+
   const findAccount = async (email) => {
 
     const rst = await findIdByEmail(email);

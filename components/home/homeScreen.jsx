@@ -1,14 +1,20 @@
+import { useContext } from "react";
 import { Text, View } from "react-native";
+import { AppContext } from "../../context/auth";
 import MainHeader from "../header";
 import Header from "../header";
+import Category from "./category";
 import SearchBar from "./searchBar";
 
 function HomeScreen() {
+    const ctx = useContext(AppContext);
     return (
         <View>
             <MainHeader />
-            <SearchBar/>
-            <Text>메인</Text>
+            <Text>환영합니다 ! {ctx.auth?ctx.auth.id:""} 님</Text>
+            <SearchBar />
+            <Category/>
+            
         </View>
     );
 }

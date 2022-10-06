@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../assets/font/base";
 
-function MainHeader() {
+function MainHeader({back}) {
     return (
         <View style={styles.main}>
+            
             <BaseFont style={{fontSize:20}}>Beauty Shop</BaseFont>
         </View>
     );

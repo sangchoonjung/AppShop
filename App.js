@@ -11,6 +11,8 @@ import JoinScreen from './components/account/login/joinScreen';
 import MypageScreen from './components/account/mypage/mypageScreen';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { AppContext, AppContextProvider } from './context/auth';
+import { useContext } from 'react';
 
 
 const Tab = createBottomTabNavigator();
@@ -18,21 +20,30 @@ const Stack = createStackNavigator();
 
 function GuestStackNavigator() {
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name='login' component={LoginScreen}/>
-      <Stack.Screen name='join' component={JoinScreen}/>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='login' component={LoginScreen} />
+      <Stack.Screen name='join' component={JoinScreen} />
     </Stack.Navigator>
   )
 }
 
 function MemberStackNavigator() {
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name='mypage' component={MypageScreen}/>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='mypage' component={MypageScreen} />
     </Stack.Navigator>
   )
 }
 
+function SwipeStackNavigator() {
+  const ctx = useContext(AppContext);
+
+  return (
+    <>
+      {ctx.auth? <MemberStackNavigator/> : <GuestStackNavigator/>}
+    </>
+  )
+}
 
 
 
@@ -40,12 +51,12 @@ function MemberStackNavigator() {
 
 function DefaultNavigator() {
   return (
-    <Tab.Navigator screenOptions={{headerShown:false}}>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name='home' component={HomeScreen}
         options={{
           tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />
         }} />
-      <Tab.Screen name='test' component={GuestStackNavigator}
+      <Tab.Screen name='account' component={SwipeStackNavigator}
         options={{
           tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />
         }} />
@@ -63,14 +74,16 @@ export default function App() {
     'baseFont': require("./assets/font/NanumGothic-Regular.ttf")
   })
   if (!fontsLoaded) {
-    return <StatusBar/>
+    return <StatusBar />
   }
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <DefaultNavigator/>
-      </NavigationContainer>
+      <AppContextProvider>
+        <NavigationContainer>
+          <DefaultNavigator />
+        </NavigationContainer>
+      </AppContextProvider>
     </>
   );
 }

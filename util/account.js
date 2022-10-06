@@ -75,3 +75,13 @@ export async function findIdByEmail(email) {
 
     }
 }
+
+
+export async function updateAccountRequest(data) {
+    console.log(data)
+    try {
+
+    } catch (e) {
+
+    }
+}    

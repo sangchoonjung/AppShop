@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+
 import HomeScreen from './components/home/homeScreen';
 import ZzimScreen from './components/zzim/zzimScreen';
 import LoginScreen from './components/account/login/loginScreen';
@@ -43,9 +44,6 @@ function DefaultNavigator() {
     </Tab.Navigator>
   )
 }
-
-
-
 
 
 export default function App() {

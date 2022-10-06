@@ -80,11 +80,14 @@ export async function findIdByEmail(email) {
 
 
 export async function updateAccountRequest(data) {
-    console.log(data)
     if (!data) {
         return;
     }
+    if(!data.passWordNow){
+        return;
+    }
     try {
+        console.log(data)
         const response = await axios.post(baseURL + "/api/account/updateAccount", {
             ...data
         })

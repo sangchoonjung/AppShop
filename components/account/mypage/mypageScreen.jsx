@@ -12,7 +12,7 @@ function MypageScreen({navigation}) {
     }
     console.log(ctx)
     const updateNavigationHandle =()=>{
-      navigation.navigate("update", )
+      navigation.navigate("update", {id:ctx.auth.id,email:ctx.auth.email})
     }
 
     return (

@@ -84,4 +84,4 @@ export async function updateAccountRequest(data) {
     } catch (e) {
 
     }
-}
+}    

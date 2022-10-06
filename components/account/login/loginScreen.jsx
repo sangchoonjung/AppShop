@@ -29,25 +29,31 @@ function LoginScreen({ navigation }) {
     if (loginData.id.length < 1 || loginData.passWord.length < 1) {
       return;
       //아이디 비밀번호 최소글자 설정 필요
-      }
-      
-    const onClose = () => {
-        setModal(current => !current);
     }
 
-    const recv = await sendLoginRequest(loginData.id, loginData.passWord);
-    // 로그인한후 인증 셋팅
-    console.log(recv.result)
-    if (recv.result) {
-      ctx.login(recv.message.id, recv.token);
-      Alert.alert("confirm", "환영합니다!")
+    try{
+
+      const recv = await sendLoginRequest(loginData.id, loginData.passWord);
+      // 로그인한후 인증 셋팅
+      console.log(recv.result)
+      if (recv.result) {
+        ctx.login(recv.message.id, recv.token, recv.message.email);
+        Alert.alert("confirm", "환영합니다!")
       navi.navigate("home");
     } else {
       Alert.alert("warning", "id 또는 password가 틀렸습니다.")
     }
+
+  }catch(e){
+    console.log(e.message);
+    Alert.alert("warning", "ERROR!!!");
+
+  }
   };
 
-
+  const onClose = () => {
+    setModal(current => !current);
+  }
 
   const findAccount = async (email) => {
 

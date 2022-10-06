@@ -13,9 +13,6 @@ export function AppContextProvider({children}) {
     }
 
 
-
-
-
     return (
         <AppContext.Provider value={{auth,login,logout}}>
             {children}

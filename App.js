@@ -13,6 +13,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AppContext, AppContextProvider } from './context/auth';
 import { useContext } from 'react';
+import UpdateAccountScreen from './components/account/mypage/updateAccountScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -31,6 +32,7 @@ function MemberStackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name='mypage' component={MypageScreen} />
+      <Stack.Screen name='update' component={UpdateAccountScreen} />
     </Stack.Navigator>
   )
 }

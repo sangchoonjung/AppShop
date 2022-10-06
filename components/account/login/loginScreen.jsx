@@ -1,13 +1,54 @@
-import { View,Text } from "react-native";
+import { useState } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { sendLoginRequest } from "../../../util/account";
 import MainHeader from "../../header";
+//해야할거 로그인context에 맞게 수정 네비게이션 (회원가입 아디비번찾기)연결 나머지는 서버작업
 
-function LoginScreen() {
+function LoginScreen({navigation}) {
+    const [loginData, setLoginData] = useState({ id: "", passWord: "" });
+
+    const changeHandle = (text) => {
+        setLoginData(current => { return { ...current, [text[0]]: text[1] } })
+    };
+
+    const loginHandle = () => {
+        if (loginData.id.length < 1 || loginData.passWord.length < 1) {
+            return;
+            //아이디 비밀번호 최소글자 설정 필요
+        }
+        sendLoginRequest(loginData.id,loginData.passWord);
+    }
+
+    const registerHandle = () => {
+        navigation.navigate("join")
+    }
+
+    const findAccount = () => {
+
+    }
+
+
+    console.log(loginData.id.length, loginData.passWord);
     return (
+        <>
         <View>
-            <MainHeader/>
-            <Text>로그인 스크린</Text>
+
+                    <MainHeader/>
         </View>
+            <View>
+                <TextInput value={{}} autoCapitalize="none" onChangeText={(text) => changeHandle(["id", text])} placeholder="아이디" />
+                <TextInput secureTextEntry={true} value={{}} onChangeText={(text) => changeHandle(["passWord", text])} placeholder="비밀번호" />
+                <Button title="임시로그인버튼" onPress={loginHandle}/>
+                <Button title="회원가입" onPress={registerHandle} />
+                <Button title="구글로그인위치" />
+                <Button title="아디비번찾기" onPress={findAccount} />
+            </View>
+        </>
     );
 }
 
+
+const styles = StyleSheet.create({
+
+})
 export default LoginScreen;

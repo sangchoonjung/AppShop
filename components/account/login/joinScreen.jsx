@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../header";
@@ -24,7 +25,22 @@ function JoinScreen() {
     sendRegisterRequest(registData);
   };
 
-  const confirmId = () => {};
+    const submitHandle = async() => {
+        console.log(registData);
+        await sendRegisterRequest(registData);
+    }
+
+    const checkId = async () => {
+        // console.log(registData.id)
+        const response = await sendIdCheck(registData.id);
+        console.log(response)
+        if(response){
+            Alert.alert("퍼퓸","사용가능")
+        }else{
+            Alert.alert("퍼퓸","사용불가")
+        }
+    }
+
   return (
     <>
       <View>
@@ -78,6 +94,7 @@ function JoinScreen() {
       </View>
     </>
   );
+
 }
 
 const sytles = StyleSheet.create({});

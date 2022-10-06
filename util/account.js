@@ -7,7 +7,7 @@ const baseURL = "http://192.168.4.127:8080";
 
 export async function sendLoginRequest(id, passWord) {
     console.log(id, passWord);
-    try{
+    try {
 
         const response = await axios.post(baseURL + "/api/account/login", {
             "id": id,
@@ -16,31 +16,62 @@ export async function sendLoginRequest(id, passWord) {
         // console.log(response.data)
 
         return response.data
-    }catch(e){
+    } catch (e) {
         console.log(e.message)
     }
 }
 
 
-export async function sendRegisterRequest(data){
-    try{
-        if(data.passWord!==data.confirmPassWord){
+export async function sendRegisterRequest(data) {
+    try {
+
+        if (data.passWord !== data.confirmPassWord) {
             return;
         }
 
         const response = await axios.post(baseURL + "/api/account/register", {
             "id": data.id,
             "passWord": data.passWord,
-            "email":data.email,
-            "birth":data.birth,
-            "question":data.question,
-            "answer":data.answer
+            "email": data.email,
+            "birth": data.birth,
+            "question": data.question,
+            "answer": data.answer
         })
-        return response.data
+        return response.data;
 
-    }catch(e){
-        
-        console.log(e.message)
+    } catch (e) {
+
+        console.log(e.message);
     }
 
+}
+
+export async function sendIdCheck(id) {
+    try {
+        if (!id) {
+            return;
+        }
+        const response = await axios.post(baseURL + "/api/account/idCheck", {
+            id: id
+        });
+        // console.log(response.data)
+        return (response.data.result)
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
+
+export async function findIdByEmail(email) {
+    try {
+        if (!email) {
+            return;
+        }
+        const response = await axios.post(baseURL + "/api/account/findId", {
+            email: email
+        })
+        return response.data
+    } catch (e) {
+
+    }
 }

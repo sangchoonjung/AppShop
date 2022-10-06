@@ -13,6 +13,7 @@ function MypageScreen() {
         <View style={styles.mainContain}>
           <MainHeader />
           <Text>마이페이지</Text>
+          <Button title="프로필수정" />
         </View>
         <View style={styles.logoutContain}>
           <Button title="logout" onPress={logoutHandle} />

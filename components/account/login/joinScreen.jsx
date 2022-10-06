@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
-import { sendRegisterRequest } from "../../../util/account";
+import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../header";
 
 function JoinScreen() {
@@ -21,21 +21,30 @@ function JoinScreen() {
   };
 
 
-    const submitHandle = async() => {
-        console.log(registData);
-        await sendRegisterRequest(registData);
-    }
+  const submitHandle = async () => {
+    console.log(registData);
+    await sendRegisterRequest(registData);
+  }
 
-    const checkId = async () => {
-        // console.log(registData.id)
-        const response = await sendIdCheck(registData.id);
-        console.log(response)
-        if(response){
-            Alert.alert("퍼퓸","사용가능")
-        }else{
-            Alert.alert("퍼퓸","사용불가")
-        }
+  const checkId = async () => {
+    // console.log(registData.id)
+
+    try {
+      if (!registData.id) {
+        return;
+      }
+      const response = await sendIdCheck(registData.id);
+      console.log(response)
+
+      if (response) {
+        Alert.alert("퍼퓸", "사용가능")
+      } else {
+        Alert.alert("퍼퓸", "사용불가")
+      }
+    } catch (e) {
+      console.log(e.message)
     }
+  }
 
   return (
     <>
@@ -50,7 +59,7 @@ function JoinScreen() {
           placeholder="id"
           style={{}}
         />
-        <Button title="아디중복화깅ㄴ" onPress={confirmId} />
+        <Button title="아디중복화깅ㄴ" onPress={checkId} />
         <TextInput
           onChangeText={(text) => changeHandle(["passWord", text])}
           secureTextEntry={true}

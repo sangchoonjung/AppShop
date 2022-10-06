@@ -91,7 +91,6 @@ function LoginScreen({ navigation }) {
         <Button title="임시로그인버튼" onPress={loginHandle} />
         <Button title="회원가입" onPress={registerHandle} />
         <Button title="구글로그인위치" />
-        <Button title="아디비번찾기" onPress={findAccount} />
         
                 <Button title="아디찾기" onPress={onClose} />
                 <Button title="비번재설정" onPress={passWordReset} />

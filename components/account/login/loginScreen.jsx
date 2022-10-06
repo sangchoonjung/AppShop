@@ -1,13 +1,9 @@
-
-import { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { findIdByEmail, sendLoginRequest } from "../../../util/account";
 
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { AppContext } from "../../../context/auth";
-import { sendLoginRequest } from "../../../util/account";
 import MainHeader from "../../header";
 import FindAccount from "./findAccount";
 //해야할거 로그인context에 맞게 수정 네비게이션 (회원가입 아디비번찾기)연결 나머지는 서버작업
@@ -72,8 +68,6 @@ function LoginScreen({ navigation }) {
     navigation.navigate("join");
   };
 
-
-  const findAccount = () => {};
 
 //   console.log(loginData.id.length, loginData.passWord);
   return (

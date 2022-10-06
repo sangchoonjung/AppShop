@@ -20,10 +20,6 @@ function JoinScreen() {
     });
   };
 
-  const submitHandle = () => {
-    console.log(registData);
-    sendRegisterRequest(registData);
-  };
 
     const submitHandle = async() => {
         console.log(registData);

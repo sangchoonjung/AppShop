@@ -2,7 +2,7 @@ import axios from "axios"
 import { useContext } from "react";
 import { AppContext } from "../context/auth";
 
-const baseURL = "http://192.168.4.127:8080";
+const baseURL = "http://192.168.4.41:8080";
 //설정값이 localhost나 128.0.0.1로 설정하면 Network Error 떠서 테스트 하실 때 자기 ip로 해주세요
 
 export async function sendLoginRequest(id, passWord) {

@@ -35,7 +35,7 @@ function LoginScreen({ navigation }) {
     // 로그인한후 인증 셋팅
       console.log(recv.result)
       if (recv.result) {
-          ctx.login(recv.message.id, recv.token);
+          ctx.login(recv.message.id, recv.token,recv.email);
           Alert.alert("confirm", "환영합니다!")
           navi.navigate("home");
       } else {

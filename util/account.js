@@ -73,6 +73,7 @@ export async function findIdByEmail(email) {
         })
         return response.data
     } catch (e) {
+        console.log(e.message);
 
     }
 }
@@ -80,9 +81,18 @@ export async function findIdByEmail(email) {
 
 export async function updateAccountRequest(data) {
     console.log(data)
+    if (!data) {
+        return;
+    }
     try {
+        const response = await axios.post(baseURL + "/api/account/updateAccount", {
+            ...data
+        })
+        console.log(response)
+        
 
     } catch (e) {
+        console.log(e.message);
 
     }
 }    

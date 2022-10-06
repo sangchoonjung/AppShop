@@ -1,6 +1,7 @@
 import { useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { updateAccountRequest } from "../../../util/account";
 import MainHeader from "../../header";
 
 function UpdateAccountScreen() {
@@ -28,6 +29,7 @@ function UpdateAccountScreen() {
 
     const submitHandle = () => {
         const data = {};
+        //입력을 했다가 지워버리면 값이 "" 으로 변해서 불필요한 정보가 넘어가길래 수정
         for( let value in updateData){
             if(updateData[value]==="")
             console.log(value)
@@ -35,7 +37,9 @@ function UpdateAccountScreen() {
                 data[value]=updateData[value]
             }
         } 
+        updateAccountRequest(data);
         console.log(data)
+
 
     }
     return (

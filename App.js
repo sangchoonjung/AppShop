@@ -4,18 +4,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
 import HomeScreen from './components/home/homeScreen';
 import ZzimScreen from './components/zzim/zzimScreen';
 import LoginScreen from './components/account/login/loginScreen';
 import JoinScreen from './components/account/login/joinScreen';
 import MypageScreen from './components/account/mypage/mypageScreen';
+import { Entypo } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function GuestStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name='login' component={LoginScreen}/>
       <Stack.Screen name='join' component={JoinScreen}/>
     </Stack.Navigator>
@@ -24,7 +27,7 @@ function GuestStackNavigator() {
 
 function MemberStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name='mypage' component={MypageScreen}/>
     </Stack.Navigator>
   )
@@ -37,10 +40,19 @@ function MemberStackNavigator() {
 
 function DefaultNavigator() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name='home' component={HomeScreen}/>
-      <Tab.Screen name='test' component={GuestStackNavigator}/>
-      <Tab.Screen name='zzim' component={ZzimScreen}/>
+    <Tab.Navigator screenOptions={{headerShown:false}}>
+      <Tab.Screen name='home' component={HomeScreen}
+        options={{
+          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />
+        }} />
+      <Tab.Screen name='test' component={GuestStackNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />
+        }} />
+      <Tab.Screen name='zzim' component={ZzimScreen}
+        options={{
+          tabBarIcon: ({ color }) => <Entypo name="heart" size={24} color={color} />
+        }} />
     </Tab.Navigator>
   )
 }

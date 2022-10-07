@@ -1,3 +1,8 @@
+export const categoryList=
+[
+"cleansing-Foam","eye-Cream","Cream","essense/serum","skin/lotion"
+]
+
 
 export const itemList = [
     {

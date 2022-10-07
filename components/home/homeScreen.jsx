@@ -12,10 +12,8 @@ function HomeScreen() {
 
 
     const [itemList,setItemList] = useState(null);
-    const [filter,setFilter] = useState(null)
-    //필터를 스테이트에 올려서 서치바or카테고리랑 연동한 필터값으로
+    const [filter,setFilter] = useState([])
     //리스트에서 필터링(안되면 바꿀게요)
-    //필터 취소시 null 세팅할것
 
 
     useEffect(() => {
@@ -24,7 +22,6 @@ function HomeScreen() {
             //서버에서 받아온 아이템으로 변경해야됨
         })
     }, []);
-    // console.log(itemList,"???????????????????????")
 
     const ctx = useContext(AppContext);
     

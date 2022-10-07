@@ -84,6 +84,7 @@ export async function updateAccountRequest(data) {
     if(!data.passWordNow){
         return;
     }
+    
     try {
         console.log(data)
         const response = await axios.post(baseURL + "/api/account/updateAccount", {

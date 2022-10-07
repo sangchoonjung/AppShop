@@ -8,7 +8,7 @@ import products from "../data/data-dummy";
 export async function requestAllProduct() {
     try {
 
-        const response = await axios.post(baseURL + "/api/product/allList", {
+        const response = await axios.post(baseURL + "/api/product/allProductList", {
             
         })
         // console.log(response.data)

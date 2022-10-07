@@ -1,5 +1,5 @@
 
-[
+export const itemList = [
     {
         "key": "1",
         "from": "Korea",

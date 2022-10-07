@@ -3,11 +3,17 @@ import { Header } from "@react-navigation/stack";
 import { Image, Modal, ScrollView, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
 import MainHeader from "../mainheader";
+import SetTime from "./setTime";
 
 function ItemDetailScreen() {
   const route = useRoute();
   const data = route.params.tag;
   console.log(data);
+
+  const timeLimit = 20
+  //20분 가정
+
+
   return (
     <View style={styles.contain}>
       <View>
@@ -32,6 +38,11 @@ function ItemDetailScreen() {
               Regular Price _ ${data.standardFee}
             </BaseFont>
           </View>
+
+            <View>
+              <SetTime timeLimit={timeLimit}/>
+            {/* 남은시간 컴포넌트 */}
+            </View>
           <View style={styles.detailImgContain}>
             <Image
               source={{ uri: data.detailImage }}
@@ -47,6 +58,7 @@ function ItemDetailScreen() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   contain: {
     flex: 1,

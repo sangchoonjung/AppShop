@@ -20,6 +20,12 @@ import ItemDetailScreen from './components/home/itemDetailScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+// 세훈 안한거 (할 거)
+// filter search 중복시 어느 한 쪽 없애기
+// interval time cutting
+// 찜 구현
+// 시간 나면 스피너
+
 function GuestStackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

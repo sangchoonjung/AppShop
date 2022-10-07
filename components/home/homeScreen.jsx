@@ -17,6 +17,7 @@ function HomeScreen() {
             setItemList(p.message);
         }).catch(e => console.log(e.message));
     }, []);
+    
     useEffect(() => {
         categoryFilteredProduct(filter).then(p => setItemList(p?.message));
         if (filter.length === 0) {

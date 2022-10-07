@@ -1,13 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Text, View } from "react-native";
 import { AppContext } from "../../context/auth";
+import { readAllProduct } from "../../util/product";
 import MainHeader from "../header";
 import Header from "../header";
 import Category from "./category";
 import SearchBar from "./searchBar";
 
 function HomeScreen() {
+
+    useEffect(() => {
+        readAllProduct().then(p => {
+            console.log(p);
+        })
+    }, []);
+    
     const ctx = useContext(AppContext);
+    
     return (
         <View>
             <MainHeader />

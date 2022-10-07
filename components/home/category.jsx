@@ -19,7 +19,8 @@ function Category({ filter, setFilter }) {
         filter.includes(e) ?
             setFilter(current => current.filter(item => item !== e))
             :
-            setFilter(current => [...current, e])
+            setFilter(current => [...current, e]);
+
     }
 
 
@@ -31,7 +32,7 @@ function Category({ filter, setFilter }) {
 
                 <ScrollView horizontal={true} >
                     {category.map(e => 
-                    <CategoryListItem onPress={() => filterhandle(e)} key={e} title={e} />
+                    <CategoryListItem filter={filter} onPress={() => filterhandle(e)} key={e} title={e} />
                     )}
                 </ScrollView>
             </View>

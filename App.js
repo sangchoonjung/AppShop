@@ -14,6 +14,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { AppContext, AppContextProvider } from './context/auth';
 import { useContext } from 'react';
 import UpdateAccountScreen from './components/account/mypage/updateAccountScreen';
+import ItemDetailScreen from './components/home/itemDetailScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -42,19 +43,26 @@ function SwipeStackNavigator() {
 
   return (
     <>
-      {ctx.auth? <MemberStackNavigator/> : <GuestStackNavigator/>}
+      {ctx.auth ? <MemberStackNavigator /> : <GuestStackNavigator />}
     </>
   )
 }
 
+function MainHomeScreen() {
 
+  return (<Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name='mainHome' component={HomeScreen} />
+    <Stack.Screen name='detail' component={ItemDetailScreen} />
+  </Stack.Navigator>
+  )
+}
 
 
 
 function DefaultNavigator() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name='home' component={HomeScreen}
+      <Tab.Screen name='home' component={MainHomeScreen}
         options={{
           tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />
         }} />

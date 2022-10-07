@@ -1,6 +1,4 @@
 import axios from "axios"
-import { useContext } from "react";
-import { AppContext } from "../context/auth";
 
 const baseURL = "http://192.168.4.41:8080";
 // const baseURL = "http://192.168.4.127:8080";

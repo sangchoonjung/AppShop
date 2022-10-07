@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { AppContext } from "../../context/auth";
 import { categoryFilteredProduct, requestAllProduct, searchFilteredProduct } from "../../util/product";
-import MainHeader from "../header";
-import Header from "../header";
+
+import MainHeader from "../mainheader";
+import Header from "../mainheader";
 import Category from "./category";
 import List from "./list";
 import SearchBar from "./searchBar";

@@ -2,12 +2,12 @@ import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 function Item({data}) {
-
     const navigation = useNavigation();
 
     const detailNavigation = ()=>{
-        navigation.navigate("detail")
+        navigation.navigate("detail",{tag:data})
     }
+
     return ( 
         <>
         <View style={styles.itemContainer}>
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
 
     },
     titleImage:{
-        height:200
+        height: 200,
+        
     }
 })
 export default Item;

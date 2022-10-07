@@ -19,7 +19,6 @@ function FindAccount({ onClose, getAccount, visible}) {
                     onChangeText={email => setEmail(email)} value={email}
                 />
                 <View>
-
                     <Button title="취소" onPress={()=> onClose()}/>
                     <Button title="찾기" onPress={find} />
                 </View>

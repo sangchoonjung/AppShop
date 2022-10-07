@@ -1,10 +1,12 @@
+import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 function Item({data}) {
 
-    
-    const detailNavigation = ()=>{
+    const navigation = useNavigation();
 
+    const detailNavigation = ()=>{
+        navigation.navigate("detail")
     }
     return ( 
         <>
@@ -20,6 +22,7 @@ function Item({data}) {
             {/* pressable 영역 조절 필요 */}
         <Image source={{uri:data.titleImage}} style={styles.titleImage}/>        
         </Pressable>
+
         </View>
         </>
      );

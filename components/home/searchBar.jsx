@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { Button, StyleSheet, TextInput, View } from "react-native";
 
-function SearchBar() {
+function SearchBar({searchHandle}) {
+    const [searchKeyword, setSearchKeyword] = useState("");
+    
+
     return (
         <View style={styles.mainContain}>
-            <TextInput style={styles.inputContain} />
-            <Button title="검색" style={styles.buttonContain} />
+            <TextInput value={searchKeyword} onChangeText={(text)=>setSearchKeyword(text)} style={styles.inputContain} />
+            <Button onPress={()=>searchHandle(searchKeyword)} title="검색" style={styles.buttonContain} />
         </View>
     );
 }
@@ -17,7 +21,8 @@ const styles = StyleSheet.create({
     inputContain: {
         flex: 2,
         borderWidth: 1,
-        borderColor:"yellow"
+        borderColor:"yellow",
+        paddingLeft:10
         
     },
     buttonContain: {

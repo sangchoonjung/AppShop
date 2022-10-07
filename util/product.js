@@ -9,7 +9,7 @@ export async function requestAllProduct() {
     try {
 
         const response = await axios.post(baseURL + "/api/product/allProductList", {
-            
+
         })
         // console.log(response.data)
         return response.data
@@ -18,3 +18,33 @@ export async function requestAllProduct() {
     }
 }
 
+
+
+
+export async function categoryFilteredProduct(category) {
+
+    try {
+        const response = await axios.post(baseURL + "/api/product/categoryProductList",
+            {
+                category : category
+            }
+        )
+        return response.data
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
+export async function searchFilteredProduct(keyword){
+    try {
+        console.log(keyword)
+        const response = await axios.post(baseURL + "/api/product/searchProductList",
+            {
+                search : keyword
+            }
+        )
+        return response.data
+    } catch (e) {
+        console.log(e.message);
+    }
+}

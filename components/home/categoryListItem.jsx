@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-function CategoryListItem({categoryList, onPress, title }) {
-    const [defaults,setDefault] = useState("styles.default")
-
+function CategoryListItem({filter, onPress, title }) {
+    const [defaults,setDefaults] = useState(styles.default);
     useEffect(()=>{
-        // categoryList.includes(title)? : 
-    },[categoryList])
+        if(filter?.includes(title)){
+            setDefaults(styles.picked);
+        }else{
+            setDefaults(styles.default);
+        }
+    },[filter])
 
 
 
     return (
         <>
         <View >
-            <Pressable style={({pressed})=>pressed?styles.pressed:styles.default} onPress={onPress}>
+            <Pressable style={({pressed})=>pressed
+            ?styles.pressed
+            :
+defaults
+            } onPress={onPress}>
                 <Text>{title}</Text>
             </Pressable>
         </View>
@@ -26,8 +33,11 @@ const styles = StyleSheet.create({
         marginHorizontal:1,
         backgroundColor:"gray"
     },
-    default:{
+    normal:{
 
+    },
+    picked:{
+        opacity:0.5
     }
 })
 

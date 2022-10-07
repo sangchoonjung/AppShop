@@ -2,7 +2,7 @@ import { useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { updateAccountRequest } from "../../../util/account";
-import MainHeader from "../../header";
+import MainHeader from "../../mainheader";
 
 function UpdateAccountScreen() {
     const route = useRoute();

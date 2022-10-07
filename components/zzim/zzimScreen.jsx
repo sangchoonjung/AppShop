@@ -1,5 +1,5 @@
 import { View,Text } from "react-native";
-import MainHeader from "../header";
+import MainHeader from "../mainheader";
 
 function ZzimScreen() {
     return (

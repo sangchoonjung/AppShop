@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { AppContext } from "../../../context/auth";
-import MainHeader from "../../header";
+import MainHeader from "../../mainheader";
 
 function MypageScreen({navigation}) {
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
 import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
-import MainHeader from "../../header";
+import MainHeader from "../../mainheader";
 
 function JoinScreen() {
   const [registData, setRegistData] = useState({

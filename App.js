@@ -22,7 +22,6 @@ const Stack = createStackNavigator();
 
 
 //찜이랑 리뷰 이것저것 하려면 유저 데이터 필요해서 컨텍스트에 올렸습니다
-//home - bottomBar.jsx 부분
 
 
 

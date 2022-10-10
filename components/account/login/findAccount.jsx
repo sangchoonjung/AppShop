@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
         // height : "70%",
         margin : "auto",
         opacity:0.9
-
-
     }
 })
 export default FindAccount;

@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const baseURL = "http://192.168.4.41:8080";
+// const baseURL = "http://192.168.4.41:8080";
+const baseURL = "http://58.125.70.41:8080";
 // const baseURL = "http://192.168.4.127:8080";
 //설정값이 localhost나 128.0.0.1로 설정하면 Network Error 떠서 테스트 하실 때 자기 ip로 해주세요
 
@@ -81,20 +82,37 @@ export async function updateAccountRequest(data) {
     if (!data) {
         return;
     }
-    if(!data.passWordNow){
+    if (!data.passWordNow) {
         return;
     }
-    
+
     try {
         console.log(data)
         const response = await axios.post(baseURL + "/api/account/updateAccount", {
             ...data
         })
         console.log(response)
-        
+
 
     } catch (e) {
         console.log(e.message);
 
     }
-}    
+}
+
+
+
+export async function setNewPassWordRequest(id, answer, passWord,question=1) {
+    //비번찾기 답 받아서 비교해서 맞으면 변경(서버에서)
+    const response = await axios.post(baseURL + "/api/account/resetPassWord", {
+        id: id,
+        answer: answer,
+        passWord: passWord,
+        question:question
+    });
+    if(response.data.result){
+
+        return response?.result
+    }
+    return response.data
+}

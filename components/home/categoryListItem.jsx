@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 function CategoryListItem({filter, onPress, title }) {
     const [defaults,setDefaults] = useState(styles.default);
+    //스타일 설정
     useEffect(()=>{
         if(filter?.includes(title)){
             setDefaults(styles.picked);
@@ -32,9 +33,6 @@ const styles = StyleSheet.create({
     pressed:{
         marginHorizontal:1,
         backgroundColor:"gray"
-    },
-    normal:{
-
     },
     picked:{
         opacity:0.5

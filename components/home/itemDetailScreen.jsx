@@ -3,6 +3,7 @@ import { Header } from "@react-navigation/stack";
 import { Image, Modal, ScrollView, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
 import MainHeader from "../mainheader";
+import BottomBar from "./bottomBar";
 import SetTime from "./setTime";
 
 function ItemDetailScreen() {
@@ -40,7 +41,9 @@ function ItemDetailScreen() {
           </View>
 
             <View>
-              <SetTime timeLimit={timeLimit}/>
+              <Text>
+              잔여 시간 <SetTime timeLimit={timeLimit}/>
+              </Text>
             {/* 남은시간 컴포넌트 */}
             </View>
           <View style={styles.detailImgContain}>
@@ -52,9 +55,9 @@ function ItemDetailScreen() {
           </View>
         </View>
       </ScrollView>
-        <View>
-          <Text>ss</Text>
-        </View>
+
+      <BottomBar id={data.key}/>
+
     </View>
   );
 }

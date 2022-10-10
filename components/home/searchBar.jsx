@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button, StyleSheet, TextInput, View } from "react-native";
 
-function SearchBar({searchHandle}) {
-    const [searchKeyword, setSearchKeyword] = useState("");
+function SearchBar({searchHandle,searchKeyword,setSearchKeyword}) {
     
+
+    // console.log(filter)
+
     return (
         <View style={styles.mainContain}>
             <TextInput value={searchKeyword} onChangeText={(text)=>setSearchKeyword(text)} style={styles.inputContain} />

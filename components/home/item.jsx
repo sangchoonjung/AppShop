@@ -1,12 +1,30 @@
 import { useNavigation } from "@react-navigation/native";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { useContext } from "react";
+import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
+import { AppContext } from "../../context/auth";
 
 function Item({ data }) {
   const navigation = useNavigation();
-
+  const ctx = useContext(AppContext);
   const detailNavigation = () => {
-    navigation.navigate("detail", { tag: data });
+    console.log(ctx.auth)
+    if(ctx.auth){
+      navigation.navigate("detail", { tag: data });
+    }else{
+      Alert.alert(
+        "Login Confirm",
+        "You must log in to view details",
+        [
+        {text:"Cancel",
+        onPress:()=>console.log("cancel pressed"),
+        style:"cancel"},
+        {text:"OK",
+        onPress:()=>navigation.navigate("account"),
+        style:"default"} ,
+        ]   
+    )
+    }
   };
 
   return (

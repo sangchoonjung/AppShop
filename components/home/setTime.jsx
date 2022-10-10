@@ -6,7 +6,7 @@ function SetTime({ timeLimit }) {
     //들어온 시간이 분단위 
     const [leftTime, setLeftTime] = useState(timeLimit*1000*60);
     //ms단위로 변환
-    console.log(leftTime)
+    // console.log(leftTime)
 
     useEffect(()=>{
         const interval = setInterval(()=>{

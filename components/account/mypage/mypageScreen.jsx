@@ -22,7 +22,7 @@ function MypageScreen({navigation}) {
 
       <View style={{flex:1}}>
         <View style={styles.mainContain}>
-          <MainHeader />
+          <MainHeader back={true}/>
           <Text>프로필 수정</Text>
           <Button title="수정하기" onPress={updateNavigationHandle} />
         </View>

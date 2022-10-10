@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import CategoryListItem from "./categoryListItem";
 
-function Category({ filter, setFilter }) {
+function Category({ filter, setFilter,setSearchKeyword }) {
     const [category, setCategory] = useState([]);
     useEffect(() => {
         function readCategory() {
@@ -15,8 +15,9 @@ function Category({ filter, setFilter }) {
     }, []);
 
     const filterhandle = (e) => {
-        console.log(e)
-        filter.includes(e) ?
+        // console.log(e)
+        setSearchKeyword("")
+        filter?.includes(e) ?
             setFilter(current => current.filter(item => item !== e))
             :
             setFilter(current => [...current, e]);

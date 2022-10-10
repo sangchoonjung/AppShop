@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
 import MainHeader from "../mainheader";
+import BottomBar from "./bottomBar";
 import ItemBuyAndZzim from "./itemBuyAndZzim";
 import SetTime from "./setTime";
 
@@ -43,7 +44,9 @@ function ItemDetailScreen() {
           </View>
 
             <View>
-              <SetTime timeLimit={timeLimit}/>
+              <Text>
+              잔여 시간 <SetTime timeLimit={timeLimit}/>
+              </Text>
             {/* 남은시간 컴포넌트 */}
             </View>
           <View style={styles.detailImgContain}>
@@ -55,11 +58,18 @@ function ItemDetailScreen() {
           </View>
         </View>
       </ScrollView>
+
+
+
+      //<BottomBar id={data.key}/>
+      //임시컴포넌트
+
       <View>
       {/* 구매,찜하기 모달 */}
         <ItemBuyAndZzim setModalVisible={setModalVisible} modalVisible={modalVisible} data={data}/>
       </View>
       
+
     </View>
   );
 }

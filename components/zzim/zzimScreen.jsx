@@ -4,7 +4,7 @@ import MainHeader from "../mainheader";
 function ZzimScreen() {
     return (
         <View>
-            <MainHeader/>
+            <MainHeader back={true}/>
             <Text>찜스크린</Text>
         </View>
     );

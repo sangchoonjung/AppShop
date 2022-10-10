@@ -1,17 +1,36 @@
 import { Alert, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
 import { Entypo } from '@expo/vector-icons';
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../context/auth";
 function ItemBuyAndZzim({modalVisible,setModalVisible,data}) {
     const [heartOnOff,setHeartOnOff]=useState(false);
     const [productCount,setProductCount] =useState(1);
 
+    const ctx = useContext(AppContext)
+    const zzimList = ctx.userInfo.data.zzimList
+    console.log(zzimList,data.key)
+
+  /*
+  초기세팅
+  계정에 있는 zzimList에 이 항목이 있으면 true
+  */
+  useEffect(()=>{
+        if (zzimList?.includes(data.key)) {
+        setHeartOnOff(true);
+        }
+  },[])
+
+
+
+    
     const countHandlerUp=()=>{
         setProductCount(productCount+1);
     }
     const countHandlerDown=()=>{
         setProductCount(productCount-1);
     }
+
     const modalConfirmButton=()=>{
         Alert.alert(
             "Buy Confirm",

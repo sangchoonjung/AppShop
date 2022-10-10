@@ -1,15 +1,18 @@
 import { useRoute } from "@react-navigation/native";
 import { Header } from "@react-navigation/stack";
-import { Image, Modal, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
 import MainHeader from "../mainheader";
 import BottomBar from "./bottomBar";
+import ItemBuyAndZzim from "./itemBuyAndZzim";
 import SetTime from "./setTime";
 
 function ItemDetailScreen() {
   const route = useRoute();
   const data = route.params.tag;
   console.log(data);
+  const [modalVisible,setModalVisible] = useState(false);
 
   const timeLimit = 20
   //20분 가정
@@ -56,7 +59,16 @@ function ItemDetailScreen() {
         </View>
       </ScrollView>
 
-      <BottomBar id={data.key}/>
+
+
+      //<BottomBar id={data.key}/>
+      //임시컴포넌트
+
+      <View>
+      {/* 구매,찜하기 모달 */}
+        <ItemBuyAndZzim setModalVisible={setModalVisible} modalVisible={modalVisible} data={data}/>
+      </View>
+      
 
     </View>
   );
@@ -94,7 +106,8 @@ const styles = StyleSheet.create({
         width: "100%",
         height:3000
         
-    }
+    },
+    
 });
 
 export default ItemDetailScreen;

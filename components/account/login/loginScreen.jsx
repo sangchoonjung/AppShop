@@ -7,8 +7,8 @@ import { AppContext } from "../../../context/auth";
 import MainHeader from "../../mainheader";
 import FindAccount from "./findAccount";
 import SetNewPassWord from "./setNewPassWord";
-
-
+import CustomButton from "../../../custom/customButton";
+import BaseFont from "../../../assets/font/base";
 //해야할거 로그인context에 맞게 수정 네비게이션 (회원가입 아디비번찾기)연결 나머지는 서버작업
 
 function LoginScreen({ navigation }) {
@@ -101,39 +101,111 @@ function LoginScreen({ navigation }) {
 
   //   console.log(loginData.id.length, loginData.passWord);
   return (
-    <>
-      <View>
-        <MainHeader back={true} />
-      </View>
-      <View>
-        <TextInput
-          value={{}}
-          autoCapitalize="none"
-          onChangeText={(text) => changeHandle(["id", text])}
-          placeholder="아이디"
-        />
-        <TextInput
-          secureTextEntry={pwView}
-          value={{}}
-          onChangeText={(text) => changeHandle(["passWord", text])}
-          placeholder="비밀번호"
-        />
-        <Pressable onPress={() => setPwView(current => !current)}>
-          <Text>{pwView ? "비번보기" : "비번숨기기"}</Text>
-        </Pressable>
-        <Button title="임시로그인버튼" onPress={loginHandle} />
-        <Button title="회원가입" onPress={registerHandle} />
-        <Button title="구글로그인위치" />
+    <View style={{ flex: 1 }}>
+      <MainHeader back={true} />
 
-        <Button title="아디찾기" onPress={onClose} />
-        <Button title="비번재설정" onPress={onClosePW} />
-        <FindAccount onClose={onClose} visible={modal} getAccount={findAccount} />
+      <View>
+        <View style={styles.loginContain}>
+          <View style={styles.textInputContain}>
+            <TextInput
+              value={{}}
+              autoCapitalize="none"
+              onChangeText={(text) => changeHandle(["id", text])}
+              placeholder="id"
+              style={styles.textInputItem}
+            />
+            <TextInput
+              secureTextEntry={true}
+              value={{}}
+              onChangeText={(text) => changeHandle(["passWord", text])}
+              placeholder="password"
+              style={styles.textInputItem}
+            />
+          </View>
+          <View>
+            <CustomButton onPress={loginHandle} style={{ marginTop: 25 }}>
+              Login
+            </CustomButton>
+            <CustomButton>구글로그인</CustomButton>
+            <Pressable
+              onPress={onClosePW}
+              style={({ pressed }) => [
+                styles.forgotContain,
+                pressed ? { opacity: 0.6 } : null,
+              ]}
+            >
+              <BaseFont>Did you forget your password?</BaseFont>
+            </Pressable>
+            <Pressable
+              onPress={onClose}
+              style={({ pressed }) => [
+                styles.forgotContain,
+                pressed ? { opacity: 0.6 } : null,
+              ]}
+            >
+              <BaseFont>Did you forget your Id?</BaseFont>
+            </Pressable>
+          </View>
+        </View>
+        {/* 세컨박스 (가입하기) */}
+        <View style={styles.joinContain}>
+          <BaseFont>Don't you have an account?</BaseFont>
+          <Pressable
+            onPress={registerHandle}
+            style={({ pressed }) => (pressed ? { opacity: 0.6 } : null)}
+          >
+            <BaseFont style={{ color: "#006699", fontWeight: "bold" }}>
+              Sign Up
+            </BaseFont>
+          </Pressable>
+        </View>
 
-        <SetNewPassWord onClose={onClosePW} visible={modalPW} passWordResetHandle={passWordResetHandle} />
+        <FindAccount
+          onClose={onClose}
+          visible={modal}
+          getAccount={findAccount}
+        />
+
+
+        <SetNewPassWord
+          onClose={onClosePW}
+          visible={modalPW}
+          passWordResetHandle={passWordResetHandle}
+        />
       </View>
-    </>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  textInputContain: {
+    marginTop: 20,
+    marginHorizontal: 30,
+  },
+  textInputItem: {
+    fontSize: 20,
+    borderWidth: 1,
+    borderColor: "#CCCCCC",
+    marginBottom: 10,
+    padding:5
+  },
+  forgotContain: {
+    marginTop:25,
+    alignItems: "center",
+  },
+  joinContain: {
+    marginTop: 5,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    padding: 40,
+    margin: 20,
+  },
+  loginContain: {
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    margin: 20,
+    paddingVertical:20
+  },
+});
 export default LoginScreen;

@@ -1,7 +1,15 @@
 import { useRoute } from "@react-navigation/native";
 import { Header } from "@react-navigation/stack";
 import { useState } from "react";
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import BaseFont from "../../assets/font/base";
 import MainHeader from "../mainheader";
 import ItemBuyAndZzim from "./itemBuyAndZzim";
@@ -11,11 +19,10 @@ function ItemDetailScreen() {
   const route = useRoute();
   const data = route.params.tag;
   console.log(data);
-  const [modalVisible,setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const timeLimit = 20
+  const timeLimit = 20;
   //20분 가정
-
 
   return (
     <View style={styles.contain}>
@@ -32,9 +39,40 @@ function ItemDetailScreen() {
             resizeMode={"contain"}
           />
           <View style={styles.textContain}>
-            <BaseFont>category _ {data.category}</BaseFont>
-            <BaseFont>Delivery method _ {data["Delivery method"]}</BaseFont>
-            <BaseFont>From _ {data.from}</BaseFont>
+            <BaseFont style={{ fontWeight: "bold", marginBottom: 10 }}>
+              Details
+            </BaseFont>
+            <View
+              style={{
+                flexDirection: "row",
+                flex: 1,
+              }}
+            >
+              <BaseFont style={{ color: "#666666", flex: 1 }}>
+                category
+              </BaseFont>
+              <BaseFont style={{ flex: 1 }}>{data.category}</BaseFont>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                flex: 1,
+              }}
+            >
+              <BaseFont style={{ color: "#666666", flex: 1 }}>
+                Delivery method
+              </BaseFont>
+              <BaseFont style={{ flex: 1 }}>{data["Delivery method"]}</BaseFont>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                flex: 1,
+              }}
+            >
+              <BaseFont style={{ color: "#666666", flex: 1 }}>From</BaseFont>
+              <BaseFont style={{ flex: 1 }}>{data.from}</BaseFont>
+            </View>
           </View>
           <View style={styles.priceContain}>
             <BaseFont style={styles.priceText}>
@@ -42,12 +80,12 @@ function ItemDetailScreen() {
             </BaseFont>
           </View>
 
-            <View>
-              <Text>
-              잔여 시간 <SetTime timeLimit={timeLimit}/>
-              </Text>
+          <View>
+            <Text>
+              잔여 시간 <SetTime timeLimit={timeLimit} />
+            </Text>
             {/* 남은시간 컴포넌트 */}
-            </View>
+          </View>
           <View style={styles.detailImgContain}>
             <Image
               source={{ uri: data.detailImage }}
@@ -58,13 +96,14 @@ function ItemDetailScreen() {
         </View>
       </ScrollView>
 
-
       <View>
-      {/* 구매,찜하기 모달 */}
-        <ItemBuyAndZzim setModalVisible={setModalVisible} modalVisible={modalVisible} data={data}/>
+        {/* 구매,찜하기 모달 */}
+        <ItemBuyAndZzim
+          setModalVisible={setModalVisible}
+          modalVisible={modalVisible}
+          data={data}
+        />
       </View>
-      
-
     </View>
   );
 }
@@ -75,34 +114,35 @@ const styles = StyleSheet.create({
   },
   titleImageContain: {
     width: "100%",
-      height: 350,
-    marginVertical:15
+    height: 350,
+    marginVertical: 15,
   },
   priceContain: {
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor: "green",
+    backgroundColor: "#93DAFF",
     margin: 10,
-    padding: 30,
-    borderRadius: 20,
+    marginHorizontal:20,
+    padding: 20,
+    borderRadius: 10,
+    borderColor: "#999999",
+    borderWidth:1
   },
   priceText: {
     fontSize: 20,
     fontWeight: "bold",
   },
   textContain: {
-    alignItems: "center",
     marginVertical: 10,
-    },
-    detailImgContain: {
-        elevation : 1
-    },
-    detailImg: {
-        width: "100%",
-        height:3000
-        
-    },
-    
+    flex: 1,
+  },
+  detailImgContain: {
+    elevation: 1,
+  },
+  detailImg: {
+    width: "100%",
+    height: 3000,
+  },
 });
 
 export default ItemDetailScreen;

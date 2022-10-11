@@ -2,7 +2,7 @@ import axios from "axios"
 
 
 
-const {baseURL} = require("./baseURL")
+const { baseURL } = require("./baseURL")
 
 // baseURL 파일 3개 바꾸기 귀찮아서 하나로 묶었습니다
 
@@ -53,12 +53,12 @@ export async function sendRegisterRequest(data) {
 
     } catch (e) {
 
-        console.log(e.message,"message");
+        console.log(e.message, "message");
         console.log(e.message.includes("code 401"))
-        if(e?.message?.includes("code 401")){
-            return {result:false,message:"email duplicate"}
-        }else{
-            return {result:false,message:"error"}
+        if (e?.message?.includes("code 401")) {
+            return { result: false, message: "email duplicate" }
+        } else {
+            return { result: false, message: "error" }
 
         }
     }
@@ -121,17 +121,51 @@ export async function updateAccountRequest(data) {
 
 
 
-export async function setNewPassWordRequest(id, answer, passWord,question=1) {
+export async function setNewPassWordRequest(id, answer, passWord, question = 1) {
     //비번찾기 답 받아서 비교해서 맞으면 변경(서버에서)
-    const response = await axios.post(baseURL + "/api/account/resetPassWord", {
-        id: id,
-        answer: answer,
-        passWord: passWord,
-        question:question
-    });
-    if(response.data.result){
+    try {
 
-        return response?.result
+        const response = await axios.post(baseURL + "/api/account/resetPassWord", {
+            id: id,
+            answer: answer,
+            passWord: passWord,
+            question: question
+        });
+        if (response.data.result) {
+
+            return response?.result
+        }
+        return response.data
+    } catch (e) {
+        console.log(e.message)
     }
-    return response.data
+}
+
+
+export async function sendProductPendingAddRequest(userId, productId, unit,price) {
+
+    try {
+        if (!userId || !productId || !unit||!price) {
+            return;
+        }
+        const response = await axios.post(baseURL + "/api/account/pendingRequest", {
+            id: userId,
+            productId: productId,
+            unit: unit,
+            price:price,
+            date:Date.now(),
+
+        });
+        if (response.data.result) {
+
+            return response?.result
+        }
+        return response.data
+
+    } catch (e) {
+        console.log(e.message)
+    }
+
+
+
 }

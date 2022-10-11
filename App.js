@@ -23,6 +23,7 @@ const Stack = createStackNavigator();
 // 시간 나면 스피너
 // 정보 수정 완료시 반응
 // time 타이머 수정
+// pending 수정 ctx 설정 찜처럼 하면 될 듯 
 
 function GuestStackNavigator() {
   return (

@@ -26,15 +26,21 @@ function ZzimScreen() {
 
 
     const newestHandle = () => {
-        setSelected(current => !current);
-        setItemList(current => current.sort((a, b) => a.date - b.date));
+        if(selected){
+            return;
+        }
+        setSelected(true);
+        setItemList(current => current.sort((b, a) => a.date - b.date));
 
     }
 
 
     const oldestHandle = () => {
-        setSelected(current => !current);
-        setItemList(current => current.sort((b, a) => a.date - b.date));
+        if(!selected){
+            return;
+        }
+        setSelected(false);
+        setItemList(current => current.sort((a, b) => a.date - b.date));
 
     }
     return (

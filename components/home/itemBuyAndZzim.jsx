@@ -4,33 +4,39 @@ import { Entypo } from '@expo/vector-icons';
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/auth";
 import { sendZzimUpdateRequest } from "../../util/userInfo";
+import { sendProductPendingAddRequest } from "../../util/account";
 function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
   const [heartOnOff, setHeartOnOff] = useState(false);
   const [productCount, setProductCount] = useState(1);
+  const [pend, setPend] = useState(false);
 
   const ctx = useContext(AppContext)
   const zzimList = ctx.zzimList
   const setZzim = ctx.setZzim
+  const pendingList = ctx.pendingList;
+
+  console.log(pendingList)
   /*
   초기세팅
   계정에 있는 zzimList에 이 항목이 있으면 true
   서버로 업데이트 하는김에 찜 목록을 재작성해서 ctx에 올려둠
   */
+  useEffect(() => {
+    if (pendingList.some(e => e.productId === data.key)) {
+      setPend(true);
+    }
 
+  }, [pendingList])
   useEffect(() => {
     const initZzim = ctx.zzimList;
 
-    if(initZzim.some(e=>e.id===String(data.key))){
+    if (initZzim.some(e => e.id === String(data.key))) {
       setHeartOnOff(true);
     } else {
       setHeartOnOff(false);
-    
+
     }
-    // if (initZzim.includes(String(data.key))) {
-    //   setHeartOnOff(true);
-    // } else {
-    //   setHeartOnOff(false);
-    // }
+
   }, [zzimList])
 
   const countHandlerUp = () => {
@@ -52,7 +58,12 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
         },
         {
           text: "OK",
-          onPress: () => console.log("OK pressed")
+          onPress: async () => {
+            await sendProductPendingAddRequest(ctx.auth.id, data.key, productCount, (productCount * data.standardFee));
+            setModalVisible(false)
+            //구매대기내역 account에 작성
+
+          }
         }
       ]
     )
@@ -64,19 +75,17 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
     let zzim = zzimList;
     try {
 
-      if(zzimList.some(e=>e.id===String(data.key))){
+      if (zzimList.some(e => e.id === String(data.key))) {
         zzim = zzimList.filter(e => e.id !== String(data.key));
         console.log(zzim)
         setZzim(zzim);
 
-      }else{
-        zzim = [...zzim, {id:String(data.key),date:Date.now()}]
+      } else {
+        zzim = [...zzim, { id: String(data.key), date: Date.now() }]
         setZzim(zzim)
 
       }
-      // if (zzimList.includes(data.key)) {
-      // } else {
-      // }
+
       const rst = await sendZzimUpdateRequest(ctx.auth.id, zzim);
     } catch (e) {
       console.log(e.message);
@@ -103,6 +112,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
               <BaseFont style={styles.modalTotalPrice}>total price _ {data.standardFee * productCount}</BaseFont>
             </View>
             {/* 모달 버튼 */}
+
             <View style={styles.modalButtonContain}>
               <Pressable
                 style={[styles.button, styles.modelButton]}
@@ -118,6 +128,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
               >
                 <Text style={styles.textStyle}>cancel</Text>
               </Pressable>
+
             </View>
           </View>
         </View>
@@ -125,11 +136,22 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
-        <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}>
-          <BaseFont style={styles.textStyle}>buy item</BaseFont>
-        </Pressable>
+        {
+          !pend ?
+
+            <Pressable
+              style={[styles.button, styles.buttonOpen]}
+              onPress={() => setModalVisible(true)}>
+              <BaseFont style={styles.textStyle}>buy item</BaseFont>
+            </Pressable>
+            :
+            <View
+              style={[styles.button, styles.buttonOpen]}
+            >
+              <BaseFont style={styles.textStyle}>now pending</BaseFont>
+            </View>
+        }
+
         {/* 찜 on/off */}
         <Pressable style={styles.heartLayout}>
           <Entypo name={heartOnOff ? "heart" : "heart-outlined"} size={24} color="black" onPress={heartHandler} />

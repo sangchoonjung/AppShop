@@ -6,7 +6,6 @@ import axios from "axios"
 
 
 const {baseURL} = require("./baseURL")
-console.log(baseURL,"url")
 
 // const baseURL = "http://192.168.4.41:8080";
 // const baseURL = "http://58.125.70.41:8080";

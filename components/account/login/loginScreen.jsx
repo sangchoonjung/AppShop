@@ -115,12 +115,15 @@ function LoginScreen({ navigation }) {
               style={styles.textInputItem}
             />
             <TextInput
-              secureTextEntry={true}
+              secureTextEntry={pwView}
               value={{}}
               onChangeText={(text) => changeHandle(["passWord", text])}
               placeholder="password"
               style={styles.textInputItem}
             />
+            <Pressable style={{}} onPress={() => setPwView(current => !current)}>
+              <Text>{pwView ? "비번보기" : "비번숨기기"}</Text>
+            </Pressable>
           </View>
           <View>
             <CustomButton onPress={loginHandle} style={{ marginTop: 25 }}>
@@ -187,10 +190,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#CCCCCC",
     marginBottom: 10,
-    padding:5
+    padding: 5
   },
   forgotContain: {
-    marginTop:25,
+    marginTop: 25,
     alignItems: "center",
   },
   joinContain: {
@@ -205,7 +208,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#cccccc",
     margin: 20,
-    paddingVertical:20
+    paddingVertical: 20
   },
 });
 export default LoginScreen;
+
+

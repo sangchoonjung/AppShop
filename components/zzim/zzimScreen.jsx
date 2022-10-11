@@ -23,28 +23,35 @@ function ZzimScreen() {
 
 
 
-    const reverseHandle = () => {
-        setSelected(current=>!current);
-        setItemList(current=>current.reverse());
+
+
+    const newestHandle = () => {
+        setSelected(current => !current);
+        setItemList(current => current.sort((a, b) => a.date - b.date));
+
     }
 
 
+    const oldestHandle = () => {
+        setSelected(current => !current);
+        setItemList(current => current.sort((b, a) => a.date - b.date));
 
+    }
     return (
         <View>
             <MainHeader back={true} />
             {/* <Text>찜스크린</Text> */}
             <View style={styles.sortContainer}>
                 <Text>
-                    {`Sort by :  `} 
+                    {`Sort by :  `}
                 </Text>
-                <Pressable onPress={reverseHandle}>
-                    <Text style={selected?styles.select:styles.defaulted}>Newest </Text>
+                <Pressable onPress={newestHandle}>
+                    <Text style={selected ? styles.select : styles.defaulted}>Newest </Text>
                 </Pressable>
                 <Text > / </Text>
 
-                <Pressable  onPress={reverseHandle}>
-                    <Text style={!selected?styles.select:styles.defaulted}> Oldest </Text>
+                <Pressable onPress={oldestHandle}>
+                    <Text style={!selected ? styles.select : styles.defaulted}> Oldest </Text>
                 </Pressable>
             </View>
             <List item={itemList} />
@@ -59,7 +66,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
     },
     select: {
-        fontWeight:"bold"
+        fontWeight: "bold"
     },
     defaulted: {
 

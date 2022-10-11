@@ -16,18 +16,13 @@ import { useContext } from 'react';
 import UpdateAccountScreen from './components/account/mypage/updateAccountScreen';
 import ItemDetailScreen from './components/home/itemDetailScreen';
 
-
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
-
-//찜이랑 리뷰 이것저것 하려면 유저 데이터 필요해서 컨텍스트에 올렸습니다
-
-
 
 // 세훈 안한거 (할 거)
 // 시간 나면 스피너
 // 정보 수정 완료시 반응
+// time 타이머 수정
 
 function GuestStackNavigator() {
   return (

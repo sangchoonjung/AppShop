@@ -51,3 +51,24 @@ export async function searchFilteredProduct(keyword){
         console.log(e.message);
     }
 }
+
+
+export async function requestZzimProduct(zzimList){
+
+    try {
+        // console.log(zzimList,"zzimlllistrequest")
+        const response = await axios.post(baseURL + "/api/product/zzimProductList",
+            {
+                zzimList : zzimList
+            }
+        )
+        return response.data
+    } catch (e) {
+        console.log(e.message);
+    }
+
+
+
+
+
+}

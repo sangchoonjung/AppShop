@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
 import { AppContext } from "../../context/auth";
+import { dateCutting } from "../../util/function";
 
 function Item({ data }) {
   const navigation = useNavigation();
@@ -26,6 +27,10 @@ function Item({ data }) {
     )
     }
   };
+
+
+
+  const addedDate = data?.date?dateCutting(data?.date):""
 
   return (
     <>
@@ -53,6 +58,7 @@ function Item({ data }) {
             >
               Standard $ {data.standardFee}
             </BaseFont>
+            {data?.date&&<Text>추가한 날짜{addedDate}</Text>}
           </View>
         </View>
       </View>

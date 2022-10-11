@@ -14,8 +14,10 @@ import BaseFont from "../../../assets/font/base";
 function LoginScreen({ navigation }) {
   const [loginData, setLoginData] = useState({ id: "", passWord: "" });
 
-  const [modal, setModal] = useState(false)
-  const [modalPW, setModalPW] = useState(false)
+  const [modal, setModal] = useState(false);
+  const [modalPW, setModalPW] = useState(false);
+
+  const [pwView, setPwView] = useState(true);
 
   const ctx = useContext(AppContext);
   const navi = useNavigation();
@@ -92,9 +94,6 @@ function LoginScreen({ navigation }) {
     }
   }
 
-
-
-
   const registerHandle = () => {
     navigation.navigate("join");
   };
@@ -166,6 +165,7 @@ function LoginScreen({ navigation }) {
           visible={modal}
           getAccount={findAccount}
         />
+
 
         <SetNewPassWord
           onClose={onClosePW}

@@ -28,7 +28,8 @@ function HomeScreen() {
             return;
         }
         //예외처리
-        if(filter?.length>1){
+
+        if(filter?.length>=1){
             categoryFilteredProduct(filter).then(p => setItemList(p?.message));
         }
 

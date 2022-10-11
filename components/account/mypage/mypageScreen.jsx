@@ -10,7 +10,7 @@ function MypageScreen({navigation}) {
     const logoutHandle = () => {
         return ctx.logout();
     }
-    console.log(ctx)
+    // console.log(ctx)
     const updateNavigationHandle =()=>{
       navigation.navigate("update", {id:ctx.auth.id,email:ctx.auth.email})
     }

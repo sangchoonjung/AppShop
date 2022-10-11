@@ -1,12 +1,15 @@
 import axios from "axios"
 
 
+
+const {baseURL} = require("./baseURL")
+console.log(baseURL,"url")
+
 // const baseURL = "http://192.168.4.41:8080";
-
 // const baseURL = "http://58.125.70.41:8080";
+// const baseURL = "http://192.168.4.127:8080";
+// baseURL 파일 3개 바꾸기 귀찮아서 파일 하나로 이동합니다
 
-const baseURL = "http://192.168.4.127:8080";
-// const baseURL = "http://172.30.1.100:8080";
 //설정값이 localhost나 128.0.0.1로 설정하면 Network Error 떠서 테스트 하실 때 자기 ip로 해주세요
 import products from "../data/data-dummy";
 

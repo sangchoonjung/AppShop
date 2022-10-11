@@ -38,9 +38,9 @@ function LoginScreen({ navigation }) {
     try {
       const recv = await sendLoginRequest(loginData.id, loginData.passWord);
       // 로그인한후 인증 셋팅
-      console.log(recv.result)
-      console.log(recv)
-      if (recv.result) {
+      // console.log(recv.result)
+      // console.log(recv)
+      if (recv?.result) {
         ctx.login(recv.message.id, recv.token, recv.message.email, recv.message);
         Alert.alert("confirm", "환영합니다!")
         navi.navigate("home");

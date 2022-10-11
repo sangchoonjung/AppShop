@@ -9,7 +9,6 @@ function Category({ filter, setFilter,setSearchKeyword }) {
             const { categoryList } = require("../../data/data-dummy")
             return categoryList
         };
-        //서버에서 받아오기 or 미리 입력된 값 읽어오기
         const list = readCategory();
         setCategory(list);
     }, []);

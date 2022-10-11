@@ -19,11 +19,18 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
   useEffect(() => {
     const initZzim = ctx.zzimList;
-    if (initZzim.includes(data.key)) {
+
+    if(initZzim.some(e=>e.id===String(data.key))){
       setHeartOnOff(true);
     } else {
       setHeartOnOff(false);
+    
     }
+    // if (initZzim.includes(String(data.key))) {
+    //   setHeartOnOff(true);
+    // } else {
+    //   setHeartOnOff(false);
+    // }
   }, [zzimList])
 
   const countHandlerUp = () => {
@@ -56,20 +63,26 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
     console.log("트루")
     let zzim = zzimList;
     try {
-      if (zzimList.includes(data.key)) {
-        zzim = zzimList.filter(e => e !== data.key)
+
+      if(zzimList.some(e=>e.id===String(data.key))){
+        zzim = zzimList.filter(e => e.id !== String(data.key));
+        console.log(zzim)
         setZzim(zzim);
-      } else {
-        zzim = [...zzim, data.key]
+
+      }else{
+        zzim = [...zzim, {id:String(data.key),date:Date.now()}]
         setZzim(zzim)
+
       }
+      // if (zzimList.includes(data.key)) {
+      // } else {
+      // }
       const rst = await sendZzimUpdateRequest(ctx.auth.id, zzim);
     } catch (e) {
       console.log(e.message);
     }
 
   }
-
 
 
   return (

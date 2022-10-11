@@ -26,11 +26,8 @@ const Stack = createStackNavigator();
 
 
 // 세훈 안한거 (할 거)
-// 찜 구현 마무리 ()
 // 시간 나면 스피너
-// checkbox?
-// 이메일 중복시 경고창
-// 회원가입 완료, 정보 수정 완료시 반응
+// 정보 수정 완료시 반응
 
 function GuestStackNavigator() {
   return (

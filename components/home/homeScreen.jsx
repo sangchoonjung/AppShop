@@ -28,7 +28,8 @@ function HomeScreen() {
             return;
         }
         //예외처리
-        if(filter?.length>1){
+
+        if(filter?.length>=1){
             categoryFilteredProduct(filter).then(p => setItemList(p?.message));
         }
 
@@ -62,7 +63,7 @@ function HomeScreen() {
             <Text>환영합니다 ! {ctx.auth ? ctx.auth.id+"님" : ""} </Text>
             <SearchBar searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword} searchHandle={searchHandle} />
             <Category setSearchKeyword={setSearchKeyword} filter={filter} setFilter={setFilter} />
-            <List item={itemList} filter={filter} />
+            <List item={itemList} />
         </View>
     );
 }

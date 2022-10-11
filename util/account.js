@@ -43,7 +43,14 @@ export async function sendRegisterRequest(data) {
 
     } catch (e) {
 
-        console.log(e.message);
+        console.log(e.message,"message");
+        console.log(e.message.includes("code 401"))
+        if(e?.message?.includes("code 401")){
+            return {result:false,message:"email duplicate"}
+        }else{
+            return {result:false,message:"error"}
+
+        }
     }
 
 }

@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
 import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../mainheader";
 
-function JoinScreen() {
+function JoinScreen({navigation}) {
   const [registData, setRegistData] = useState({
     id: "",
     passWord: "",
@@ -20,10 +20,23 @@ function JoinScreen() {
     });
   };
 
-
   const submitHandle = async () => {
     console.log(registData);
-    await sendRegisterRequest(registData);
+    const rst = await sendRegisterRequest(registData);
+    console.log(rst)
+    if(rst.result){
+      Alert.alert("system","complete!",[
+        {
+          text:"ok",
+          onPress : ()=>{
+            navigation.navigate("login")
+          }
+        }
+      ])
+    }
+    if(rst?.result===false&&rst?.message){
+      Alert.alert("error",rst.message);
+    }
   }
 
   const checkId = async () => {
@@ -102,5 +115,7 @@ function JoinScreen() {
 
 }
 
-const sytles = StyleSheet.create({});
+const sytles = StyleSheet.create({
+
+});
 export default JoinScreen;

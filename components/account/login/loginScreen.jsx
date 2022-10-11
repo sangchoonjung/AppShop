@@ -2,18 +2,22 @@ import { setNewPassWordRequest, findIdByEmail, sendLoginRequest } from "../../..
 
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { AppContext } from "../../../context/auth";
 import MainHeader from "../../mainheader";
 import FindAccount from "./findAccount";
 import SetNewPassWord from "./setNewPassWord";
+
+
 //해야할거 로그인context에 맞게 수정 네비게이션 (회원가입 아디비번찾기)연결 나머지는 서버작업
 
 function LoginScreen({ navigation }) {
   const [loginData, setLoginData] = useState({ id: "", passWord: "" });
 
-  const [modal, setModal] = useState(false)
-  const [modalPW, setModalPW] = useState(false)
+  const [modal, setModal] = useState(false);
+  const [modalPW, setModalPW] = useState(false);
+
+  const [pwView, setPwView] = useState(true);
 
   const ctx = useContext(AppContext);
   const navi = useNavigation();
@@ -90,9 +94,6 @@ function LoginScreen({ navigation }) {
     }
   }
 
-
-
-
   const registerHandle = () => {
     navigation.navigate("join");
   };
@@ -112,11 +113,14 @@ function LoginScreen({ navigation }) {
           placeholder="아이디"
         />
         <TextInput
-          secureTextEntry={true}
+          secureTextEntry={pwView}
           value={{}}
           onChangeText={(text) => changeHandle(["passWord", text])}
           placeholder="비밀번호"
         />
+        <Pressable onPress={() => setPwView(current => !current)}>
+          <Text>{pwView ? "비번보기" : "비번숨기기"}</Text>
+        </Pressable>
         <Button title="임시로그인버튼" onPress={loginHandle} />
         <Button title="회원가입" onPress={registerHandle} />
         <Button title="구글로그인위치" />

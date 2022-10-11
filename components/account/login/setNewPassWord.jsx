@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import CustomButton from "../../../custom/customButton";
 
 function SetNewPassWord({ onClose, visible, passWordResetHandle }) {
@@ -14,6 +14,10 @@ function SetNewPassWord({ onClose, visible, passWordResetHandle }) {
   return (
     <>
       <Modal visible={visible} animationType={"slide"} transparent={true}>
+        <Pressable
+          style={{ flex: 1, backgroundColor: "#000", opacity: 0.2 }}
+          onPress={onClose}
+        />
         <View style={styles.modalContainer}>
           <TextInput
             placeholder="Enter Your ID"
@@ -55,8 +59,9 @@ const styles = StyleSheet.create({
     height: 400,
     marginTop: 200,
     width: "100%",
-    margin: "auto",
-    opacity: 0.9,
+    marginTop: "auto",
+    marginBottom:50
+    
   },
   textInputContain: {
     textAlign: "center",

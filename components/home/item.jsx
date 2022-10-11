@@ -51,7 +51,7 @@ function Item({ data }) {
                 margin: 10,
               }}
             >
-              Standard $ {data.standardFee}
+            $ {data.standardFee}.00
             </BaseFont>
           </View>
         </View>
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    marginVertical: 2,
-    borderColor: "#CCCCCC",
+    margin: 5,
+    borderColor: "#999999",
   },
   left: {
     flex: 1,

@@ -21,6 +21,8 @@ function FindAccount({ onClose, getAccount, visible }) {
   return (
     <>
       <Modal visible={visible} animationType={"slide"} transparent={true}>
+        {/* 바깥쪽 눌렀을때 나가게 하기 */}
+        <Pressable style={{ flex: 1 ,backgroundColor:"#000" ,opacity:0.2}} onPress={onClose} />
         <View style={styles.modalContainer}>
           <BaseFont style={{ fontSize: 20, textAlign: "center" }}>
             Please enter your email
@@ -44,14 +46,12 @@ function FindAccount({ onClose, getAccount, visible }) {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    padding: 50,
     backgroundColor: "white",
     justifyContent: "center",
     height: 400,
-    marginTop: 200,
     width: "100%",
-    margin: "auto",
-    opacity: 0.9,
+    marginTop: "auto",
+    marginBottom:50
   },
   textInputContain: {
     textAlign: "center",

@@ -6,3 +6,11 @@ export function timeCutting(ms){
 
     return (hour+":"+min+":" + sec)
 }
+
+export function dateCutting(date){
+    const createdTime = new Date(Number(date));
+    const writedDay = `${createdTime.getFullYear()}-${("0" + (createdTime.getMonth() + 1)).slice(-2)}-${createdTime.getDate()}`;
+    const writedTime = `/${createdTime.getHours()} : ${("0" + createdTime.getMinutes()).slice(-2)}`;
+
+    return(writedDay.slice(0)+writedTime)
+}

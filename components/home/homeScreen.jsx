@@ -18,11 +18,35 @@ function HomeScreen() {
   const [filter, setFilter] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  useEffect(() => {
-    requestAllProduct()
-      .then((p) => {
-        if (p) {
-          setItemList(p.message);
+
+    useEffect(() => {
+        requestAllProduct().then(p => {
+            if(p){
+                setItemList(p.message);
+            }
+        }).catch(e => console.log(e.message));
+    }, []);
+    
+    // console.log(itemList)
+    useEffect(() => {
+        if(!(searchKeyword==="")){
+            return;
+        }
+        //예외처리
+
+        if(filter?.length>=1){
+            categoryFilteredProduct(filter).then(p => setItemList(p?.message));
+        }
+
+        if (filter?.length === 0) {
+            //필터 제거하면 전체목록
+            //모든 값 제거했을 때(빈 필터) 약간의 로딩 딜레이 있음(나중에 스피너)
+            requestAllProduct().then(p => {
+                if(p){
+                    setItemList(p.message);
+                }
+            }).catch(e => console.log(e.message));
+
         }
       })
       .catch((e) => console.log(e.message));

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 function CategoryListItem({ filter, onPress, title }) {
+
   const [defaults, setDefaults] = useState(styles.default);
   //스타일 설정
   useEffect(() => {
@@ -35,5 +36,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#91D8FA",
   },
 });
+
 
 export default CategoryListItem;

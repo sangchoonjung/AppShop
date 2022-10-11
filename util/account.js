@@ -1,14 +1,21 @@
 import axios from "axios"
 
 
-// const baseURL = "http://192.168.4.41:8080";
+
+const {baseURL} = require("./baseURL")
+
+// baseURL 파일 3개 바꾸기 귀찮아서 하나로 묶었습니다
 
 
-// const baseURL = "http://58.125.70.41:8080";
 
+
+/*
+const baseURL = "http://58.125.70.41:8080";
+const baseURL = "http://192.168.4.41:8080";
 const baseURL = "http://192.168.4.127:8080";
-// const baseURL = "http://172.30.1.100:8080";
-//설정값이 localhost나 128.0.0.1로 설정하면 Network Error 떠서 테스트 하실 때 자기 ip로 해주세요
+const baseURL = "http://172.30.1.100:8080";
+설정값이 localhost나 128.0.0.1로 설정하면 Network Error 떠서 테스트 하실 때 자기 ip로 해주세요
+*/
 
 export async function sendLoginRequest(id, passWord) {
     console.log(id, passWord);
@@ -46,7 +53,14 @@ export async function sendRegisterRequest(data) {
 
     } catch (e) {
 
-        console.log(e.message);
+        console.log(e.message,"message");
+        console.log(e.message.includes("code 401"))
+        if(e?.message?.includes("code 401")){
+            return {result:false,message:"email duplicate"}
+        }else{
+            return {result:false,message:"error"}
+
+        }
     }
 
 }

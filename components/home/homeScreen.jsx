@@ -57,13 +57,23 @@ function HomeScreen() {
 
 
     return (
-        <View>
-            <MainHeader back={true}/>
-            <Text>환영합니다 ! {ctx.auth ? ctx.auth.id+"님" : ""} </Text>
-            <SearchBar searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword} searchHandle={searchHandle} />
-            <Category setSearchKeyword={setSearchKeyword} filter={filter} setFilter={setFilter} />
-            <List item={itemList} filter={filter} />
+      <View>
+        <MainHeader back={true} />
+        <View style={{ backgroundColor: "#B4FBFF" }}>
+          <Text>환영합니다 ! {ctx.auth ? ctx.auth.id + "님" : ""} </Text>
         </View>
+        <SearchBar
+          searchKeyword={searchKeyword}
+          setSearchKeyword={setSearchKeyword}
+          searchHandle={searchHandle}
+        />
+        <Category
+          setSearchKeyword={setSearchKeyword}
+          filter={filter}
+          setFilter={setFilter}
+        />
+        <List item={itemList} filter={filter} />
+      </View>
     );
 }
 

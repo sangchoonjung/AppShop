@@ -7,8 +7,7 @@ function CustomButton({ children, onPress, style,textStyle }) {
             {({ pressed }) =>
                 pressed ? [styles.buttonOuter]
                     : ""}>
-            <View 
-            style={[styles.buttonContainer, style]}>
+            <View style={[styles.buttonContainer, style]}>
                 <Text style={[styles.buttonText,textStyle]}>
                     {children}
                 </Text>
@@ -18,29 +17,30 @@ function CustomButton({ children, onPress, style,textStyle }) {
 ;}
 
 const styles = StyleSheet.create({
-    buttonOuter: {
-        opacity: 0.5
-    },
-    buttonContainer: {
-        backgroundColor: "black",
-        borderRadius: 8,
-        paddingHorizontal: 8,
-        paddingVertical: 4,
-        marginVertical: 8,
-        opacity: 0.95,
-        elevation: 1,
-        borderWidth: 2,
-        borderColor: "#222222",
-        alignContent:"center",
-        alignItems:"center",
-        justifyContent:"center",
-        textAlign:"center"
-    },
-    buttonText: {
-        color: "white",
-        fontSize: 24,
-        textAlign: "center",
-        fontWeight: "bold"
-    }
+  buttonOuter: {
+    opacity: 0.7,
+  },
+  buttonContainer: {
+    backgroundColor: "#006699",
+    borderRadius: 7,
+    paddingVertical: 10,
+    marginVertical: 5,
+    elevation: 1,
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    marginHorizontal: 30,
+
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 15,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontFamily: "baseFont",
+  },
 });
 export default CustomButton;

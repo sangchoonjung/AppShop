@@ -9,6 +9,7 @@ function BaseFont({children,style}) {
 const styles = StyleSheet.create({
   base: {
     fontFamily: "baseFont",
+    
   },
 });
 

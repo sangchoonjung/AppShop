@@ -20,21 +20,18 @@ function MainHeader({back}) {
     );
 }
 const styles = StyleSheet.create({
-    main: {
-        width: "100 %",
-        height: 80,
-        backgroundColor: "green",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingTop: 10,
+  main: {
+    width: "100 %",
+    height: 80,
+    backgroundColor: "#A5D8FA",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 10,
 
-//---------------------------
-        flexDirection:"row"
-    },
-    button:{
-
-    }
-
-})
+    //---------------------------
+    flexDirection: "row",
+  },
+  button: {},
+});
 
 export default MainHeader;

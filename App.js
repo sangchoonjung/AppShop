@@ -86,21 +86,13 @@ function DefaultNavigator() {
   )
 }
 
-
-
 export default function App() {
-
-
   const [fontsLoaded] = useFonts({
     'baseFont': require("./assets/font/NanumGothic-Regular.ttf")
   })
   if (!fontsLoaded) {
     return <StatusBar />
   }
-
-
-
-
 
   return (
     <>

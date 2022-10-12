@@ -8,6 +8,9 @@ export function AppContextProvider({ children }) {
     const [zzimList, setZzimList] = useState([]);
 
     const [pendingList, setPendingList] = useState([]);
+    const [completeList, setCompleteList] = useState([]);
+
+
 
     const login = (id, token, email, data) => {
         setAuth({ id: id, token: token, email: email });
@@ -29,6 +32,7 @@ export function AppContextProvider({ children }) {
     return (
         <AppContext.Provider value={{
             auth, login, logout, userInfo, zzimList, setZzim, pendingList, setPendingList
+            , completeList, setCompleteList
         }}>
             {children}
         </AppContext.Provider>

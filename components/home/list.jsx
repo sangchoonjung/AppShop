@@ -8,8 +8,7 @@ function List({ item }) {
   const ctx = useContext(AppContext);
   const zzimList = ctx.zzimList;
   const setZzim = ctx.setZzim;
-  console.log(zzimList)
-  
+  // console.log(zzimList)
   
 
   const [refresh, setRefresh] = useState(false);

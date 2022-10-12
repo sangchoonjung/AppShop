@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
 import CustomButton from "../../../custom/customButton";
 import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../mainheader";
+import QuestionPicker from "./questionPicker";
 
 function JoinScreen({ navigation }) {
   const [registData, setRegistData] = useState({
@@ -103,14 +104,13 @@ function JoinScreen({ navigation }) {
             placeholder="birth"
             style={sytles.textinputContain}
           />
-          <TextInput placeholder="질문 선택(임시)" />
+          <QuestionPicker/>
           <TextInput
             autoCapitalize="none"
             onChangeText={(text) => changeHandle(["answer", text])}
             placeholder="answer"
             style={sytles.textinputContain}
           />
-          {/* select를 위한 모듈 설치 필요 */}
         </View>
       </View>
       <View>

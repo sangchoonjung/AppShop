@@ -75,7 +75,6 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
   // console.log(data.key,ctx.auth.id)
 
   const heartHandler = async () => {
-    console.log("트루")
     let zzim = zzimList;
     try {
 
@@ -100,20 +99,31 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
   return (
     <>
-      <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => {
-        setModalVisible(!modalVisible)
-      }}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View>
               <BaseFont style={styles.modalProductName}>{data.title}</BaseFont>
               <View style={{ flexDirection: "row", justifyContent: "center" }}>
                 <BaseFont style={{ fontSize: 20 }}>count _ </BaseFont>
-                <Text style={styles.modalcount} onPress={countHandlerDown}>-</Text>
+                <Text style={styles.modalcount} onPress={countHandlerDown}>
+                  -
+                </Text>
                 <BaseFont style={{ fontSize: 20 }}>{productCount}</BaseFont>
-                <Text style={styles.modalcount} onPress={countHandlerUp}>+</Text>
+                <Text style={styles.modalcount} onPress={countHandlerUp}>
+                  +
+                </Text>
               </View>
-              <BaseFont style={styles.modalTotalPrice}>total price _ {data.standardFee * productCount}</BaseFont>
+              <BaseFont style={styles.modalTotalPrice}>
+                total price _ {data.standardFee * productCount}
+              </BaseFont>
             </View>
             {/* 모달 버튼 */}
 
@@ -127,12 +137,11 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
               <Pressable
                 style={[styles.button, styles.modelButton]}
                 onPress={() => {
-                  setModalVisible(!modalVisible)
+                  setModalVisible(!modalVisible);
                 }}
               >
                 <Text style={styles.textStyle}>cancel</Text>
               </Pressable>
-
             </View>
           </View>
         </View>
@@ -140,26 +149,27 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
-        {
-          !pend ?
-
-            <Pressable
-              style={[styles.button, styles.buttonOpen]}
-              onPress={() => setModalVisible(true)}>
-              <BaseFont style={styles.textStyle}>buy item</BaseFont>
-            </Pressable>
-            :
-            <View
-              style={[styles.button, styles.buttonOpen]}
-            >
-              <BaseFont style={styles.textStyle}>now pending</BaseFont>
-            </View>
-        }
+        {!pend ? (
+          <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}
+          >
+            <BaseFont style={styles.textStyle}>pending now</BaseFont>
+          </Pressable>
+        ) : (
+          <View style={[styles.button, styles.buttonOpen]}>
+            <BaseFont style={[styles.textStyle]}>pending more</BaseFont>
+          </View>
+        )}
 
         {/* 찜 on/off */}
         <Pressable style={styles.heartLayout}>
-          <Entypo name={heartOnOff ? "heart" : "heart-outlined"} size={24} color="black" onPress={heartHandler} />
-
+          <Entypo
+            name={heartOnOff ? "heart" : "heart-outlined"}
+            size={24}
+            color="#0064FF"
+            onPress={heartHandler}
+          />
         </Pressable>
       </View>
     </>
@@ -181,17 +191,18 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.5,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   button: {
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: "green",
-    paddingHorizontal: 130,
+    backgroundColor: "#006699",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingVertical: 15,
+    flex: 1,
   },
   buttonClose: {
     backgroundColor: "green",
@@ -199,21 +210,21 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "black",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: "center",
   },
   blockLayout: {
-    flexDirection: "row"
+    flexDirection: "row",
+    width : "100%"
   },
   heartLayout: {
     justifyContent: "center",
-    backgroundColor: "red",
-    flex: 1,
+    backgroundColor: "#A5D8FA",
     justifyContent: "center",
-    alignItems: "center"
+    paddingHorizontal:15
   },
   modalcount: {
     fontSize: 15,
@@ -221,29 +232,27 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     borderWidth: 1,
     paddingHorizontal: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   modalProductName: {
     fontSize: 20,
     marginBottom: 20,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   modalTotalPrice: {
     fontSize: 25,
     marginTop: 20,
     textAlign: "center",
-
   },
   modalButtonContain: {
     flexDirection: "row",
-    marginTop: 20
+    marginTop: 20,
   },
   modelButton: {
     marginHorizontal: 10,
     backgroundColor: "green",
-    borderRadius: 10
-  }
-
-})
+    borderRadius: 10,
+  },
+});
 
 export default ItemBuyAndZzim;

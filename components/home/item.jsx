@@ -49,7 +49,7 @@ function Item({ data }) {
         </Pressable>
         <View style={styles.right}>
           <BaseFont>No.{data.key}</BaseFont>
-          <BaseFont>{data.title}</BaseFont>
+          <BaseFont>{data.title.length > 30 ? data.title.substring(0,25)+"..." : data.title}</BaseFont>
           <BaseFont>(별점자리)</BaseFont>
           <View>
             <BaseFont
@@ -74,9 +74,8 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
     margin: 5,
-    borderColor: "#999999",
+    backgroundColor:"white"
   },
   left: {
     flex: 1,

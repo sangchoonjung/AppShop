@@ -19,7 +19,7 @@ function List({ item }) {
         }}
         data={item}
         renderItem={({ item }) => <Item data={item} key={item.key} />}
-        showsVerticalScrollIndicator={false} />
+        showsVerticalScrollIndicator={false}/>
     </View>
   );
 }

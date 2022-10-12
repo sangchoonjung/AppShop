@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Button, Pressable, StyleSheet, Text, View } from "react-native";
 import { AppContext } from "../../../context/auth";
-import { requestPendingProductList } from "../../../util/product";
-import { requestCompleteProductList } from "../../../util/product";
+import {
+  requestCompleteProductList,
+  requestPendingProductList,
+} from "../../../util/product";
+
 import List from "../../home/list";
 import MainHeader from "../../mainheader";
 
@@ -18,7 +21,7 @@ function MypageScreen({ navigation }) {
   const ctx = useContext(AppContext);
 
   useEffect(() => {
-    requestPendingProduct(ctx.pendingList)
+    requestPendingProductList(ctx.pendingList)
       .then((item) => {
         if (item && item?.result) {
           setPendingList(item.message);
@@ -46,40 +49,25 @@ function MypageScreen({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.mainContain}>
-        <View style={styles.accountSetting}>
-          <Pressable
-            style={({ pressed }) => (pressed ? { opacity: 0.5 } : null)}
-            onPress={updateNavigationHandle}
-          >
-            <MaterialCommunityIcons name="account" size={40} color="#0064FF" />
-          </Pressable>
-        </View>
-        <View>
-          <BaseFont style={{ marginLeft: 20 }}>
-            Welcome, {ctx.auth.id} !
-          </BaseFont>
-        </View>
-        <View style={{ flex: 1 }}>
-          {/* <View style={styles.mainContain}> */}
-          <MainHeader back={true} />
-          <Text>프로필 수정</Text>
-          <Button title="수정하기" onPress={updateNavigationHandle} />
-
-          {pendingList.length > 0 && (
-            <TabViewExample
-              pendingList={pendingList}
-              completeList={completeList}
-            />
-          )}
-
-          {/* </View> */}
-
-          <View style={styles.logoutContain}>
-            <Button title="logout" onPress={logoutHandle} />
-          </View>
-        </View>
+    <View style={styles.mainContain}>
+      <View style={styles.accountSetting}>
+        <Pressable
+          style={({ pressed }) => (pressed ? { opacity: 0.5 } : null)}
+          onPress={updateNavigationHandle}
+        >
+          <MaterialCommunityIcons name="account" size={40} color="#0064FF" />
+        </Pressable>
+      </View>
+      <View>
+        <BaseFont style={{ marginLeft: 20 }}>Welcome, {ctx.auth.id} !</BaseFont>
+      </View>
+      <View style={{ flex: 1 }}>
+        {pendingList.length > 0 && (
+          <TabViewExample
+            pendingList={pendingList}
+            completeList={completeList}
+          />
+        )}
       </View>
     </View>
   );

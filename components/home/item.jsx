@@ -31,7 +31,7 @@ function Item({ data }) {
       )
     }
   };
-
+console.log(data)
 
 
   const addedDate = data?.date ? dateCutting(data?.date) : ""
@@ -63,6 +63,7 @@ function Item({ data }) {
               $ {data.standardFee}.00
             </BaseFont>
             {data?.date && <Text>Added Date:{addedDate}</Text>}
+
           </View>
         </View>
       </View>

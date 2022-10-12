@@ -76,12 +76,25 @@ export async function requestZzimProduct(zzimList){
 }
 // 찜이랑 팬딩이랑 하나의 경로에 보내도 될 것 같은데 리팩토링할 시간 있으면 고치고
 // 일단은 그냥 분리
-export async function requestPendingProduct(productId){
+export async function requestPendingProductList(productId){
     try {
-        // console.log(zzimList,"zzimlllistrequest")
-        const response = await axios.post(baseURL + "/api/product/pendingProductList",
+        const response = await axios.post(baseURL + "/api/product/requestProductList",
             {
-                pendingList : productId
+                list : productId
+            }
+        )
+        return response.data
+    } catch (e) {
+        console.log(e.message);
+    }
+}
+
+
+export async function requestCompleteProductList(productId){
+    try {
+        const response = await axios.post(baseURL + "/api/product/requestProductList",
+            {
+                list : productId
             }
         )
         return response.data

@@ -1,18 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { AppContext } from "../../../context/auth";
-import { requestPendingProduct } from "../../../util/product";
+import { requestPendingProductList } from "../../../util/product";
+import { requestCompleteProductList } from "../../../util/product";
 import List from "../../home/list";
 import MainHeader from "../../mainheader";
+import TabViewExample from "./tabViewNavigator";
 
 function MypageScreen({ navigation }) {
   const [pendingList, setPendingList] = useState([]);
+  const [completeList, setCompleteList] = useState([]);
   const ctx = useContext(AppContext);
 
 
   useEffect(() => {
 
-    requestPendingProduct(ctx.pendingList).then(
+    requestPendingProductList(ctx.pendingList).then(
       item => {
         if (item && item?.result) {
           setPendingList(item.message)
@@ -22,6 +25,21 @@ function MypageScreen({ navigation }) {
 
   }, [ctx.pendingList]);
   // console.log(pendingList)
+
+
+  useEffect(() => {
+    requestCompleteProductList(ctx.completeList).then(
+      item => {
+        if (item && item?.result) {
+          setCompleteList(item.message)
+        }
+      }
+    ).catch(e => console.log(e.message));
+
+  }, [ctx.completeList]);
+
+
+
   const logoutHandle = () => {
     return ctx.logout();
   }
@@ -35,28 +53,24 @@ function MypageScreen({ navigation }) {
   return (
 
 
-    <View style={{ flex: 1 }}>
-      <View style={styles.mainContain}>
+    <>
+      <View style={{ flex: 1 }}>
+        {/* <View style={styles.mainContain}> */}
         <MainHeader back={true} />
         <Text>프로필 수정</Text>
         <Button title="수정하기" onPress={updateNavigationHandle} />
 
-        <View style={{flex:1}}>
-          <Text>Pending... </Text>
-          <List item={pendingList} />
-          <Text>Complete...</Text>
-          
+        {pendingList.length > 0 && <TabViewExample pendingList={pendingList} completeList={completeList} />}
+
+        {/* </View> */}
+
+
+        <View style={styles.logoutContain}>
+          <Button title="logout" onPress={logoutHandle} />
         </View>
-
-
       </View>
 
-
-      <View style={styles.logoutContain}>
-        <Button title="logout" onPress={logoutHandle} />
-      </View>
-    </View>
-
+    </>
   );
 }
 const styles = StyleSheet.create({

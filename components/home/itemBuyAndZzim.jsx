@@ -77,14 +77,14 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
   const heartHandler = async () => {
     let zzim = zzimList;
     try {
-
+// 삭제
       if (zzimList.some(e => e.id === String(data.key))) {
         zzim = zzimList.filter(e => e.id !== String(data.key));
         // console.log(zzim)
         setZzim(zzim);
-
+// 등록
       } else {
-        zzim = [...zzim, { id: String(data.key), date: Date.now() }]
+        zzim = [...zzim, { id: String(data.key), date: Date.now(),zzimType:true}]
         setZzim(zzim)
 
       }

@@ -8,6 +8,8 @@ import { dateCutting } from "../../util/function";
 function Item({ data }) {
   const navigation = useNavigation();
   const ctx = useContext(AppContext);
+
+
   const detailNavigation = () => {
     console.log(ctx.auth)
     if (ctx.auth) {
@@ -31,9 +33,9 @@ function Item({ data }) {
       )
     }
   };
-console.log(data)
+// console.log(data)
 
-
+  console.log(data.zzimType)
   const addedDate = data?.date ? dateCutting(data?.date) : ""
 
   return (

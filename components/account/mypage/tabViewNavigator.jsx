@@ -5,7 +5,7 @@ import List from '../../home/list';
 
 export default function TabViewExample({ pendingList,completeList }) {
     const layout = useWindowDimensions();
-    console.log(completeList)
+    // console.log(completeList)
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
         { key: 'pending', title: `대기중(${pendingList.length})` },

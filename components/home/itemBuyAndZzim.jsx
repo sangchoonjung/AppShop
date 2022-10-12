@@ -30,7 +30,6 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
   useEffect(() => {
     const initZzim = ctx.zzimList;
-
     if (initZzim.some(e => e.id === String(data.key))) {
       setHeartOnOff(true);
     } else {

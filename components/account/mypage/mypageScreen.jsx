@@ -18,10 +18,8 @@ function MypageScreen({ navigation }) {
   const ctx = useContext(AppContext);
 
   useEffect(() => {
-
     requestPendingProduct(ctx.pendingList)
       .then((item) => {
-
         if (item && item?.result) {
           setPendingList(item.message);
         }
@@ -30,19 +28,15 @@ function MypageScreen({ navigation }) {
   }, [ctx.pendingList]);
   // console.log(pendingList)
 
-
   useEffect(() => {
-    requestCompleteProductList(ctx.completeList).then(
-      item => {
+    requestCompleteProductList(ctx.completeList)
+      .then((item) => {
         if (item && item?.result) {
-          setCompleteList(item.message)
+          setCompleteList(item.message);
         }
-      }
-    ).catch(e => console.log(e.message));
-
+      })
+      .catch((e) => console.log(e.message));
   }, [ctx.completeList]);
-
-
 
   const logoutHandle = () => {
     return ctx.logout();
@@ -52,7 +46,6 @@ function MypageScreen({ navigation }) {
   };
 
   return (
-
     <View style={{ flex: 1 }}>
       <View style={styles.mainContain}>
         <View style={styles.accountSetting}>
@@ -70,25 +63,25 @@ function MypageScreen({ navigation }) {
         </View>
         <View style={{ flex: 1 }}>
           {/* <View style={styles.mainContain}> */}
-        <MainHeader back={true} />
-        <Text>프로필 수정</Text>
-        <Button title="수정하기" onPress={updateNavigationHandle} />
+          <MainHeader back={true} />
+          <Text>프로필 수정</Text>
+          <Button title="수정하기" onPress={updateNavigationHandle} />
 
-        {pendingList.length > 0 && <TabViewExample pendingList={pendingList} completeList={completeList} />}
+          {pendingList.length > 0 && (
+            <TabViewExample
+              pendingList={pendingList}
+              completeList={completeList}
+            />
+          )}
 
-        {/* </View> */}
+          {/* </View> */}
 
-
-        <View style={styles.logoutContain}>
-          <Button title="logout" onPress={logoutHandle} />
+          <View style={styles.logoutContain}>
+            <Button title="logout" onPress={logoutHandle} />
+          </View>
         </View>
       </View>
-        </View>
-      </View>
-
-      
     </View>
-
   );
 }
 const styles = StyleSheet.create({

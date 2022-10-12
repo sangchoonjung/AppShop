@@ -15,7 +15,7 @@ function CategoryListItem({ filter, onPress, title }) {
 
   return (
     <>
-      <View style={{marginRight:15}}>
+      <View style={{ marginRight: 15 }}>
         <Pressable
           style={({ pressed }) => (pressed ? styles.pressed : defaults)}
           onPress={onPress}

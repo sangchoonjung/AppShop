@@ -26,7 +26,7 @@ function ZzimScreen() {
 
 
     const newestHandle = () => {
-        if(selected){
+        if (selected) {
             return;
         }
         setSelected(true);
@@ -36,7 +36,7 @@ function ZzimScreen() {
 
 
     const oldestHandle = () => {
-        if(!selected){
+        if (!selected) {
             return;
         }
         setSelected(false);

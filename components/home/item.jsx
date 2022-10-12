@@ -10,27 +10,31 @@ function Item({ data }) {
   const ctx = useContext(AppContext);
   const detailNavigation = () => {
     console.log(ctx.auth)
-    if(ctx.auth){
+    if (ctx.auth) {
       navigation.navigate("detail", { tag: data });
-    }else{
+    } else {
       Alert.alert(
         "Login Confirm",
         "You must log in to view details",
         [
-        {text:"Cancel",
-        onPress:()=>console.log("cancel pressed"),
-        style:"cancel"},
-        {text:"OK",
-        onPress:()=>navigation.navigate("account"),
-        style:"default"} ,
-        ]   
-    )
+          {
+            text: "Cancel",
+            onPress: () => console.log("cancel pressed"),
+            style: "cancel"
+          },
+          {
+            text: "OK",
+            onPress: () => navigation.navigate("account"),
+            style: "default"
+          },
+        ]
+      )
     }
   };
 
 
 
-  const addedDate = data?.date?dateCutting(data?.date):""
+  const addedDate = data?.date ? dateCutting(data?.date) : ""
 
   return (
     <>
@@ -56,9 +60,9 @@ function Item({ data }) {
                 margin: 10,
               }}
             >
-            $ {data.standardFee}.00
+              $ {data.standardFee}.00
             </BaseFont>
-            {data?.date&&<Text>추가한 날짜{addedDate}</Text>}
+            {data?.date && <Text>추가한 날짜{addedDate}</Text>}
           </View>
         </View>
       </View>

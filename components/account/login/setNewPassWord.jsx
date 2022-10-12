@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     marginTop: 200,
     width: "100%",
     marginTop: "auto",
-    marginBottom:50
-    
+    marginBottom: 50
+
   },
   textInputContain: {
     textAlign: "center",

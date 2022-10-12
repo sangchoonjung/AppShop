@@ -5,7 +5,7 @@ import CustomButton from "../../../custom/customButton";
 import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../mainheader";
 
-function JoinScreen({navigation}) {
+function JoinScreen({ navigation }) {
   const [registData, setRegistData] = useState({
     id: "",
     passWord: "",
@@ -25,18 +25,18 @@ function JoinScreen({navigation}) {
     console.log(registData);
     const rst = await sendRegisterRequest(registData);
     console.log(rst)
-    if(rst.result){
-      Alert.alert("system","complete!",[
+    if (rst.result) {
+      Alert.alert("system", "complete!", [
         {
-          text:"ok",
-          onPress : ()=>{
+          text: "ok",
+          onPress: () => {
             navigation.navigate("login")
           }
         }
       ])
     }
-    if(rst?.result===false&&rst?.message){
-      Alert.alert("error",rst.message);
+    if (rst?.result === false && rst?.message) {
+      Alert.alert("error", rst.message);
     }
   }
 
@@ -126,22 +126,22 @@ const sytles = StyleSheet.create({
     marginHorizontal: 30,
     borderWidth: 1,
     padding: 20,
-    borderColor:"#cccccc"
-    
+    borderColor: "#cccccc"
+
   },
   checkButton: {
     fontSize: 20,
-    marginHorizontal:10
-    
+    marginHorizontal: 10
+
   },
   textinputContain: {
     borderWidth: 1,
     padding: 5,
     fontSize: 20,
     marginBottom: 10,
-    marginHorizontal:10,
+    marginHorizontal: 10,
     borderRadius: 2,
-    borderColor:"#cccccc"
+    borderColor: "#cccccc"
   },
 });
 export default JoinScreen;

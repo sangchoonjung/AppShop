@@ -122,11 +122,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#93DAFF",
     margin: 10,
-    marginHorizontal:20,
+    marginHorizontal: 20,
     padding: 20,
     borderRadius: 10,
     borderColor: "#999999",
-    borderWidth:1
+    borderWidth: 1
   },
   priceText: {
     fontSize: 20,

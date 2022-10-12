@@ -19,35 +19,12 @@ function HomeScreen() {
   const [searchKeyword, setSearchKeyword] = useState("");
 
 
-    useEffect(() => {
-        requestAllProduct().then(p => {
-            if(p){
-                setItemList(p.message);
-            }
-        }).catch(e => console.log(e.message));
-    }, []);
-    
-    // console.log(itemList)
-    useEffect(() => {
-        if(!(searchKeyword==="")){
-            return;
-        }
-        //예외처리
-
-        if(filter?.length>=1){
-            categoryFilteredProduct(filter).then(p => setItemList(p?.message));
-        }
-
-        if (filter?.length === 0) {
-            //필터 제거하면 전체목록
-            //모든 값 제거했을 때(빈 필터) 약간의 로딩 딜레이 있음(나중에 스피너)
-            requestAllProduct().then(p => {
-                if(p){
-                    setItemList(p.message);
-                }
-            }).catch(e => console.log(e.message));
-
-        }
+  useEffect(() => {
+    requestAllProduct().then(p => {
+      if (p) {
+        setItemList(p.message);
+      }
+    }).catch(e => console.log(e.message));
   }, []);
 
   // console.log(itemList)
@@ -56,22 +33,30 @@ function HomeScreen() {
       return;
     }
     //예외처리
-    if (filter?.length > 1) {
-      categoryFilteredProduct(filter).then((p) => setItemList(p?.message));
+
+    if (filter?.length >= 1) {
+      categoryFilteredProduct(filter).then(p => setItemList(p?.message));
     }
 
     if (filter?.length === 0) {
       //필터 제거하면 전체목록
       //모든 값 제거했을 때(빈 필터) 약간의 로딩 딜레이 있음(나중에 스피너)
-      requestAllProduct()
-        .then((p) => {
-          if (p) {
-            setItemList(p.message);
-          }
-        })
-        .catch((e) => console.log(e.message));
+      requestAllProduct().then(p => {
+        if (p) {
+          setItemList(p.message);
+        }
+      }).catch(e => console.log(e.message));
+
     }
   }, [filter]);
+
+
+
+
+
+
+
+
   const ctx = useContext(AppContext);
 
   const searchHandle = (keyword) => {
@@ -87,8 +72,8 @@ function HomeScreen() {
     <View style={{ flex: 1 }}>
       <MainHeader back={true} />
       <View style={styles.boxContain}>
-        
-              <SearchBar
+
+        <SearchBar
           searchKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
           searchHandle={searchHandle}
@@ -105,9 +90,9 @@ function HomeScreen() {
 }
 const styles = StyleSheet.create({
   boxContain: {
-    paddingBottom:15,
+    paddingBottom: 15,
     backgroundColor: "#B4FBFF",
-    
+
   },
 });
 export default HomeScreen;

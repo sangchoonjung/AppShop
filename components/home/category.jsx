@@ -3,30 +3,19 @@ import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import CategoryListItem from "./categoryListItem";
 
 
-=======
-function Category({ filter, setFilter,setSearchKeyword }) {
-    const [category, setCategory] = useState([]);
-    useEffect(() => {
-        function readCategory() {
-            const { categoryList } = require("../../data/data-dummy")
-            return categoryList
-        };
-        const list = readCategory();
-        setCategory(list);
-    }, []);
+function Category({ filter, setFilter, setSearchKeyword }) {
 
-    const filterhandle = (e) => {
-        // console.log(e)
-        setSearchKeyword("")
-        filter?.includes(e) ?
-            setFilter(current => current.filter(item => item !== e))
-            :
-            setFilter(current => [...current, e]);
-    }
-    //서버에서 받아오기 or 미리 입력된 값 읽어오기
+
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    function readCategory() {
+      const { categoryList } = require("../../data/data-dummy")
+      return categoryList
+    };
     const list = readCategory();
     setCategory(list);
   }, []);
+
 
   const filterhandle = (e) => {
     // console.log(e)
@@ -39,7 +28,7 @@ function Category({ filter, setFilter,setSearchKeyword }) {
   // console.log(category)
   return (
     <View style={styles.scrollContainer}>
-      <ScrollView horizontal={true} style={{paddingHorizontal:20}} showsHorizontalScrollIndicator={false}>
+      <ScrollView horizontal={true} style={{ paddingHorizontal: 20 }} showsHorizontalScrollIndicator={false}>
         {category.map((e) => (
           <CategoryListItem
             filter={filter}

@@ -87,6 +87,7 @@ function DefaultNavigator() {
 }
 
 
+
 export default function App() {
 
 
@@ -96,6 +97,11 @@ export default function App() {
   if (!fontsLoaded) {
     return <StatusBar />
   }
+
+
+
+
+
   return (
     <>
       <StatusBar style="auto" />

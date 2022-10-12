@@ -15,7 +15,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
   const setZzim = ctx.setZzim
   const pendingList = ctx.pendingList;
 
-  console.log(pendingList)
+  // console.log(pendingList)
   /*
   초기세팅
   계정에 있는 zzimList에 이 항목이 있으면 true
@@ -27,6 +27,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
     }
 
   }, [pendingList])
+
   useEffect(() => {
     const initZzim = ctx.zzimList;
 
@@ -46,6 +47,14 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
     setProductCount(productCount - 1);
   }
 
+
+  const pendingHandle = async ()=>{
+    const recv = await sendProductPendingAddRequest(ctx.auth.id, data.key, productCount, (productCount * data.standardFee));
+    // console.log(recv,"pendingggg")
+    ctx.setPendingList(recv);
+    setModalVisible(false)
+  }
+
   const modalConfirmButton = () => {
     Alert.alert(
       "Buy Confirm",
@@ -58,12 +67,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
         },
         {
           text: "OK",
-          onPress: async () => {
-            await sendProductPendingAddRequest(ctx.auth.id, data.key, productCount, (productCount * data.standardFee));
-            setModalVisible(false)
-            //구매대기내역 account에 작성
-
-          }
+          onPress: pendingHandle
         }
       ]
     )
@@ -77,7 +81,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
       if (zzimList.some(e => e.id === String(data.key))) {
         zzim = zzimList.filter(e => e.id !== String(data.key));
-        console.log(zzim)
+        // console.log(zzim)
         setZzim(zzim);
 
       } else {

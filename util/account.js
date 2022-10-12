@@ -7,8 +7,6 @@ const { baseURL } = require("./baseURL")
 // baseURL 파일 3개 바꾸기 귀찮아서 하나로 묶었습니다
 
 
-
-
 /*
 const baseURL = "http://58.125.70.41:8080";
 const baseURL = "http://192.168.4.41:8080";
@@ -154,11 +152,9 @@ export async function sendProductPendingAddRequest(userId, productId, unit,price
             unit: unit,
             price:price,
             date:Date.now(),
-
         });
-        if (response.data.result) {
-
-            return response?.result
+        if (response?.data?.result) {
+            return response?.data.message
         }
         return response.data
 

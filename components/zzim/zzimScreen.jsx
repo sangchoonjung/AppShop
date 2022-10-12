@@ -24,7 +24,6 @@ function ZzimScreen() {
 
 
 
-
     const newestHandle = () => {
         if (selected) {
             return;
@@ -44,7 +43,7 @@ function ZzimScreen() {
 
     }
     return (
-        <View>
+        <View style={styles.main}>
             <MainHeader back={true} />
             {/* <Text>찜스크린</Text> */}
             <View style={styles.sortContainer}>
@@ -60,7 +59,8 @@ function ZzimScreen() {
                     <Text style={!selected ? styles.select : styles.defaulted}> Oldest </Text>
                 </Pressable>
             </View>
-            <List item={itemList} />
+
+            {itemList.length>0&&<List item={itemList} />}
             {/* height 지정 필요 */}
         </View>
     );
@@ -76,6 +76,9 @@ const styles = StyleSheet.create({
     },
     defaulted: {
 
+    },
+    main:{
+        flex:1
     }
 
 })

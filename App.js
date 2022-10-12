@@ -16,6 +16,9 @@ import { useContext } from 'react';
 import UpdateAccountScreen from './components/account/mypage/updateAccountScreen';
 import ItemDetailScreen from './components/home/itemDetailScreen';
 
+
+
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -85,6 +88,8 @@ function DefaultNavigator() {
 
 
 export default function App() {
+
+
   const [fontsLoaded] = useFonts({
     'baseFont': require("./assets/font/NanumGothic-Regular.ttf")
   })

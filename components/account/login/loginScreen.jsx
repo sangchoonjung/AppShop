@@ -9,6 +9,7 @@ import FindAccount from "./findAccount";
 import SetNewPassWord from "./setNewPassWord";
 import CustomButton from "../../../custom/customButton";
 import BaseFont from "../../../assets/font/base";
+
 //해야할거 로그인context에 맞게 수정 네비게이션 (회원가입 아디비번찾기)연결 나머지는 서버작업
 
 function LoginScreen({ navigation }) {
@@ -129,7 +130,7 @@ function LoginScreen({ navigation }) {
             <CustomButton onPress={loginHandle} style={{ marginTop: 25 }}>
               Login
             </CustomButton>
-            <CustomButton>구글로그인</CustomButton>
+            
             <Pressable
               onPress={onClosePW}
               style={({ pressed }) => [

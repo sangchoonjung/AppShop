@@ -48,8 +48,6 @@ function HomeScreen() {
             }).catch(e => console.log(e.message));
 
         }
-      })
-      .catch((e) => console.log(e.message));
   }, []);
 
   // console.log(itemList)

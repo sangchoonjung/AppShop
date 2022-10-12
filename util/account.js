@@ -141,7 +141,6 @@ export async function setNewPassWordRequest(id, answer, passWord, question = 1) 
 
 
 export async function sendProductPendingAddRequest(userId, productId, unit,price) {
-
     try {
         if (!userId || !productId || !unit||!price) {
             return;

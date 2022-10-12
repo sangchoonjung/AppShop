@@ -84,6 +84,7 @@ function DefaultNavigator() {
 }
 
 
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'baseFont': require("./assets/font/NanumGothic-Regular.ttf")
@@ -91,6 +92,11 @@ export default function App() {
   if (!fontsLoaded) {
     return <StatusBar />
   }
+
+
+
+
+
   return (
     <>
       <StatusBar style="auto" />

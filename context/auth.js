@@ -13,10 +13,13 @@ export function AppContextProvider({ children }) {
         setAuth({ id: id, token: token, email: email });
         setUserInfo({ data: data });
         setZzimList(data.zzimList);
-        setPendingList(data.productPendingItem)
+        setPendingList(data.productPendingItem);
     }
     const logout = () => {
-        setAuth(null)
+        setAuth(null);
+        setUserInfo(null);
+        setZzimList([]);
+        setPendingList([]);
     }
 
     const setZzim = (list) => {
@@ -25,8 +28,8 @@ export function AppContextProvider({ children }) {
 
     return (
         <AppContext.Provider value={{
-            auth, login, logout, userInfo, zzimList, setZzim, pendingList 
-            }}>
+            auth, login, logout, userInfo, zzimList, setZzim, pendingList, setPendingList
+        }}>
             {children}
         </AppContext.Provider>
     )

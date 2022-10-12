@@ -62,7 +62,7 @@ function Item({ data }) {
             >
               $ {data.standardFee}.00
             </BaseFont>
-            {data?.date && <Text>추가한 날짜{addedDate}</Text>}
+            {data?.date && <Text>Added Date:{addedDate}</Text>}
           </View>
         </View>
       </View>

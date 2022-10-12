@@ -18,7 +18,7 @@ import SetTime from "./setTime";
 function ItemDetailScreen() {
   const route = useRoute();
   const data = route.params.tag;
-  console.log(data);
+  // console.log(data);
   const [modalVisible, setModalVisible] = useState(false);
 
   const timeLimit = 20;

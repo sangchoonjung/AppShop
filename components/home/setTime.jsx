@@ -2,19 +2,22 @@ import { useEffect, useState } from "react";
 import { Text } from "react-native";
 import { timeCutting } from "../../util/function";
 
-function SetTime({ timeLimit }) {
-    //들어온 시간이 분단위 
-    const [leftTime, setLeftTime] = useState(timeLimit * 1000 * 60);
-    //ms단위로 변환
-    // console.log(leftTime)
+function SetTime({ timeLimit  ,setDisableHandle }) {
 
+    const expire = new Date(timeLimit) - new Date();
+    const [leftTime, setLeftTime] = useState(expire);
     useEffect(() => {
+        const expire = new Date(timeLimit) - new Date() + new Date().getTimezoneOffset() ** 1000 * 60;
+        setLeftTime(expire)
+        // console.log(new Date().getTimezoneOffset())
         const interval = setInterval(() => {
-            setLeftTime(current => current - 1000)
+            const left = new Date(timeLimit) - new Date() + new Date().getTimezoneOffset() * 1000 * 60;
+            setLeftTime(left)
+            if (leftTime <= 0) {
+                clearInterval(interval);
+                setDisableHandle();
+            }
         }, 1000)
-        if (setLeftTime <= 0) {
-            clearInterval(interval);
-        }
     }, []);
 
 
@@ -24,7 +27,7 @@ function SetTime({ timeLimit }) {
 
     return (
         <>
-            <Text>{timeCutting(leftTime)}</Text>
+            <Text>{timeLimit}까지 앞으로 {timeCutting(leftTime)}</Text>
         </>
     );
 }

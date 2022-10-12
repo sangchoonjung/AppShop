@@ -52,11 +52,6 @@ function HomeScreen() {
 
 
 
-
-
-
-
-
   const ctx = useContext(AppContext);
 
   const searchHandle = (keyword) => {

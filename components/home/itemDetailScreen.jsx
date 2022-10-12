@@ -21,7 +21,10 @@ function ItemDetailScreen() {
   // console.log(data);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const timeLimit = 20;
+  const  setDisableHandle = ()=>{
+    //잔여시간 0이하로 내려가면 기능 막기
+  }
+  const timeLimit = "2022-10-13";
   //20분 가정
 
   return (
@@ -82,7 +85,7 @@ function ItemDetailScreen() {
 
           <View>
             <Text>
-              잔여 시간 <SetTime timeLimit={timeLimit} />
+              잔여 시간 <SetTime timeLimit={timeLimit} setDisableHandle={()=>setDisableHandle(data.key)}/>
             </Text>
             {/* 남은시간 컴포넌트 */}
           </View>

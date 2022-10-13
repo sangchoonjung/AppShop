@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { AppContext } from "../../context/auth";
@@ -10,7 +11,7 @@ function ZzimScreen() {
     const ctx = useContext(AppContext);
 
     const [selected, setSelected] = useState(true);
-
+const focused = useIsFocused();
     useEffect(() => {
         requestZzimProduct(ctx.zzimList).then(list => {
             if (list) {
@@ -19,6 +20,10 @@ function ZzimScreen() {
             }
         })
             .catch(e => console.log(e))
+        if (!focused) {
+          return;
+        }
+        console.log(focused);
     }, [ctx.zzimList])
 
 

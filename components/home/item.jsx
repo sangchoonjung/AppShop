@@ -7,10 +7,22 @@ import CustomButton from "../../custom/customButton";
 import { dateCutting } from "../../util/function";
 import { requestZzimProduct } from "../../util/product";
 import ItemBuyAndZzim from "./itemBuyAndZzim";
+import ReviewModal from "./reviewModal";
 
 function Item({ data }) {
   const navigation = useNavigation();
   const ctx = useContext(AppContext);
+
+  const [reiviewModalOpen,setReiviewModalOpen] = useState(false)
+
+  const[reviewButton,setReviewButton] = useState(true)
+
+useEffect(()=>{
+if(ctx.completeReview.includes(data.key)){
+  setReviewButton(false)
+}
+},[ctx.completeReview])
+
 
   const detailNavigation = () => {
     console.log(ctx.auth);
@@ -32,13 +44,21 @@ function Item({ data }) {
     }
   };
 
-
   // console.log(data.zzimType, "찜타입이 있나요?")
   const addedDate = data?.date ? dateCutting(data?.date) : "";
   
   const goToItemDetail = () => {
     navigation.navigate("detail", { tag: ctx.zzimList });
   }
+
+
+  const goToReivew=()=>{
+    setReiviewModalOpen(true)
+  }
+
+
+
+
   return (
     <>
       <View style={styles.itemContainer}>
@@ -76,10 +96,22 @@ function Item({ data }) {
           </View>
           {data?.zzimType && (
             <View style={styles.zzimListButton}>
-
               <CustomButton style={styles.zzimButtonItem}>delete</CustomButton>
             </View>
           )}
+          {(data?.type==="complete"&&reviewButton)&&(
+            <View style={styles.goToReivew}>
+              <CustomButton onPress={goToReivew} style={styles.zzimButtonItem}>Write Review</CustomButton>
+            </View>
+          )
+          }
+          <View>
+            <ReviewModal
+            reiviewModalOpen={reiviewModalOpen}
+            setReiviewModalOpen={setReiviewModalOpen}
+            data={data}
+            />
+          </View>
         </View>
       </View>
     </>

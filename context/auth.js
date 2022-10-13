@@ -10,6 +10,7 @@ export function AppContextProvider({ children }) {
     const [pendingList, setPendingList] = useState([]);
     const [completeList, setCompleteList] = useState([]);
 
+    const [completeReview,setCompleteReview]=useState([])
 
 
     const login = (id, token, email, data) => {
@@ -18,6 +19,7 @@ export function AppContextProvider({ children }) {
         setZzimList(data.zzimList);
         setPendingList(data.productPendingItem);
         setCompleteList(data.productCompleteItem);
+        setCompleteReview(data.completeReview)
     }
     const logout = () => {
         setAuth(null);
@@ -25,6 +27,7 @@ export function AppContextProvider({ children }) {
         setZzimList([]);
         setPendingList([]);
         setCompleteList([]);
+        setCompleteReview([]);
     }
 
     const setZzim = (list) => {
@@ -34,7 +37,7 @@ export function AppContextProvider({ children }) {
     return (
         <AppContext.Provider value={{
             auth, login, logout, userInfo, zzimList, setZzim, pendingList, setPendingList
-            , completeList, setCompleteList
+            , completeList, setCompleteList,completeReview,setCompleteReview
         }}>
             {children}
         </AppContext.Provider>

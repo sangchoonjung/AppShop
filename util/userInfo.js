@@ -5,23 +5,44 @@
 
 import axios from "axios"
 
-const {baseURL} = require("./baseURL")
+const { baseURL } = require("./baseURL")
 
 
 
 //찜 요청
-export async function sendZzimUpdateRequest(userId,zzimList) {
+export async function sendZzimUpdateRequest(userId, zzimList) {
     //게시물 아이디 , 사용자 아이디 (둘 다 유일값 가정)
     try {
         const response = await axios.post(baseURL + "/api/userinfo/zzim", {
             "user": userId,
-            "zzimList":zzimList
+            "zzimList": zzimList
         });
-
+        
         return response.data
 
     } catch (e) {
         console.log(e.message)
+
+    }
+}
+
+//리뷰 작성
+
+export async function sendUploadReviewRequest(content, fileUri, auth,completeList) {
+    // console.log(content, fileData, fileUri, auth)
+    try {
+        const formData = new FormData();
+        formData.append("content",content,"?");
+        formData.append("fileData",fileUri);
+        formData.append("id",auth.id)
+        formData.append("list",completeList)
+        const response = await axios.post(baseURL + "/api/userinfo/requestReview", {
+            formData
+        })
+        console.log(response.data.message)
+        return response.data.message.completeReview
+
+    } catch (e) {
 
     }
 }

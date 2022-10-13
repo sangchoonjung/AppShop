@@ -8,15 +8,27 @@ import { dateCutting } from "../../util/function";
 import { requestZzimProduct } from "../../util/product";
 import { sendZzimUpdateRequest } from "../../util/userInfo";
 import ItemBuyAndZzim from "./itemBuyAndZzim";
+import ReviewModal from "./reviewModal";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
 import FixamountUnit from "../account/mypage/fixamountUnit";
 
-
 function Item({ data }) {
   const navigation = useNavigation();
   const ctx = useContext(AppContext);
+
+  const [reiviewModalOpen,setReiviewModalOpen] = useState(false)
+
+  const[reviewButton,setReviewButton] = useState(true)
+
+useEffect(()=>{
+if(ctx.completeReview.includes(data.key)){
+  setReviewButton(false)
+}
+},[ctx.completeReview])
+
+
   const [modalVisible, setModalVisible] = useState(false);
   
   const detailNavigation = () => {
@@ -38,7 +50,18 @@ function Item({ data }) {
       ]);
     }
   };
-  const deleteHandler = async () => {
+
+  
+  const goToItemDetail = () => {
+    navigation.navigate("detail", { tag: ctx.zzimList });
+  }
+
+
+  const goToReivew=()=>{
+    setReiviewModalOpen(true)
+  }
+
+const deleteHandler = async () => {
     const zzimList = ctx.zzimList;
     let result;
     if (zzimList.some((e) => e.id === String(data.key))) {
@@ -48,10 +71,7 @@ function Item({ data }) {
     await sendZzimUpdateRequest(ctx.auth.id, result);
   };
 
-  // console.log(data.zzimType, "찜타입이 있나요?")
   const addedDate = data?.date ? dateCutting(data?.date) : "";
-
-
 
 
 
@@ -101,6 +121,7 @@ function Item({ data }) {
           </BaseFont>
           {data?.zzimType && (
             <View style={styles.zzimListButton}>
+
               <CustomButton
                 style={styles.zzimButtonView}
                 onPress={detailNavigation}
@@ -113,8 +134,22 @@ function Item({ data }) {
               >
                 <Feather name="trash-2" size={20} color="white" />
               </CustomButton>
+
             </View>
           )}
+          {(data?.type==="complete"&&reviewButton)&&(
+            <View style={styles.goToReivew}>
+              <CustomButton onPress={goToReivew} style={styles.zzimButtonItem}>Write Review</CustomButton>
+            </View>
+          )
+          }
+          <View>
+            <ReviewModal
+            reiviewModalOpen={reiviewModalOpen}
+            setReiviewModalOpen={setReiviewModalOpen}
+            data={data}
+            />
+          </View>
         </View>
       </View>
     </Pressable>

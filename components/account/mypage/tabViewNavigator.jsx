@@ -9,8 +9,8 @@ export default function TabViewExample({ pendingList, completeList }) {
     const [index, setIndex] = React.useState(0);
     React.useEffect(() => {
         setRoutes([
-            { key: 'pending', title: `대기중(${pendingList.length})` },
-            { key: 'complete', title: `구매완료(${completeList.length})` },
+            { key: 'pending', title: `pended(${pendingList.length})` },
+            { key: 'complete', title: `complete(${completeList.length})` },
         ])
         //length 업데이트가 안 돼서 수동으로 했습니다.
     }, [pendingList.length, completeList.length])
@@ -42,6 +42,7 @@ export default function TabViewExample({ pendingList, completeList }) {
             renderScene={renderScene}
             onIndexChange={setIndex}
             initialLayout={{ width: layout.width }}
+            
         />
     );
 }

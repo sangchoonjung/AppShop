@@ -1,6 +1,7 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import BaseFont from "../../assets/font/base";
 import { AppContext } from "../../context/auth";
 import { requestZzimProduct } from "../../util/product";
 import List from "../home/list";
@@ -49,43 +50,50 @@ function ZzimScreen() {
 
     }
     return (
-        <View style={styles.main}>
-            <MainHeader back={true} />
-            {/* <Text>찜스크린</Text> */}
-            <View style={styles.sortContainer}>
-                <Text>
-                    {`Sort by :  `}
-                </Text>
-                <Pressable onPress={newestHandle}>
-                    <Text style={selected ? styles.select : styles.defaulted}>Newest </Text>
-                </Pressable>
-                <Text > / </Text>
-
-                <Pressable onPress={oldestHandle}>
-                    <Text style={!selected ? styles.select : styles.defaulted}> Oldest </Text>
-                </Pressable>
-            </View>
-
-            {itemList.length > 0 && <List item={itemList} />}
-            {/* height 지정 필요 */}
+      <View style={styles.main}>
+        <MainHeader back={true} />
+        <View style={styles.boxContain}>
+          <BaseFont style={{fontSize:15}}>My WishList</BaseFont>
         </View>
+        <View style={styles.sortContainer}>
+          <Pressable onPress={newestHandle}>
+            <Text style={selected ? styles.select : styles.defaulted}>
+              Newest{" "}
+            </Text>
+          </Pressable>
+          <Text> / </Text>
+          <Pressable onPress={oldestHandle}>
+            <Text style={!selected ? styles.select : styles.defaulted}>
+              {" "}
+              Oldest{" "}
+            </Text>
+          </Pressable>
+        </View>
+
+        {itemList.length > 0 && <List item={itemList} />}
+        {/* height 지정 필요 */}
+      </View>
     );
 }
 
 const styles = StyleSheet.create({
-    sortContainer: {
-        flexDirection: "row",
-        justifyContent: "flex-end"
-    },
-    select: {
-        fontWeight: "bold"
-    },
-    defaulted: {
-
-    },
-    main: {
-        flex: 1
-    }
-
-})
+  sortContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginRight: 10,
+    marginVertical: 3,
+  },
+  select: {
+    fontWeight: "bold",
+  },
+  defaulted: {},
+  main: {
+    flex: 1,
+  },
+  boxContain: {
+      backgroundColor: "#B4FBFF",
+      alignItems: "center",
+    paddingVertical:20
+  },
+});
 export default ZzimScreen;

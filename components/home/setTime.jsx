@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import BaseFont from "../../assets/font/base";
 import { timeCutting } from "../../util/function";
 
 function SetTime({ timeLimit  ,setDisableHandle }) {
@@ -26,10 +27,22 @@ function SetTime({ timeLimit  ,setDisableHandle }) {
 
 
     return (
-        <>
-            <Text>{timeLimit}까지 앞으로 {timeCutting(leftTime)}</Text>
-        </>
+      <>
+        <BaseFont style={styles.fontStyle}>
+          Due Date <BaseFont style={{ color: "red" }}>{timeLimit}</BaseFont>
+        </BaseFont>
+        <BaseFont style={styles.fontStyle}>
+          Left Time <BaseFont style={{ color: "red" }}>{timeCutting(leftTime)}</BaseFont>
+        </BaseFont>
+      </>
     );
 }
+const styles = StyleSheet.create({
+    fontStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight:"bold"
+    }
+})
 
 export default SetTime;

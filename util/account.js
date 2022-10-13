@@ -147,6 +147,7 @@ export async function sendProductPendingAddRequest(userId, productId, unit,price
         if (response?.data?.result) {
             return response?.data.message
         }
+        console.log(response.data,"sang")
         return response.data
 
     } catch (e) {

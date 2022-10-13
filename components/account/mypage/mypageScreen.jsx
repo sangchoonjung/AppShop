@@ -60,9 +60,6 @@ function MypageScreen({ navigation }) {
       .catch((e) => console.log(e.message));
   }, [ctx.completeList]);
 
-  const logoutHandle = () => {
-    return ctx.logout();
-  };
 
   // console.log(pendingList.length,"렝쓰ㅡ으으으으")
   // console.log(pendingList)
@@ -79,11 +76,11 @@ function MypageScreen({ navigation }) {
           style={({ pressed }) => (pressed ? { opacity: 0.5 } : null)}
           onPress={updateNavigationHandle}
         >
-          <MaterialCommunityIcons name="account" size={40} color="#0064FF" />
+          <MaterialCommunityIcons name="account" size={50} color="#0064FF" style={{marginTop:10}} />
         </Pressable>
       </View>
       <View>
-        <BaseFont style={{ marginLeft: 20 }}>Welcome, {ctx.auth.id} !</BaseFont>
+        <BaseFont style={{ marginLeft: 30,marginBottom:5 }}>Welcome, {ctx.auth.id} !</BaseFont>
       </View>
       <View style={{ flex: 1 }}>
         {pendingList.length > 0 && (
@@ -108,10 +105,12 @@ const styles = StyleSheet.create({
   accountSetting: {
     flexDirection: "row",
     margin: 20,
+    marginBottom:5,
     borderBottomWidth: 1,
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 10,
+    borderColor:"#999999"
   },
 });
 

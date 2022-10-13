@@ -157,7 +157,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
           </Pressable>
         ) : (
           <View style={[styles.button, styles.buttonOpen]}>
-            <BaseFont style={[styles.textStyle]}>pending more</BaseFont>
+            <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
           </View>
         )}
 

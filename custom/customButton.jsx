@@ -18,7 +18,7 @@ function CustomButton({ children, onPress, style,textStyle }) {
 
 const styles = StyleSheet.create({
   buttonOuter: {
-    opacity: 0.7,
+    opacity: 0.75,
   },
   buttonContainer: {
     backgroundColor: "#006699",

@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/auth";
 import { sendZzimUpdateRequest } from "../../util/userInfo";
 import { sendProductPendingAddRequest } from "../../util/account";
+import { useNavigation } from "@react-navigation/native";
 function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
   const [heartOnOff, setHeartOnOff] = useState(false);
   const [productCount, setProductCount] = useState(1);
@@ -15,6 +16,8 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
   const setZzim = ctx.setZzim
   const pendingList = ctx.pendingList;
 
+
+  const navigation = useNavigation();
   // console.log(pendingList)
   /*
   초기세팅
@@ -52,6 +55,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
     // console.log(recv,"pendingggg")
     ctx.setPendingList(recv);
     setModalVisible(false)
+    navigation.navigate("mypage")
   }
 
   const modalConfirmButton = () => {

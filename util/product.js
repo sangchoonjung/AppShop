@@ -72,7 +72,8 @@ export async function requestPendingProductList(productId){
     try {
         const response = await axios.post(baseURL + "/api/product/requestProductList",
             {
-                list : productId
+                list : productId,
+                type:"pending"
             }
         )
         return response.data
@@ -84,9 +85,10 @@ export async function requestPendingProductList(productId){
 
 export async function requestCompleteProductList(productId){
     try {
-        const response = await axios.post(baseURL + "/api/product/requestProductList",
+        const response = await axios.post(baseURL + "/api/product/requestProductListComplete",
             {
-                list : productId
+                list : productId,
+                type:"complete"
             }
         )
         return response.data

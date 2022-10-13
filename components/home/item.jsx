@@ -67,7 +67,11 @@ function Item({ data }) {
                 margin: 5,
               }}
             >
-              $ {data.standardFee}.00
+              {data.unit?
+              `TOTAL:$${data.price}.00(unit:${data.unit}) `
+              :
+              `$ ${data.standardFee}.00`
+              }
             </BaseFont>
           </View>
           {data?.zzimType && (

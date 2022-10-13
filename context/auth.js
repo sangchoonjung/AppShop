@@ -23,6 +23,7 @@ export function AppContextProvider({ children }) {
         setUserInfo(null);
         setZzimList([]);
         setPendingList([]);
+        setCompleteList([]);
     }
 
     const setZzim = (list) => {

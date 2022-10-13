@@ -9,25 +9,26 @@ import MainHeader from "../mainheader";
 function ZzimScreen() {
     const [itemList, setItemList] = useState([]);
     const ctx = useContext(AppContext);
-
+    
     const [selected, setSelected] = useState(true);
-const focused = useIsFocused();
+    const focused = useIsFocused();
     useEffect(() => {
         requestZzimProduct(ctx.zzimList).then(list => {
             if (list) {
                 list.message.reverse()
                 setItemList(list.message)
+                console.log(list)
             }
         })
             .catch(e => console.log(e))
         if (!focused) {
-          return;
+            return;
         }
         console.log(focused);
     }, [ctx.zzimList])
 
 
-// console.log(itemList,"?????????????????????????")
+    // console.log(itemList,"?????????????????????????")
 
     const newestHandle = () => {
         if (selected) {
@@ -65,7 +66,7 @@ const focused = useIsFocused();
                 </Pressable>
             </View>
 
-            {itemList.length>0&&<List item={itemList} />}
+            {itemList.length > 0 && <List item={itemList} />}
             {/* height 지정 필요 */}
         </View>
     );
@@ -82,8 +83,8 @@ const styles = StyleSheet.create({
     defaulted: {
 
     },
-    main:{
-        flex:1
+    main: {
+        flex: 1
     }
 
 })

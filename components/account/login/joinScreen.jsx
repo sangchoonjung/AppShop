@@ -40,6 +40,7 @@ function JoinScreen({ navigation }) {
       Alert.alert("error", rst.message);
     }
   }
+  console.log(registData)
 
   const checkId = async () => {
     // console.log(registData.id)
@@ -104,7 +105,7 @@ function JoinScreen({ navigation }) {
             placeholder="birth"
             style={sytles.textinputContain}
           />
-          <QuestionPicker/>
+          <QuestionPicker changeHandle={changeHandle}/>
           <TextInput
             autoCapitalize="none"
             onChangeText={(text) => changeHandle(["answer", text])}

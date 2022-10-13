@@ -35,7 +35,7 @@ function Item({ data }) {
   };
 // console.log(data)
 
-  console.log(data.zzimType)
+  // console.log(data.zzimType, "찜타입이 있나요?")
   const addedDate = data?.date ? dateCutting(data?.date) : ""
 
   return (

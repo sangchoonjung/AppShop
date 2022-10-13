@@ -13,7 +13,7 @@ function JoinScreen({ navigation }) {
     confirmPassWord: "",
     email: "",
     birth: "",
-    question: "",
+    question: "place",
     answer: "",
   });
   const changeHandle = (text) => {

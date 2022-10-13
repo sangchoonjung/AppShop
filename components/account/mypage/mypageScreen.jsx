@@ -26,7 +26,7 @@ function MypageScreen({ navigation }) {
   useEffect(() => {
     requestPendingProductList(ctx.pendingList)
       .then((item) => {
-        if (item && item?.result&&item.message.length>0) {
+        if (item && item?.result && item.message.length > 0) {
           setPendingList(item.message);
         }
       })
@@ -34,12 +34,12 @@ function MypageScreen({ navigation }) {
 
     requestCompleteProductList(ctx.completeList)
       .then((item) => {
-        if (item && item?.result&&item.message.length>0) {
-          setPendingList(item.message);
+        if (item && item?.result && item.message.length > 0) {
+          setCompleteList(item.message);
         }
       })
       .catch((e) => console.log(e.message));
-  }, [ctx.pendingList,ctx.completeList]);
+  }, [ctx.pendingList, ctx.completeList]);
 
 
 
@@ -49,11 +49,11 @@ function MypageScreen({ navigation }) {
 
 
 
-
   useEffect(() => {
     requestCompleteProductList(ctx.completeList)
       .then((item) => {
         if (item && item?.result) {
+          console.log(ctx.completeList)
           setCompleteList(item.message);
         }
       })
@@ -86,7 +86,7 @@ function MypageScreen({ navigation }) {
         <BaseFont style={{ marginLeft: 20 }}>Welcome, {ctx.auth.id} !</BaseFont>
       </View>
       <View style={{ flex: 1 }}>
-        {pendingList.length > 0 && (
+        {(pendingList.length > 0 || completeList.length > 0) && (
           <TabViewExample
             pendingList={pendingList}
             completeList={completeList}

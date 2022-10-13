@@ -111,19 +111,21 @@ export async function updateAccountRequest(data) {
 
 
 
-export async function setNewPassWordRequest(id, answer, passWord, question = 1) {
+export async function setNewPassWordRequest(id, hint, passWord) {
     //비번찾기 답 받아서 비교해서 맞으면 변경(서버에서)
     try {
+        console.log(id,hint.answer,hint.question,passWord)
 
         const response = await axios.post(baseURL + "/api/account/resetPassWord", {
             id: id,
-            answer: answer,
+            answer: hint.answer,
             passWord: passWord,
-            question: question
+            question: hint.question
         });
+        // console.log(response.data)
         if (response.data.result) {
 
-            return response?.result
+            return response.data.result
         }
         return response.data
     } catch (e) {

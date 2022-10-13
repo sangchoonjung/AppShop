@@ -15,6 +15,8 @@ export default function TabViewExample({ pendingList, completeList }) {
         //length 업데이트가 안 돼서 수동으로 했습니다.
     }, [pendingList.length, completeList.length])
 
+
+
     const [routes,setRoutes] = React.useState([
         { key: 'pending', title: `대기중(${pendingList.length})` },
         { key: 'complete', title: `구매완료(${completeList.length})` },
@@ -26,7 +28,8 @@ export default function TabViewExample({ pendingList, completeList }) {
                 route.title = `대기중(${pendingList.length})`
                 return <List item={pendingList} />
             case "complete":
-                return <Text>임시</Text>
+                route.title = `구매완료(${completeList.length})`
+                return <List item={completeList} />
             default:
                 break;
         }

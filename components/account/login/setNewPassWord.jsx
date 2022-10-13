@@ -1,15 +1,42 @@
 import { useState } from "react";
 import { Button, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import CustomButton from "../../../custom/customButton";
+import QuestionPicker from "./questionPicker";
 
 function SetNewPassWord({ onClose, visible, passWordResetHandle }) {
   const [id, setId] = useState("");
-  const [answer, setAnswer] = useState("");
+
+  const [pwView,setPwView]=useState(true);
+  const [qna, setQna] = useState({
+    question: "place",
+    answer: ""
+  });
   const [passWord, setPassWord] = useState("");
+
+
   const find = () => {
-    setAnswer("");
-    passWordResetHandle(id, answer, passWord);
+    // console.log(id,qna,passWord);
+    if(passWord.length===0||qna.answer.length===0){
+      return;
+    }
+    passWordResetHandle(id, qna, passWord);
+    setQna({
+    question: "place",
+    answer: ""
+  });
+  setPassWord("")
+  setId("")
+
   };
+
+  // console.log(qna)
+
+  const changeHandle = (text) => {
+    setQna(current => { return { ...current, [text[0]]: text[1] } });
+  }
+  const pwViewhandle =()=>{
+    setPwView(current=>!current)
+  }
 
   return (
     <>
@@ -26,22 +53,29 @@ function SetNewPassWord({ onClose, visible, passWordResetHandle }) {
             value={id}
             style={styles.textInputContain}
           />
-          <Text>대충질문선택위치</Text>
+          <View>
+
+            <QuestionPicker changeHandle={changeHandle} />
+          </View>
           <TextInput
             placeholder="Enter Your Answer"
             keyboardType="default"
-            onChangeText={(answer) => setAnswer(answer)}
-            value={answer}
+            onChangeText={(text) => changeHandle(["answer",text])}
+            value={qna.answer}
             style={styles.textInputContain}
           />
 
           <TextInput
+          secureTextEntry={pwView}
             placeholder="Enter Your New Password"
             keyboardType="default"
             onChangeText={(passWord) => setPassWord(passWord)}
             value={passWord}
             style={styles.textInputContain}
           />
+          <Pressable style={styles.pwViewStyle} onPress={pwViewhandle}>
+          <Text style={{textAlign:"right"}}>{pwView?"View Password":"Hide Password"}</Text>
+          </Pressable>
           <View>
             <CustomButton onPress={onClose}>Cancel</CustomButton>
             <CustomButton onPress={find}>Confirm</CustomButton>
@@ -72,5 +106,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 20,
   },
+  pwViewStyle:{
+    marginTop:-13,
+    marginHorizontal:20,
+    marginLeft:150,
+    marginBottom:5,
+    paddingRight:3
+    // borderWidth:1
+  }
 });
 export default SetNewPassWord;

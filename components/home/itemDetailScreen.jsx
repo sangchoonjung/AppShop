@@ -24,6 +24,7 @@ function ItemDetailScreen() {
   const  setDisableHandle = ()=>{
     //잔여시간 0이하로 내려가면 기능 막기
   }
+  
   const timeLimit = "2022-10-13";
   //20분 가정
 

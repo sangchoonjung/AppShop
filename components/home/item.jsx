@@ -62,7 +62,11 @@ function Item({ data }) {
                 margin: 10,
               }}
             >
-              $ {data.standardFee}.00
+              {data.unit?
+              `TOTAL:$${data.price}.00(unit:${data.unit}) `
+              :
+              `$ ${data.standardFee}.00`
+              }
             </BaseFont>
             {data?.date && <Text>Added Date:{addedDate}</Text>}
 

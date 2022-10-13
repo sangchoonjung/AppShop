@@ -20,16 +20,35 @@ function MypageScreen({ navigation }) {
   const [completeList, setCompleteList] = useState([]);
   const ctx = useContext(AppContext);
 
+
+
+
   useEffect(() => {
     requestPendingProductList(ctx.pendingList)
       .then((item) => {
-        if (item && item?.result) {
+        if (item && item?.result&&item.message.length>0) {
           setPendingList(item.message);
         }
       })
       .catch((e) => console.log(e.message));
-  }, [ctx.pendingList]);
+
+    requestCompleteProductList(ctx.completeList)
+      .then((item) => {
+        if (item && item?.result&&item.message.length>0) {
+          setPendingList(item.message);
+        }
+      })
+      .catch((e) => console.log(e.message));
+  }, [ctx.pendingList,ctx.completeList]);
+
+
+
   // console.log(pendingList)
+  // console.log(completeList)
+
+
+
+
 
   useEffect(() => {
     requestCompleteProductList(ctx.completeList)
@@ -44,6 +63,11 @@ function MypageScreen({ navigation }) {
   const logoutHandle = () => {
     return ctx.logout();
   };
+
+  // console.log(pendingList.length,"렝쓰ㅡ으으으으")
+  // console.log(pendingList)
+
+
   const updateNavigationHandle = () => {
     navigation.navigate("update", { id: ctx.auth.id, email: ctx.auth.email });
   };

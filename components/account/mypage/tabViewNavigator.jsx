@@ -1,29 +1,37 @@
 import * as React from 'react';
-import { View, useWindowDimensions, Text } from 'react-native';
+import { useWindowDimensions, Text } from 'react-native';
 import { TabView } from 'react-native-tab-view';
 import List from '../../home/list';
 
-export default function TabViewExample({ pendingList,completeList }) {
+export default function TabViewExample({ pendingList, completeList }) {
     const layout = useWindowDimensions();
     // console.log(completeList)
     const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
+    React.useEffect(() => {
+        setRoutes([
+            { key: 'pending', title: `대기중(${pendingList.length})` },
+            { key: 'complete', title: `구매완료(${completeList.length})` },
+        ])
+        //length 업데이트가 안 돼서 수동으로 했습니다.
+    }, [pendingList.length, completeList.length])
+
+    const [routes,setRoutes] = React.useState([
         { key: 'pending', title: `대기중(${pendingList.length})` },
         { key: 'complete', title: `구매완료(${completeList.length})` },
-    ], [pendingList]);
-
-
+    ], [pendingList.length, completeList.length]);
+    
     const renderScene = ({ route }) => {
         switch (route.key) {
             case "pending":
+                route.title = `대기중(${pendingList.length})`
                 return <List item={pendingList} />
-            case "complete": 
-            return <Text>임시</Text>
+            case "complete":
+                return <Text>임시</Text>
             default:
                 break;
         }
-
     };
+
 
     return (
         <TabView

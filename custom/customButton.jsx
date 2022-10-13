@@ -1,4 +1,5 @@
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import BaseFont from "../assets/font/base";
 
 function CustomButton({ children, onPress, style,textStyle }) {
     return (

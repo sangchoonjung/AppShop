@@ -59,7 +59,7 @@ export async function requestZzimProduct(zzimList){
                 zzimList : zzimList
             }
         )
-        console.log(response.data)
+        // console.log(response.data)
         return response.data
     } catch (e) {
         console.log(e.message);
@@ -76,7 +76,8 @@ export async function requestPendingProductList(productId){
                 list : productId,
                 type:"pending"
             }
-        )
+            )
+            // console.log(response.data)
         return response.data
     } catch (e) {
         console.log(e.message);

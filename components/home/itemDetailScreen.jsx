@@ -18,7 +18,7 @@ import SetTime from "./setTime";
 function ItemDetailScreen() {
   const route = useRoute();
   const data = route.params.tag;
-  // console.log(data);
+  console.log(data,"datas");
   const [modalVisible, setModalVisible] = useState(false);
 
   const  setDisableHandle = ()=>{
@@ -34,9 +34,16 @@ function ItemDetailScreen() {
         <MainHeader />
       </View>
       <ScrollView>
-        <View>
+        <View style={{ margin: 10 }}>
           <BaseFont style={{ fontSize: 25 }}>{data.title}</BaseFont>
           <BaseFont>(평점)(평점갯수)</BaseFont>
+          {/* 남은시간 컴포넌트 */}
+          <View style={styles.timerContain}>
+              <SetTime
+                timeLimit={timeLimit}
+                setDisableHandle={() => setDisableHandle(data.key)}
+              />
+          </View>
           <Image
             source={{ uri: data.titleImage }}
             style={styles.titleImageContain}
@@ -80,16 +87,10 @@ function ItemDetailScreen() {
           </View>
           <View style={styles.priceContain}>
             <BaseFont style={styles.priceText}>
-              Regular Price _ ${data.standardFee}
+              Standard Price ${data.standardFee}
             </BaseFont>
           </View>
 
-          <View>
-            <Text>
-              잔여 시간 <SetTime timeLimit={timeLimit} setDisableHandle={()=>setDisableHandle(data.key)}/>
-            </Text>
-            {/* 남은시간 컴포넌트 */}
-          </View>
           <View style={styles.detailImgContain}>
             <Image
               source={{ uri: data.detailImage }}
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
   titleImageContain: {
     width: "100%",
     height: 350,
-    marginVertical: 15,
+    marginVertical: 5,
   },
   priceContain: {
     flexDirection: "row",
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     margin: 10,
     marginHorizontal: 20,
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 5,
     borderColor: "#999999",
     borderWidth: 1
   },
@@ -147,6 +148,15 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 3000,
   },
+  timerContain: {
+    alignItems: "center",
+    marginVertical: 10,
+    borderWidth: 1,
+    paddingVertical: 10,
+    borderRadius: 5,
+    borderColor: "#999999",
+    
+  }
 });
 
 export default ItemDetailScreen;

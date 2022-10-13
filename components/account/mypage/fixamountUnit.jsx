@@ -1,13 +1,14 @@
 import { Alert, Modal, Pressable, StyleSheet, Text, View } from "react-native";
-import BaseFont from "../../assets/font/base";
+import BaseFont from "../../common/base";
 import { Entypo } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../context/auth";
-import { sendZzimUpdateRequest } from "../../util/userInfo";
-import { sendProductPendingAddRequest } from "../../util/account";
+import { AppContext } from "../../../context/auth";
+import { Feather } from "@expo/vector-icons";
+import { sendProductPendingAddRequest } from "../../../util/account";
 import { useNavigation } from "@react-navigation/native";
-import CustomButton from "../../custom/customButton";
-function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
+import CustomButton from "../../../custom/customButton";
+
+function FixamountUnit({ modalVisible, setModalVisible, data }) {
   const [heartOnOff, setHeartOnOff] = useState(false);
   const [productCount, setProductCount] = useState(1);
   const [pend, setPend] = useState(false);
@@ -29,15 +30,6 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
       setPend(true);
     }
   }, [pendingList]);
-
-  useEffect(() => {
-    const initZzim = ctx.zzimList;
-    if (initZzim.some((e) => e.id === String(data.key))) {
-      setHeartOnOff(true);
-    } else {
-      setHeartOnOff(false);
-    }
-  }, [zzimList]);
 
   const countHandlerUp = () => {
     setProductCount(productCount + 1);
@@ -75,30 +67,6 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
   };
   // console.log(data.key,ctx.auth.id)
 
-  // 찜버튼 (하트 온오프)
-  const heartHandler = async () => {
-    let zzim = zzimList;
-    try {
-      // 삭제
-      if (zzimList.some((e) => e.id === String(data.key))) {
-        zzim = zzimList.filter((e) => e.id !== String(data.key));
-        // console.log(zzim)
-        setZzim(zzim);
-        // 등록
-      } else {
-        zzim = [
-          ...zzim,
-          { id: String(data.key), date: Date.now(), zzimType: true },
-        ];
-        setZzim(zzim);
-      }
-
-      const rst = await sendZzimUpdateRequest(ctx.auth.id, zzim);
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
   return (
     <>
       <Modal
@@ -130,13 +98,12 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
             {/* 모달 버튼 */}
 
             <View style={styles.modalButtonContain}>
-              
-                <CustomButton
-                  style={styles.modalButton}
-                  onPress={modalConfirmButton}
-                >
-                  pend
-                </CustomButton>
+              <CustomButton
+                style={styles.modalButton}
+                onPress={modalConfirmButton}
+              >
+                pend
+              </CustomButton>
 
               <CustomButton
                 style={styles.modalButton}
@@ -151,28 +118,14 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
-        {!pend ? (
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <BaseFont style={styles.modalButton}>pending now</BaseFont>
-          </Pressable>
-        ) : (
-          <View style={[styles.button, styles.buttonOpen]}>
-            <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
-          </View>
-        )}
-
-        {/* 찜 on/off */}
-        <Pressable style={styles.heartLayout}>
-          <Entypo
-            name={heartOnOff ? "heart" : "heart-outlined"}
-            size={24}
-            color="#0064FF"
-            onPress={heartHandler}
-          />
-        </Pressable>
+        <CustomButton
+          style={styles.mountFixButton}
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <Feather name="tool" size={28} color="#222222" />
+        </CustomButton>
       </View>
     </>
   );
@@ -258,4 +211,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ItemBuyAndZzim;
+export default FixamountUnit;

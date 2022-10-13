@@ -80,15 +80,17 @@ function LoginScreen({ navigation }) {
   }
 
 
-
   const passWordResetHandle = async (id, answer, passWord) => {
     try {
+      // console.log(id,answer,passWord)
 
       const rst = await setNewPassWordRequest(id, answer, passWord)
-      // 답이 맞으면 result true 틀리면 false
-      //서버측 작업을 안했음 정보 전송까지는 했음
-      if (rst.message) {
+      console.log(rst)
+      if (!rst) {
         Alert.alert("warning", "error");
+      } else {
+        setModalPW(false)
+        Alert.alert("퍼퓸","Complete!")
       }
     } catch (e) {
       console.log(e.message)
@@ -130,7 +132,7 @@ function LoginScreen({ navigation }) {
             <CustomButton onPress={loginHandle} style={{ marginTop: 25 }}>
               Login
             </CustomButton>
-            
+
             <Pressable
               onPress={onClosePW}
               style={({ pressed }) => [

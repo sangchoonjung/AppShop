@@ -17,6 +17,7 @@ export function AppContextProvider({ children }) {
         setUserInfo({ data: data });
         setZzimList(data.zzimList);
         setPendingList(data.productPendingItem);
+        setCompleteList(data.productCompleteItem);
     }
     const logout = () => {
         setAuth(null);

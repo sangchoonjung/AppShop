@@ -1,11 +1,13 @@
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
+import { Text } from 'react-native';
 
 function QuestionPicker() {
-    const [selected, setSelected] = useState();
+    const [selected, setSelected] = useState("Choose you Question");
 
     return (
         <>
+        <Text style={{textAlign:"center"}}>Choose you Question.</Text>
             <Picker
                 selectedValue={selected}
                 onValueChange={(itemValue, itemIndex) =>

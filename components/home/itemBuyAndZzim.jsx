@@ -7,7 +7,7 @@ import { sendZzimUpdateRequest } from "../../util/userInfo";
 import { sendProductPendingAddRequest } from "../../util/account";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../custom/customButton";
-function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
+function ItemBuyAndZzim({ modalVisible, setModalVisible, data ,disable}) {
   const [heartOnOff, setHeartOnOff] = useState(false);
   const [productCount, setProductCount] = useState(1);
   const [pend, setPend] = useState(false);
@@ -151,7 +151,15 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data }) {
 
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
-        {!pend ? (
+        {
+        
+        disable?
+        <View style={[styles.button, styles.buttonOpen]}>
+        <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
+        </View>
+
+        :
+        !pend ? (
           <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => setModalVisible(true)}

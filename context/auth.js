@@ -34,10 +34,15 @@ export function AppContextProvider({ children }) {
         setZzimList(list)
     }
 
+    const setCompleteReviewList =(response)=>{
+        
+        setCompleteReview(response);
+
+    }
     return (
         <AppContext.Provider value={{
             auth, login, logout, userInfo, zzimList, setZzim, pendingList, setPendingList
-            , completeList, setCompleteList,completeReview,setCompleteReview
+            , completeList, setCompleteList,completeReview,setCompleteReviewList
         }}>
             {children}
         </AppContext.Provider>

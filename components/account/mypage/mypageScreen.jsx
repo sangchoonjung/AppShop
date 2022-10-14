@@ -20,9 +20,6 @@ function MypageScreen({ navigation }) {
   const [completeList, setCompleteList] = useState([]);
   const ctx = useContext(AppContext);
 
-
-
-
   useEffect(() => {
     requestPendingProductList(ctx.pendingList)
       .then((item) => {
@@ -69,6 +66,15 @@ function MypageScreen({ navigation }) {
     navigation.navigate("update", { id: ctx.auth.id, email: ctx.auth.email });
   };
 
+  console.log(completeList)
+
+  const refreshOneProduct = (updateProduct) => {
+    // setItemList
+    console.log(updateProduct, "updateProduct")
+    const except = completeList.map(e => e.key !== updateProduct.key)
+    // setCompleteList({ ...except, updateProduct });
+}
+
   return (
     <View style={styles.mainContain}>
       <View style={styles.accountSetting}>
@@ -87,6 +93,7 @@ function MypageScreen({ navigation }) {
           <TabViewExample
             pendingList={pendingList}
             completeList={completeList}
+            refreshOneProduct={refreshOneProduct}
           />
         )}
       </View>

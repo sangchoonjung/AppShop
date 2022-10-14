@@ -14,7 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import FixamountUnit from "../account/mypage/fixamountUnit";
 
-function Item({ data }) {
+function Item({ data,refreshOneProduct }) {
   const navigation = useNavigation();
   const ctx = useContext(AppContext);
 
@@ -54,7 +54,7 @@ if(ctx.completeReview.includes(data.key)){
 
 
   const goToReivew=()=>{
-    setReiviewModalOpen(true)
+    setReiviewModalOpen(current=>!current)
   }
 
 const deleteHandler = async () => {
@@ -68,8 +68,6 @@ const deleteHandler = async () => {
   };
 
   // const addedDate = data?.date ? dateCutting(data?.date) : "";
-
-
 
   return (
     <Pressable onPress={detailNavigation}>
@@ -144,6 +142,7 @@ const deleteHandler = async () => {
             <ReviewModal
             reiviewModalOpen={reiviewModalOpen}
             setReiviewModalOpen={setReiviewModalOpen}
+            refreshOneProduct={refreshOneProduct}
             data={data}
             />
           </View>

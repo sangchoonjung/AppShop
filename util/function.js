@@ -1,4 +1,7 @@
 export function timeCutting(ms){
+    if(ms<=0){
+        return false
+    }
     const seconds = (ms/1000).toFixed(0)
     const hour = parseInt(seconds/3600) < 10 ? '0'+ parseInt(seconds/3600) : parseInt(seconds/3600);
     const min = parseInt((seconds%3600)/60) < 10 ? '0'+ parseInt((seconds%3600)/60) : parseInt((seconds%3600)/60);

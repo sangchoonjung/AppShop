@@ -29,7 +29,7 @@ const Stack = createStackNavigator();
 function GuestStackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name='login' component={LoginScreen} />
+      <Stack.Screen name='loginScreen' component={LoginScreen} />
       <Stack.Screen name='join' component={JoinScreen} />
     </Stack.Navigator>
   )

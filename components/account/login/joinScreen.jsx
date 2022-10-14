@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 
 import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
@@ -6,7 +7,8 @@ import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../mainheader";
 import QuestionPicker from "./questionPicker";
 
-function JoinScreen({ navigation }) {
+function JoinScreen({  }) {
+  const navigation = useNavigation()
   const [registData, setRegistData] = useState({
     id: "",
     passWord: "",
@@ -31,7 +33,7 @@ function JoinScreen({ navigation }) {
         {
           text: "ok",
           onPress: () => {
-            navigation.navigate("login")
+            navigation.navigate("loginScreen")
           }
         }
       ])

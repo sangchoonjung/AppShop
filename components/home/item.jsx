@@ -51,10 +51,6 @@ if(ctx.completeReview.includes(data.key)){
     }
   };
 
-  
-  const goToItemDetail = () => {
-    navigation.navigate("detail", { tag: ctx.zzimList });
-  }
 
 
   const goToReivew=()=>{
@@ -71,10 +67,7 @@ const deleteHandler = async () => {
     await sendZzimUpdateRequest(ctx.auth.id, result);
   };
 
-  const addedDate = data?.date ? dateCutting(data?.date) : "";
-
-
-
+  // const addedDate = data?.date ? dateCutting(data?.date) : "";
 
 
 
@@ -95,6 +88,7 @@ const deleteHandler = async () => {
               : data.title}
           </BaseFont>
           <BaseFont>(별점자리)</BaseFont>
+
           <BaseFont>
             {data.unit ? (
               <View style={styles.mountFixContain}>
@@ -108,11 +102,14 @@ const deleteHandler = async () => {
                 </View>
                 <View>
                   {/* 모달 */}
+                  {data?.type!=="complete"&&
+                  //구매후에는 fix안되게 수정
                   <FixamountUnit
-                    setModalVisible={setModalVisible}
-                    modalVisible={modalVisible}
-                    data={data}
+                  setModalVisible={setModalVisible}
+                  modalVisible={modalVisible}
+                  data={data}
                   />
+                }
                 </View>
               </View>
             ) : (
@@ -139,7 +136,7 @@ const deleteHandler = async () => {
           )}
           {(data?.type==="complete"&&reviewButton)&&(
             <View style={styles.goToReivew}>
-              <CustomButton onPress={goToReivew} style={styles.zzimButtonItem}>Write Review</CustomButton>
+              <CustomButton onPress={goToReivew} style={styles.zzimButtonView}>Write Review</CustomButton>
             </View>
           )
           }

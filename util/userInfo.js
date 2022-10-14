@@ -43,6 +43,21 @@ export async function sendUploadReviewRequest(content, fileUri, auth,completeLis
         return response.data.message.completeReview
 
     } catch (e) {
+        console.log(e.message)
+    }
+}
 
+
+export async function sendPendToCompleteReqDummy(uid,pendingList){
+    try {
+        const response = await axios.post(baseURL + "/api/userinfo/pendToComple", {
+            id:uid,
+            pendingList:pendingList
+        }
+        )
+        return response.data
+    }catch(e){
+        console.log(e.message)
+        
     }
 }

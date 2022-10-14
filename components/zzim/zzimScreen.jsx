@@ -1,10 +1,11 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
-import { View, Text, Pressable, StyleSheet, Alert } from "react-native";
+import { View, Text, Pressable, StyleSheet, Alert, Button } from "react-native";
 import BaseFont from "../../assets/font/base";
 import { AppContext } from "../../context/auth";
 import CustomButton from "../../custom/customButton";
 import { requestZzimProduct } from "../../util/product";
+import { sendPendToCompleteReqDummy } from "../../util/userInfo";
 import List from "../home/list";
 import MainHeader from "../mainheader";
 
@@ -15,7 +16,13 @@ function ZzimScreen({ navigation }) {
   const [selected, setSelected] = useState(true);
   const focused = useIsFocused();
 
-
+  const onPressPendToComplete = async() => {
+    //더미코드
+    console.log(ctx.auth.id)
+    console.log(ctx.pendingList)
+    const rst =  await sendPendToCompleteReqDummy(ctx.auth.id,ctx.pendingList)
+    console.log(rst)
+  }
 
   useEffect(() => {
     requestZzimProduct(ctx.zzimList).then(list => {
@@ -94,7 +101,16 @@ function ZzimScreen({ navigation }) {
 
       {itemList.length > 0 && <List item={itemList} />}
       {/* height 지정 필요 */}
+
+      {/* 더미코드 */}
+      {/* ctx업데이트를 안 해서 로그아웃 했다가 와야지 반영됩니다 */}
+      <View>
+        <Text>pend to complete</Text>
+        <Button onPress={onPressPendToComplete} title="임시" />
+      </View>
+      {/* 현재 계정의 팬딩을 컴플리트로 옮기는 코드*/}
     </View>
+
   );
 }
 
@@ -125,18 +141,18 @@ const styles = StyleSheet.create({
   btnStyle: {
     paddingHorizontal: 32
   },
-  notLoginTitleTxt:{
-    fontSize:25,
-    fontWeight:"bold",
-    textShadowColor:"purple",
-    textShadowRadius:5,
-    color:"#222222"
+  notLoginTitleTxt: {
+    fontSize: 25,
+    fontWeight: "bold",
+    textShadowColor: "purple",
+    textShadowRadius: 5,
+    color: "#222222"
   },
   notLoginTxt: {
-    fontSize:14,
-    textShadowColor:"purple",
-    textShadowRadius:2,
-    color:"green"
+    fontSize: 14,
+    textShadowColor: "purple",
+    textShadowRadius: 2,
+    color: "green"
   }
 });
 export default ZzimScreen;

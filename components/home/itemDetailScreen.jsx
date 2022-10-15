@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Header } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import {
@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native";
 import BaseFont from "../../assets/font/base";
+import CustomButton from "../../custom/customButton";
 import MainHeader from "../mainheader";
 import ItemBuyAndZzim from "./itemBuyAndZzim";
 import QnaReviewModal from "./qnaAndReview/qnaReviewModal";
@@ -27,6 +28,8 @@ function ItemDetailScreen() {
   const [qnaReviewModalVisible,setQnaReviewModalVisible] =useState(false)
 
   const [disable,setDisable] = useState(false);
+
+
 
 
 
@@ -70,6 +73,12 @@ const qnaOpenHandle =()=>{
             style={styles.titleImageContain}
             resizeMode={"contain"}
           />
+          <View style={styles.priceContain}>
+            <BaseFont style={styles.priceText}>
+              Standard Price ${data.standardFee}
+            </BaseFont>
+          </View>
+          
           <View style={styles.textContain}>
             <BaseFont style={{ fontWeight: "bold", marginBottom: 10 }}>
               Details
@@ -106,10 +115,9 @@ const qnaOpenHandle =()=>{
               <BaseFont style={{ flex: 1 }}>{data.from}</BaseFont>
             </View>
           </View>
-          <View style={styles.priceContain}>
-            <BaseFont style={styles.priceText}>
-              Standard Price ${data.standardFee}
-            </BaseFont>
+          {/* QnA, 리뷰 띄우기 모달 */}
+          <View style={{}}>
+            <CustomButton onPress={qnaOpenHandle} style={styles.qnaReviewModalButton}>QnA / Review</CustomButton>
           </View>
 
           <View style={styles.detailImgContain}>
@@ -122,19 +130,14 @@ const qnaOpenHandle =()=>{
         </View>
       </ScrollView>
 
-
-
         <View>
-          <Button title="Open Q&A / Review" onPress={qnaOpenHandle}/>
           <QnaReviewModal
                     setModalVisible={setQnaReviewModalVisible}
                     modalVisible={qnaReviewModalVisible}
                     data={data}
           />
         {/* Q&A 리뷰 모달 => 탭뷰 */}
-
       </View>
-
 
       <View>
         {/* 구매,찜하기 모달 */}
@@ -161,13 +164,11 @@ const styles = StyleSheet.create({
   priceContain: {
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor: "#93DAFF",
     margin: 10,
     marginHorizontal: 20,
     padding: 20,
-    borderRadius: 5,
-    borderColor: "#999999",
-    borderWidth: 1
+    borderBottomWidth:1
+
   },
   priceText: {
     fontSize: 20,
@@ -192,6 +193,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "#999999",
 
+  },
+  qnaReviewModalButton:{
+    paddingVertical:15,
+    textAlign:"left",
+    marginHorizontal:0,
+    borderRadius:5
   }
 });
 

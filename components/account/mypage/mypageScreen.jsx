@@ -81,7 +81,7 @@ function MypageScreen({ navigation }) {
           style={({ pressed }) => (pressed ? { opacity: 0.5 } : null)}
           onPress={updateNavigationHandle}
         >
-          <MaterialCommunityIcons name="account" size={50} color="#0064FF" style={{ marginTop: 10 }} />
+          <MaterialCommunityIcons name="account" size={50} color="#1E90FF" style={{ marginTop: 10 }} />
         </Pressable>
       </View>
       <View>

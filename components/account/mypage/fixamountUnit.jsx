@@ -119,12 +119,12 @@ function FixamountUnit({ modalVisible, setModalVisible, data }) {
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
         <CustomButton
-          style={styles.mountFixButton}
           onPress={() => {
             setModalVisible(true);
           }}
+          style={styles.fixButton}
         >
-          <Feather name="tool" size={28} color="#222222" />
+          <Feather name="tool" size={28} color="white" style={{opacity:0.7}}/>
         </CustomButton>
       </View>
     </>
@@ -209,6 +209,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 15,
   },
+  fixButton:{
+    padding:6,
+    paddingVertical:6
+  }
+
 });
 
 export default FixamountUnit;

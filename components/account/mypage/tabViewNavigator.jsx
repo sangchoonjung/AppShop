@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useWindowDimensions, Text } from 'react-native';
-import { TabView } from 'react-native-tab-view';
+import { TabBar, TabView } from 'react-native-tab-view';
 import List from '../../home/list';
 
 export default function TabViewExample({ pendingList, completeList,refreshOneProduct }) {
@@ -42,7 +42,7 @@ export default function TabViewExample({ pendingList, completeList,refreshOnePro
             renderScene={renderScene}
             onIndexChange={setIndex}
             initialLayout={{ width: layout.width }}
-
+            renderTabBar={props => <TabBar {...props} style={{backgroundColor: '#006699'}} indicatorStyle={{backgroundColor:"#A5D8FA"}}/>}
         />
     );
 }

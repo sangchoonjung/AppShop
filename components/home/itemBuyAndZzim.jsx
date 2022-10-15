@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 8,
     paddingHorizontal: 15,
+    color:"white"
   },
 });
 

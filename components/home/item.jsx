@@ -88,12 +88,13 @@ const deleteHandler = async () => {
           <BaseFont>(별점자리)</BaseFont>
 
           <BaseFont>
+          {/* 마이페이지에서 펜딩 버튼 */}
             {data.unit ? (
               <View style={styles.mountFixContain}>
                 <View>
                   <BaseFont>Unit : {data.unit} ea</BaseFont>
                   <BaseFont
-                    style={{ color: "#0064FF", fontSize: 18, marginTop: 10 }}
+                    style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
                   >
                     Total : $ {data.price}
                   </BaseFont>
@@ -114,6 +115,7 @@ const deleteHandler = async () => {
               `$ ${data.standardFee}.00`
             )}
           </BaseFont>
+          {/* 찜에서 버튼 */}
           {data?.zzimType && (
             <View style={styles.zzimListButton}>
 

@@ -98,3 +98,21 @@ export async function requestCompleteProductList(productId){
         console.log(e.message);
     }
 }
+
+
+
+export async function requestAddQna(qna,productId,userId){
+    try {
+        // console.log(qna,productId,userId)
+        const response = await axios.post(baseURL + "/api/product/requestQnaAdd",
+            {
+                qna : qna,
+                productId:productId,
+                userId:userId
+            }
+        )
+        return response.data
+    } catch (e) {
+        console.log(e.message);
+    }
+}

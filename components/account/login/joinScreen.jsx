@@ -42,7 +42,6 @@ function JoinScreen({  }) {
       Alert.alert("error", rst.message);
     }
   }
-  console.log(registData)
 
   const checkId = async () => {
     // console.log(registData.id)

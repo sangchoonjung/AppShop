@@ -50,7 +50,7 @@ function MypageScreen({ navigation }) {
     requestCompleteProductList(ctx.completeList)
       .then((item) => {
         if (item && item?.result) {
-          console.log(ctx.completeList)
+          // console.log(ctx.completeList)
           setCompleteList(item.message);
         }
       })
@@ -66,14 +66,13 @@ function MypageScreen({ navigation }) {
     navigation.navigate("update", { id: ctx.auth.id, email: ctx.auth.email });
   };
 
-  console.log(completeList)
 
   const refreshOneProduct = (updateProduct) => {
     // setItemList
-    console.log(updateProduct, "updateProduct")
+    // console.log(updateProduct, "updateProduct")
     const except = completeList.map(e => e.key !== updateProduct.key)
     // setCompleteList({ ...except, updateProduct });
-}
+  }
 
   return (
     <View style={styles.mainContain}>
@@ -82,11 +81,11 @@ function MypageScreen({ navigation }) {
           style={({ pressed }) => (pressed ? { opacity: 0.5 } : null)}
           onPress={updateNavigationHandle}
         >
-          <MaterialCommunityIcons name="account" size={50} color="#0064FF" style={{marginTop:10}} />
+          <MaterialCommunityIcons name="account" size={50} color="#0064FF" style={{ marginTop: 10 }} />
         </Pressable>
       </View>
       <View>
-        <BaseFont style={{ marginLeft: 30,marginBottom:5 }}>Welcome, {ctx.auth.id} !</BaseFont>
+        <BaseFont style={{ marginLeft: 30, marginBottom: 5 }}>Welcome, {ctx.auth.id} !</BaseFont>
       </View>
       <View style={{ flex: 1 }}>
         {(pendingList.length > 0 || completeList.length > 0) && (
@@ -112,12 +111,12 @@ const styles = StyleSheet.create({
   accountSetting: {
     flexDirection: "row",
     margin: 20,
-    marginBottom:5,
+    marginBottom: 5,
     borderBottomWidth: 1,
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 10,
-    borderColor:"#999999"
+    borderColor: "#999999"
   },
 });
 

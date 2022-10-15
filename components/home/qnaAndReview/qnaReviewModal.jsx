@@ -6,7 +6,7 @@ function QnaReviewModal({setModalVisible,modalVisible,data}) {
 
 
     // const ctx = useContext(AppContext)
-
+    
     return (<>
     <Modal
     animationType="slide"

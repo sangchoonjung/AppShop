@@ -3,7 +3,7 @@ import { useWindowDimensions, Text } from 'react-native';
 import { TabView } from 'react-native-tab-view';
 import List from '../../home/list';
 
-export default function TabViewExample({ pendingList, completeList }) {
+export default function TabViewExample({ pendingList, completeList,refreshOneProduct }) {
     const layout = useWindowDimensions();
     // console.log(completeList)
     const [index, setIndex] = React.useState(0);

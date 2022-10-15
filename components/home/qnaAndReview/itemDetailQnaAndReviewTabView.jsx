@@ -22,9 +22,9 @@ function ItemDetailQnaAndReviewTabView({ data }) {
     const renderScene = ({ route }) => {
         switch (route.key) {
             case "Q&A":
-                return <QnaAndReviewList item={data.QnA} type="qna" />
+                return <QnaAndReviewList data={data} item={data.QnA} type="qna" />
             case "Review":
-                return <QnaAndReviewList item={data.review} type="review"/>
+                return <QnaAndReviewList data={data} item={data.review} type="review"/>
             default:
                 break;
         }

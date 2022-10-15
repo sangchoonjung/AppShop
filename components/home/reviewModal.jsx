@@ -23,7 +23,7 @@ function ReviewModal({ reiviewModalOpen, setReiviewModalOpen, data,refreshOnePro
         if (!ctx.auth) {
             return;
         }
-        if (content.title.length === 0 || content.main.length === 0 || content.rating.length === 0) {
+        if (content?.title?.length === 0 || content?.main?.length === 0 || content?.rating?.length === 0) {
             Alert.alert("퍼퓸", "Please wirte the message.");
         } else if (uploadImage?.length === 0 || uploadImageBase64?.length === 0) {
             Alert.alert("퍼퓸", "Please upload the photo.");

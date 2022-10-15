@@ -12,7 +12,7 @@ function ImagePicker({ onPicked, onChangeHandle }) {
     const takeFromAlbum = async () => {
         try {
 
-            console.log(mediaStatus)
+            // console.log(mediaStatus)
             if (!mediaStatus.granted) {
                 const resp = await requestMediaPermission();
                 if (!resp.granted) {

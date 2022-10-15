@@ -16,7 +16,6 @@ export default function App() {
     React.useEffect(() => {
         if (response?.type === 'success') {
             const { authentication } = response;
-            // console.log(response);
         }
     }, [response]);
 

@@ -29,7 +29,6 @@ function SetNewPassWord({ onClose, visible, passWordResetHandle }) {
 
   };
 
-  // console.log(qna)
 
   const changeHandle = (text) => {
     setQna(current => { return { ...current, [text[0]]: text[1] } });

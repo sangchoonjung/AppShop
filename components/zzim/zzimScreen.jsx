@@ -18,10 +18,10 @@ function ZzimScreen({ navigation }) {
 
   const onPressPendToComplete = async() => {
     //더미코드
-    console.log(ctx.auth.id)
-    console.log(ctx.pendingList)
+    // console.log(ctx.auth.id)
+    // console.log(ctx.pendingList)
     const rst =  await sendPendToCompleteReqDummy(ctx.auth.id,ctx.pendingList)
-    console.log(rst)
+    // console.log(rst)
   }
 
   useEffect(() => {
@@ -29,14 +29,14 @@ function ZzimScreen({ navigation }) {
       if (list) {
         list.message.reverse()
         setItemList(list.message)
-        console.log(list)
+        // console.log(list)
       }
     })
       .catch(e => console.log(e))
     if (!focused) {
       return;
     }
-    console.log(focused);
+    // console.log(focused);
   }, [ctx.zzimList])
 
 

@@ -6,18 +6,12 @@ import { timeCutting } from "../../util/function";
 function SetTime({ timeLimit, setDisableHandle }) {
 
 
-
-
-
   const expire = new Date(timeLimit) - new Date();
   const [leftTime, setLeftTime] = useState(expire);
   useEffect(() => {
-    // if(expire<0){
-    //   setLeftTime(0)
-    // }
+
     const expire = new Date(timeLimit) - new Date() + new Date().getTimezoneOffset() ** 1000 * 60;
     setLeftTime(expire)
-    // console.log(new Date().getTimezoneOffset())
 
     const interval = setInterval(() => {
       const left = new Date(timeLimit) - new Date() + new Date().getTimezoneOffset() * 1000 * 60;
@@ -28,7 +22,6 @@ function SetTime({ timeLimit, setDisableHandle }) {
       }
     }, 1000)
   }, []);
-
 
   // 기준 시간과의 차이 세팅
 
@@ -43,7 +36,6 @@ function SetTime({ timeLimit, setDisableHandle }) {
         <BaseFont style={styles.fontStyle}>
         Left Time <BaseFont style={{ color: "red" }}>{timeCutting(leftTime)}</BaseFont>
         </BaseFont>
-      
         :
         <BaseFont style={styles.fontStyle}>
           <BaseFont style={{ color: "red" }}>Sold Out!</BaseFont>

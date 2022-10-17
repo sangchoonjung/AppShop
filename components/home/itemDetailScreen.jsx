@@ -40,7 +40,7 @@ function ItemDetailScreen() {
   }
 
 
-  const timeLimit= "2022-10-15"
+  const timeLimit= "2022-10-18"
   // const timeLimit = data?.dueDate
   //20분 가정
 const qnaOpenHandle =()=>{

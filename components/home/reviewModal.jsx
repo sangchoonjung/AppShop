@@ -6,7 +6,7 @@ import { AppContext } from "../../context/auth";
 import { sendUploadReviewRequest } from "../../util/userInfo";
 import ImagePicker from "../account/mypage/imageUpload/imagePicker";
 
-function ReviewModal({ reiviewModalOpen, setReiviewModalOpen, data,refreshOneProduct }) {
+function ReviewModal({ reiviewModalOpen, setReiviewModalOpen, data, refreshOneProduct }) {
     // console.log(data)
     const [uploadImage, setUploadImage] = useState(null);
     const [uploadImageBase64, setUploadImageBase64] = useState(null)
@@ -23,27 +23,26 @@ function ReviewModal({ reiviewModalOpen, setReiviewModalOpen, data,refreshOnePro
         if (!ctx.auth) {
             return;
         }
-        if (content?.title?.length === 0 || content?.main?.length === 0 || content?.rating?.length === 0) {
-            Alert.alert("퍼퓸", "Please wirte the message.");
-        } else if (uploadImage?.length === 0 || uploadImageBase64?.length === 0) {
-            Alert.alert("퍼퓸", "Please upload the photo.");
-        }
-        try{
-            
+        // if (content?.title?.length === 0 || content?.main?.length === 0 || content?.rating?.length === 0) {
+            // return Alert.alert("퍼퓸", "Please wirte the message.");
+        // } else if (uploadImage?.length === 0 || uploadImageBase64?.length === 0) {
+            // return Alert.alert("퍼퓸", "Please upload the photo.");
+        // }
+        try {
+
             const response = await sendUploadReviewRequest(content, uploadImageBase64, ctx.auth, ctx.completeList);
             // console.log(response);
-            ctx.setCompleteReviewList(response.message.completeReview);
-            refreshOneProduct(response.updateProduct);
-            if (response) {
-                Alert.alert("Beauty Shop", "Complete!");
-            } else {
-                Alert.alert("Beauty Shop", "Error!");
-            }
-        }catch(e){
-            console.log(e.message)
-        }finally{
-            setReiviewModalOpen(false);
-
+            // ctx.setCompleteReviewList(response.message.completeReview);
+            // refreshOneProduct(response.updateProduct);
+            // if (response) {
+            //     return Alert.alert("Beauty Shop", "Complete!");
+            // } else {
+            //     return Alert.alert("Beauty Shop", "Error!");
+            // }
+        } catch (e) {
+            console.log(e)
+        } finally {
+            // setReiviewModalOpen(false);
         }
     }
 

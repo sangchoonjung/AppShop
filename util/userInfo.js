@@ -4,6 +4,7 @@
 
 
 import axios from "axios"
+import mime from "mime";
 
 const { baseURL } = require("./baseURL")
 
@@ -17,7 +18,7 @@ export async function sendZzimUpdateRequest(userId, zzimList) {
             "user": userId,
             "zzimList": zzimList
         });
-        
+
         return response.data
 
     } catch (e) {
@@ -28,22 +29,38 @@ export async function sendZzimUpdateRequest(userId, zzimList) {
 
 //리뷰 작성
 
-export async function sendUploadReviewRequest(content, fileUri, auth,completeList) {
+export async function sendUploadReviewRequest(content, fileUri, auth, completeList) {
     // console.log(content, fileData, fileUri, auth)
     try {
         const formData = new FormData();
-        formData.append("content",content,"?");
-        formData.append("fileData",fileUri);
-        formData.append("id",auth.id)
-        formData.append("list",completeList)
-        const response = await axios.post(baseURL + "/api/userinfo/requestReview", {
+        
+        formData.append("content", [content,auth.id,completeList]);
+        formData.append("image", {
+            "uri": fileUri,
+            type: mime.getType(fileUri),
+            name: Date.now()
+
+        }); //img data
+        formData.append("id", auth.id)
+        formData.append("list", completeList)
+        console.log(formData)
+        const headers = {
+            accept: 'application/json',
+            'content-type': 'multipart/form-data',
+        };
+        const response = await axios.post(baseURL + "/api/userinfo/requestReview",
             formData
-        })
+            , {
+                headers: headers
+            }
+        );
         console.log(response.data.message)
-        if(response.data.result){
+        if (response.data.result) {
             return response.data
-        }elseP
-        return false
+        } else {
+
+            return false
+        }
 
     } catch (e) {
         console.log(e.message)
@@ -51,16 +68,16 @@ export async function sendUploadReviewRequest(content, fileUri, auth,completeLis
 }
 
 
-export async function sendPendToCompleteReqDummy(uid,pendingList){
+export async function sendPendToCompleteReqDummy(uid, pendingList) {
     try {
         const response = await axios.post(baseURL + "/api/userinfo/pendToComple", {
-            id:uid,
-            pendingList:pendingList
+            id: uid,
+            pendingList: pendingList
         }
         )
         return response.data
-    }catch(e){
+    } catch (e) {
         console.log(e.message)
-        
+
     }
 }

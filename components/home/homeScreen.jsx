@@ -1,3 +1,4 @@
+import { CurrentRenderContext } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { AppContext } from "../../context/auth";
@@ -6,6 +7,7 @@ import {
   requestAllProduct,
   searchFilteredProduct,
 } from "../../util/product";
+import Loading from "../common/loading";
 
 import MainHeader from "../mainheader";
 import Header from "../mainheader";
@@ -17,14 +19,19 @@ function HomeScreen() {
   const [itemList, setItemList] = useState(null);
   const [filter, setFilter] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const ctx = useContext(AppContext);
 
 
   useEffect(() => {
+    ctx.setLoading(true);
     requestAllProduct().then(p => {
       if (p) {
         setItemList(p.message);
       }
-    }).catch(e => console.log(e.message));
+    }).catch(e => console.log(e.message))
+      .finally(() => {
+        ctx.setLoading(false)
+      });
   }, []);
 
   // console.log(itemList)
@@ -34,25 +41,36 @@ function HomeScreen() {
     }
     //예외처리
 
+
     if (filter?.length >= 1) {
-      categoryFilteredProduct(filter).then(p => setItemList(p?.message));
+      ctx.setLoading(true);
+      categoryFilteredProduct(filter).then(p => setItemList(p?.message))
+        .finally(() => {
+          ctx.setLoading(false)
+        }).catch(e => console.log(e.message));
+
     }
 
     if (filter?.length === 0) {
       //필터 제거하면 전체목록
       //모든 값 제거했을 때(빈 필터) 약간의 로딩 딜레이 있음(나중에 스피너)
+      ctx.setLoading(true);
+
       requestAllProduct().then(p => {
         if (p) {
           setItemList(p.message);
         }
-      }).catch(e => console.log(e.message));
-
+      }).catch(e => console.log(e.message)).finally(() => {
+        ctx.setLoading(false)
+      });
     }
+
+    ctx.setLoading(false)
+
   }, [filter]);
 
 
 
-  const ctx = useContext(AppContext);
 
   const searchHandle = (keyword) => {
     // console.log(keyword,"Keyword")
@@ -80,6 +98,7 @@ function HomeScreen() {
         />
       </View>
       <List item={itemList} filter={filter} />
+      <Loading visible={ctx.loading} />
     </View>
   );
 }

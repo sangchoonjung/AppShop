@@ -8,7 +8,7 @@ import { dateCutting } from "../../util/function";
 import { requestZzimProduct } from "../../util/product";
 import { sendZzimUpdateRequest } from "../../util/userInfo";
 import ItemBuyAndZzim from "./itemBuyAndZzim";
-import ReviewModal from "./reviewModal";
+import ReviewModal from "./qnaAndReview/reviewModal";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -88,7 +88,7 @@ const deleteHandler = async () => {
           <BaseFont>(별점자리)</BaseFont>
 
           <BaseFont>
-          {/* 마이페이지에서 펜딩 버튼 */}
+          {/* 마이페이지에서 펜딩탭에서  버튼 */}
             {data.unit ? (
               <View style={styles.mountFixContain}>
                 <View>
@@ -134,6 +134,7 @@ const deleteHandler = async () => {
 
             </View>
           )}
+          {/* 마이페이지에서 complete에서 버튼 */}
           {(data?.type==="complete"&&reviewButton)&&(
             <View style={styles.goToReivew}>
               <CustomButton onPress={goToReivew} style={styles.zzimButtonView}>Write Review</CustomButton>

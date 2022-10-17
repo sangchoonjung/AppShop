@@ -40,7 +40,7 @@ function ItemDetailScreen() {
   }
 
 
-  const timeLimit= "2022-10-18"
+  const timeLimit= "2022-10-15"
   // const timeLimit = data?.dueDate
   //20분 가정
 const qnaOpenHandle =()=>{
@@ -54,7 +54,7 @@ const qnaOpenHandle =()=>{
   return (
     <View style={styles.contain}>
       <View>
-        <MainHeader />
+        <MainHeader/>
       </View>
 
       <ScrollView>
@@ -141,12 +141,12 @@ const qnaOpenHandle =()=>{
 
       <View>
         {/* 구매,찜하기 모달 */}
-        <ItemBuyAndZzim
+        <ItemBuyAndZzim 
           setModalVisible={setModalVisible}
           modalVisible={modalVisible}
           data={data}
           disable={disable}
-        />
+        />  
       </View>
     </View>
   );

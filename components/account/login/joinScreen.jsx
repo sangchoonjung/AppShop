@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 
-import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput, Button, Alert, ScrollView } from "react-native";
 import CustomButton from "../../../custom/customButton";
 import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../mainheader";
@@ -66,58 +66,60 @@ function JoinScreen({  }) {
   return (
     <>
       <MainHeader back={true} />
-      <View style={sytles.contain}>
-        <TextInput
-          keyboardType="email-address"
-          autoCapitalize="none"
-          onChangeText={(text) => changeHandle(["id", text])}
-          placeholder="id"
-          style={[sytles.textinputContain, { marginBottom: 2 }]}
-        />
-        <CustomButton onPress={checkId} style={sytles.checkButton}>
-          Check
-        </CustomButton>
-
-        <View>
-          <TextInput
-            onChangeText={(text) => changeHandle(["passWord", text])}
-            secureTextEntry={true}
-            placeholder="password"
-            style={sytles.textinputContain}
-          />
-          <TextInput
-            onChangeText={(text) => changeHandle(["confirmPassWord", text])}
-            secureTextEntry={true}
-            placeholder="confirm"
-            style={sytles.textinputContain}
-          />
+      <ScrollView>
+        <View style={sytles.contain}>
           <TextInput
             keyboardType="email-address"
             autoCapitalize="none"
-            onChangeText={(text) => changeHandle(["email", text])}
-            placeholder="email"
-            style={sytles.textinputContain}
+            onChangeText={(text) => changeHandle(["id", text])}
+            placeholder="id"
+            style={[sytles.textinputContain, { marginBottom: 2 }]}
           />
-          <TextInput
-            maxLength={8}
-            keyboardType="number-pad"
-            autoCapitalize="none"
-            onChangeText={(text) => changeHandle(["birth", text])}
-            placeholder="birth"
-            style={sytles.textinputContain}
-          />
-          <QuestionPicker changeHandle={changeHandle}/>
-          <TextInput
-            autoCapitalize="none"
-            onChangeText={(text) => changeHandle(["answer", text])}
-            placeholder="answer"
-            style={sytles.textinputContain}
-          />
+          <CustomButton onPress={checkId} style={sytles.checkButton}>
+            Check
+          </CustomButton>
+
+          <View>
+            <TextInput
+              onChangeText={(text) => changeHandle(["passWord", text])}
+              secureTextEntry={true}
+              placeholder="password"
+              style={sytles.textinputContain}
+            />
+            <TextInput
+              onChangeText={(text) => changeHandle(["confirmPassWord", text])}
+              secureTextEntry={true}
+              placeholder="confirm"
+              style={sytles.textinputContain}
+            />
+            <TextInput
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={(text) => changeHandle(["email", text])}
+              placeholder="email"
+              style={sytles.textinputContain}
+            />
+            <TextInput
+              maxLength={8}
+              keyboardType="number-pad"
+              autoCapitalize="none"
+              onChangeText={(text) => changeHandle(["birth", text])}
+              placeholder="birth"
+              style={sytles.textinputContain}
+            />
+            <QuestionPicker changeHandle={changeHandle} />
+            <TextInput
+              autoCapitalize="none"
+              onChangeText={(text) => changeHandle(["answer", text])}
+              placeholder="answer"
+              style={sytles.textinputContain}
+            />
+          </View>
         </View>
-      </View>
-      <View>
-        <CustomButton onPress={submitHandle}>Submit</CustomButton>
-      </View>
+        <View>
+          <CustomButton onPress={submitHandle}>Submit</CustomButton>
+        </View>
+      </ScrollView>
     </>
   );
 }

@@ -23,12 +23,22 @@ import SetTime from "./setTime";
 function ItemDetailScreen() {
   const route = useRoute();
   const data = route.params.tag;
+  console.log(data)
   // console.log(data,"datas");
   const [modalVisible, setModalVisible] = useState(false);
   const [qnaReviewModalVisible,setQnaReviewModalVisible] =useState(false)
-
+  const [rating, setRating] = useState([]);
   const [disable,setDisable] = useState(false);
 
+  useEffect(() => {
+    let count = 0;
+    data.review.map((item) => {
+      count += Number(item.content.rating).toFixed(1);
+    });
+    const avg = count / data.review.length;
+
+    setRating(avg);
+  }, []);
 
 
 
@@ -40,7 +50,7 @@ function ItemDetailScreen() {
   }
 
 
-  const timeLimit= "2022-10-15"
+  const timeLimit= "2022-10-18"
   // const timeLimit = data?.dueDate
   //20분 가정
 const qnaOpenHandle =()=>{
@@ -54,13 +64,13 @@ const qnaOpenHandle =()=>{
   return (
     <View style={styles.contain}>
       <View>
-        <MainHeader/>
+        <MainHeader />
       </View>
 
       <ScrollView>
         <View style={{ margin: 10 }}>
           <BaseFont style={{ fontSize: 25 }}>{data.title}</BaseFont>
-          <BaseFont>(평점)(평점갯수)</BaseFont>
+          <BaseFont>평점({rating?rating:"0"})</BaseFont>
           {/* 남은시간 컴포넌트 */}
           <View style={styles.timerContain}>
             <SetTime
@@ -78,7 +88,7 @@ const qnaOpenHandle =()=>{
               Standard Price ${data.standardFee}
             </BaseFont>
           </View>
-          
+
           <View style={styles.textContain}>
             <BaseFont style={{ fontWeight: "bold", marginBottom: 10 }}>
               Details
@@ -117,7 +127,12 @@ const qnaOpenHandle =()=>{
           </View>
           {/* QnA, 리뷰 띄우기 모달 */}
           <View style={{}}>
-            <CustomButton onPress={qnaOpenHandle} style={styles.qnaReviewModalButton}>QnA / Review</CustomButton>
+            <CustomButton
+              onPress={qnaOpenHandle}
+              style={styles.qnaReviewModalButton}
+            >
+              QnA / Review
+            </CustomButton>
           </View>
 
           <View style={styles.detailImgContain}>
@@ -130,23 +145,23 @@ const qnaOpenHandle =()=>{
         </View>
       </ScrollView>
 
-        <View>
-          <QnaReviewModal
-                    setModalVisible={setQnaReviewModalVisible}
-                    modalVisible={qnaReviewModalVisible}
-                    data={data}
-          />
+      <View>
+        <QnaReviewModal
+          setModalVisible={setQnaReviewModalVisible}
+          modalVisible={qnaReviewModalVisible}
+          data={data}
+        />
         {/* Q&A 리뷰 모달 => 탭뷰 */}
       </View>
 
       <View>
         {/* 구매,찜하기 모달 */}
-        <ItemBuyAndZzim 
+        <ItemBuyAndZzim
           setModalVisible={setModalVisible}
           modalVisible={modalVisible}
           data={data}
           disable={disable}
-        />  
+        />
       </View>
     </View>
   );

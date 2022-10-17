@@ -21,7 +21,7 @@ function Item({ data, refreshOneProduct }) {
   const [reiviewModalOpen, setReiviewModalOpen] = useState(false);
 
   const [reviewButton, setReviewButton] = useState(true);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState([]);
   useEffect(() => {
     if (ctx.completeReview.includes(data.key)) {
       setReviewButton(false)
@@ -72,14 +72,19 @@ function Item({ data, refreshOneProduct }) {
   useEffect(() => {
 
     let count = 0
-    data.review.forEach(e => {
-      count + Number(e.content.rating)
+    data.review.map(item => {
+      count += Number(item.content.rating).toFixed(1);
+      
     });
-    setRating(count / (data.review.length))
+    const avg = count / data.review.length;
+    
 
-  }, data.review)
-  // console.log(data.review.foreach(e => { rating + Number(e.content.rating) }))
-  console.log(rating)
+    setRating(avg);
+
+  }, [])
+  // console.log(rating,"레이팅");
+  // console.log(data.review)
+  
   return (
     <Pressable onPress={detailNavigation}>
       <View style={styles.itemContainer}>
@@ -96,7 +101,7 @@ function Item({ data, refreshOneProduct }) {
               ? data.title.substring(0, 25) + "..."
               : data.title}
           </BaseFont>
-          <BaseFont>({rating})</BaseFont>
+          <BaseFont>평점 ({rating?rating:"0"})</BaseFont>
 
           <BaseFont>
             {/* 마이페이지에서 펜딩탭에서  버튼 */}

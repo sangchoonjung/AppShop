@@ -34,18 +34,21 @@ export async function sendUploadReviewRequest(content, fileUri, auth, completeLi
     try {
         const formData = new FormData();
         
-        formData.append("content", [content,auth.id,completeList]);
+        formData.append("uid",auth.id);
+        formData.append("title",content.title);
+        formData.append("rating",content.rating);
+        formData.append("review",content.main);
+        formData.append("productId",content.productId);
+        
         formData.append("image", {
-            "uri": fileUri,
-            type: mime.getType(fileUri),
-            name: Date.now()
-
+            uri : Platform.OS === 'android' ? fileUri : fileUri.replace('file://', ''),
+            type: "image/jpeg",
+            name: "image"
+            
         }); //img data
-        formData.append("id", auth.id)
-        formData.append("list", completeList)
-        console.log(formData)
+        console.log(content)
+        // console.log(formData)
         const headers = {
-            accept: 'application/json',
             'content-type': 'multipart/form-data',
         };
         const response = await axios.post(baseURL + "/api/userinfo/requestReview",
@@ -54,7 +57,7 @@ export async function sendUploadReviewRequest(content, fileUri, auth, completeLi
                 headers: headers
             }
         );
-        console.log(response.data.message)
+        // console.log(response.data.message)
         if (response.data.result) {
             return response.data
         } else {

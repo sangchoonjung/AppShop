@@ -69,11 +69,14 @@ function MypageScreen({ navigation }) {
 
   const refreshOneProduct = (updateProduct) => {
     // setItemList
-    // console.log(updateProduct, "updateProduct")
-    const except = completeList.map(e => e.key !== updateProduct.key)
-    // setCompleteList({ ...except, updateProduct });
+    if(!updateProduct){
+      return;
+    }
+    console.log(updateProduct, "updateProduct")
+    const except = completeList.map(e =>{if(e.key !== updateProduct.key){return e}})
+    // console.log(except)
+    setCompleteList([...except, updateProduct ]);
   }
-
   return (
     <View style={styles.mainContain}>
       <View style={styles.accountSetting}>

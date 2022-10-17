@@ -39,6 +39,7 @@ export async function sendUploadReviewRequest(content, fileUri, auth, completeLi
         formData.append("rating",content.rating);
         formData.append("review",content.main);
         formData.append("productId",content.productId);
+        formData.append("completeList",completeList);
         
         formData.append("image", {
             uri : Platform.OS === 'android' ? fileUri : fileUri.replace('file://', ''),

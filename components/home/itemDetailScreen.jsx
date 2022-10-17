@@ -65,11 +65,11 @@ const qnaOpenHandle =()=>{
           <View style={styles.timerContain}>
             <SetTime
               timeLimit={timeLimit}
-              setDisableHandle={() => setDisableHandle(data.key)}
+              setDisableHandle={() => setDisableHandle(data?.key)}
             />
           </View>
           <Image
-            source={{ uri: data.titleImage }}
+            source={{ uri: data?.titleImage }}
             style={styles.titleImageContain}
             resizeMode={"contain"}
           />

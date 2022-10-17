@@ -59,7 +59,7 @@ function ReviewModal({
       );
       // console.log(response);
       ctx.setCompleteReviewList(response.message.completeReview);
-      // refreshOneProduct(response.updateProduct);
+      refreshOneProduct(response.updateProduct);
       // if (response) {
       //   Alert.alert("Beauty Shop", "Complete!");
       // } else {
@@ -68,7 +68,7 @@ function ReviewModal({
     } catch (e) {
       console.log(e.message);
     } finally {
-      // setReiviewModalOpen(false);
+      setReiviewModalOpen(false);
     }
   };
 

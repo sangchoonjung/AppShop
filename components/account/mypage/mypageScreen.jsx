@@ -75,7 +75,7 @@ function MypageScreen({ navigation }) {
     console.log(updateProduct, "updateProduct")
     const except = completeList.map(e =>{if(e.key !== updateProduct.key){return e}})
     // console.log(except)
-    setCompleteList([...except, updateProduct ]);
+    setCompleteList(updateProduct);
   }
   return (
     <View style={styles.mainContain}>

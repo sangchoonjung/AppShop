@@ -14,23 +14,23 @@ import { AntDesign } from "@expo/vector-icons";
 
 import FixamountUnit from "../account/mypage/fixamountUnit";
 
-function Item({ data,refreshOneProduct }) {
+function Item({ data, refreshOneProduct }) {
   const navigation = useNavigation();
   const ctx = useContext(AppContext);
 
-  const [reiviewModalOpen,setReiviewModalOpen] = useState(false)
+  const [reiviewModalOpen, setReiviewModalOpen] = useState(false);
 
-  const[reviewButton,setReviewButton] = useState(true)
-
-useEffect(()=>{
-if(ctx.completeReview.includes(data.key)){
-  setReviewButton(false)
-}
-},[ctx.completeReview])
+  const [reviewButton, setReviewButton] = useState(true);
+  const [rating, setRating] = useState(0);
+  useEffect(() => {
+    if (ctx.completeReview.includes(data.key)) {
+      setReviewButton(false)
+    }
+  }, [ctx.completeReview])
 
 
   const [modalVisible, setModalVisible] = useState(false);
-  
+
   const detailNavigation = () => {
     console.log(ctx.auth);
     if (ctx.auth) {
@@ -53,15 +53,15 @@ if(ctx.completeReview.includes(data.key)){
 
 
 
-  const goToReivew=()=>{
-    setReiviewModalOpen(current=>!current)
+  const goToReivew = () => {
+    setReiviewModalOpen(current => !current)
   }
 
-const deleteHandler = async () => {
+  const deleteHandler = async () => {
     const zzimList = ctx.zzimList;
     let result;
-    if (zzimList.some((e) => e.id === String(data.key))) {
-      result = zzimList.filter((e) => e.id !== String(data.key));
+    if (zzimList.some((e) => e.id === String(data?.key))) {
+      result = zzimList.filter((e) => e.id !== String(data?.key));
       ctx.setZzim(result);
     }
     await sendZzimUpdateRequest(ctx.auth.id, result);
@@ -69,11 +69,22 @@ const deleteHandler = async () => {
 
   // const addedDate = data?.date ? dateCutting(data?.date) : "";
 
+  useEffect(() => {
+
+    let count = 0
+    data.review.forEach(e => {
+      count + Number(e.content.rating)
+    });
+    setRating(count / (data.review.length))
+
+  }, data.review)
+  // console.log(data.review.foreach(e => { rating + Number(e.content.rating) }))
+  console.log(rating)
   return (
     <Pressable onPress={detailNavigation}>
       <View style={styles.itemContainer}>
         <Image
-          source={{ uri: data.titleImage }}
+          source={{ uri: data?.titleImage }}
           style={styles.left}
           resizeMode={"contain"}
         />
@@ -85,10 +96,10 @@ const deleteHandler = async () => {
               ? data.title.substring(0, 25) + "..."
               : data.title}
           </BaseFont>
-          <BaseFont>(별점자리)</BaseFont>
+          <BaseFont>({rating})</BaseFont>
 
           <BaseFont>
-          {/* 마이페이지에서 펜딩탭에서  버튼 */}
+            {/* 마이페이지에서 펜딩탭에서  버튼 */}
             {data.unit ? (
               <View style={styles.mountFixContain}>
                 <View>
@@ -101,14 +112,14 @@ const deleteHandler = async () => {
                 </View>
                 <View>
                   {/* 모달 */}
-                  {data?.type!=="complete"&&
-                  //구매후에는 fix안되게 수정
-                  <FixamountUnit
-                  setModalVisible={setModalVisible}
-                  modalVisible={modalVisible}
-                  data={data}
-                  />
-                }
+                  {data?.type !== "complete" &&
+                    //구매후에는 fix안되게 수정
+                    <FixamountUnit
+                      setModalVisible={setModalVisible}
+                      modalVisible={modalVisible}
+                      data={data}
+                    />
+                  }
                 </View>
               </View>
             ) : (
@@ -135,7 +146,7 @@ const deleteHandler = async () => {
             </View>
           )}
           {/* 마이페이지에서 complete에서 버튼 */}
-          {(data?.type==="complete"&&reviewButton)&&(
+          {(data?.type === "complete" && reviewButton) && (
             <View style={styles.goToReivew}>
               <CustomButton onPress={goToReivew} style={styles.zzimButtonView}>Write Review</CustomButton>
             </View>
@@ -143,10 +154,10 @@ const deleteHandler = async () => {
           }
           <View>
             <ReviewModal
-            reiviewModalOpen={reiviewModalOpen}
-            setReiviewModalOpen={setReiviewModalOpen}
-            refreshOneProduct={refreshOneProduct}
-            data={data}
+              reiviewModalOpen={reiviewModalOpen}
+              setReiviewModalOpen={setReiviewModalOpen}
+              refreshOneProduct={refreshOneProduct}
+              data={data}
             />
           </View>
         </View>
@@ -202,7 +213,7 @@ const styles = StyleSheet.create({
   mountFixButton: {
     paddingVertical: 5,
     paddingHorizontal: 5,
-    marginLeft:30
+    marginLeft: 30
   }
 });
 export default Item;

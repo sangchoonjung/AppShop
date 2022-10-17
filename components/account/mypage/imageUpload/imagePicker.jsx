@@ -43,19 +43,14 @@ function ImagePicker({ onPicked, onChangeHandle }) {
 const setRatingHandle =(text)=>{
 //입력값을 5?기준점까지만 막을 필요가 있음 아직안했음...
     if (text > 0 && text < 6) {
-        setRating(text);
-      onChangeHandle(["rating", text]);
+      setRating(text);
+      console.log(text)
+        onChangeHandle(["rating", text]);
     } else {
         setRating("")
-        Alert.alert("Error", "Please fill in from 1 to 5", {
-          text: "OK",
-          onPress: () => console.log("OK Pressed"),
-        });
+        Alert.alert("Error", "Please fill in from One to Five");
     }
-    // setRating(text)
-    
 }
-
 
     return (
       <View style={{ flex: 1 }}>

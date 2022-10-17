@@ -53,22 +53,22 @@ function ReviewModal({
     try {
       const response = await sendUploadReviewRequest(
         content,
-        uploadImage,
+        uploadImageBase64,
         ctx.auth,
         ctx.completeList
       );
       // console.log(response);
       ctx.setCompleteReviewList(response.message.completeReview);
-      // refreshOneProduct(response.updateProduct);
-      // if (response) {
-      //   Alert.alert("Beauty Shop", "Complete!");
-      // } else {
-      //   Alert.alert("Beauty Shop", "Error!");
-      // }
+      refreshOneProduct(response.updateProduct);
+      if (response) {
+        Alert.alert("Beauty Shop", "Complete!");
+      } else {
+        Alert.alert("Beauty Shop", "Error!");
+      }
     } catch (e) {
       console.log(e.message);
     } finally {
-      // setReiviewModalOpen(false);
+      setReiviewModalOpen(false);
     }
   };
 

@@ -6,29 +6,28 @@ import QnaAndReviewList from "./qnaAndReviewList";
 function ItemDetailQnaAndReviewTabView({ data }) {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
-
   React.useEffect(() => {
     setRoutes([
-      { key: "Q&A", title: `Q&A(${data?.QnA?.length})` },
-      { key: "Review", title: `Review(${data?.review?.length})` },
+      { key: "Q&A", title: `Q&A(${data.QnA.length})` },
+      { key: "Review", title: `Review(${data.review.length})` },
     ]);
-  }, [data?.QnA?.length, data?.review?.length]);
+  }, [data.QnA.length, data.review.length]);
 
   const [routes, setRoutes] = React.useState(
     [
-      { key: "Q&A", title: `Q&A(${data?.QnA?.length})` },
-      { key: "Review", title: `Review(${data?.review?.length})` },
+      { key: "Q&A", title: `Q&A(${data.QnA.length})` },
+      { key: "Review", title: `Review(${data.review.length})` },
     ],
-    [data?.QnA?.length, data?.review?.length]
+    [data.QnA.length, data.review.length]
   );
 
   const renderScene = ({ route }) => {
     switch (route.key) {
       case "Q&A":
-        return <QnaAndReviewList data={data} item={data?.QnA} type="qna" />;
+        return <QnaAndReviewList data={data} item={data.QnA} type="qna" />;
       case "Review":
         return (
-          <QnaAndReviewList data={data} item={data?.review} type="review" />
+          <QnaAndReviewList data={data} item={data.review} type="review" />
         );
       default:
         break;

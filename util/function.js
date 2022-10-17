@@ -1,4 +1,7 @@
 export function timeCutting(ms){
+    if(isNaN(ms)){
+        return;
+    }
     if(ms<=0){
         return false
     }
@@ -13,7 +16,7 @@ export function timeCutting(ms){
 export function dateCutting(date){
     const createdTime = new Date(Number(date));
     const writedDay = `${createdTime.getFullYear()}-${("0" + (createdTime.getMonth() + 1)).slice(-2)}-${createdTime.getDate()}`;
-    const writedTime = `/${("0"+createdTime.getHours()).slice(-2)}:${("0" + createdTime.getMinutes()).slice(-2)}`;
+    const writedTime = ` ${("0"+createdTime.getHours()).slice(-2)}:${("0" + createdTime.getMinutes()).slice(-2)}`;
 
     return(writedDay+writedTime).slice(2)
 }

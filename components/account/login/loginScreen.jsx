@@ -9,6 +9,7 @@ import FindAccount from "./findAccount";
 import SetNewPassWord from "./setNewPassWord";
 import CustomButton from "../../../custom/customButton";
 import BaseFont from "../../../assets/font/base";
+import Loading from "../../common/loading";
 
 //해야할거 로그인context에 맞게 수정 네비게이션 (회원가입 아디비번찾기)연결 나머지는 서버작업
 
@@ -37,8 +38,8 @@ function LoginScreen({ navigation }) {
       return;
       //아이디 비밀번호 최소글자 설정 필요
     }
-
     try {
+      ctx.setLoading(true);
       const recv = await sendLoginRequest(loginData.id, loginData.passWord);
       // 로그인한후 인증 셋팅
       if (recv?.result) {
@@ -48,11 +49,11 @@ function LoginScreen({ navigation }) {
       } else {
         Alert.alert("warning", "id 또는 password가 틀렸습니다.")
       }
-
     } catch (e) {
       console.log(e.message);
       Alert.alert("warning", "ERROR!!!");
-
+    }finally{
+      ctx.setLoading(false);
     }
   };
 
@@ -65,7 +66,6 @@ function LoginScreen({ navigation }) {
   }
   const findAccount = async (email) => {
     try {
-
       const rst = await findIdByEmail(email);
       console.log(rst)
       setModal(current => !current);
@@ -177,6 +177,7 @@ function LoginScreen({ navigation }) {
           passWordResetHandle={passWordResetHandle}
         />
       </View>
+              <Loading visible={ctx.loading}/>
     </View>
   );
 }

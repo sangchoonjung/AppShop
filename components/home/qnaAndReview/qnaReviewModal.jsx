@@ -5,6 +5,10 @@ import ItemDetailQnaAndReviewTabView from "./itemDetailQnaAndReviewTabView";
 function QnaReviewModal({ setModalVisible, modalVisible, data }) {
   // const ctx = useContext(AppContext)
 
+
+
+  // console.log(data.review)
+
   return (
     <View>
       <Modal

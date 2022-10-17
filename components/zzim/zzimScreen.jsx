@@ -104,10 +104,10 @@ function ZzimScreen({ navigation }) {
 
       {/* 더미코드 */}
       {/* ctx업데이트를 안 해서 로그아웃 했다가 와야지 반영됩니다 */}
-      <View>
+      {/* <View>
         <Text>pend to complete</Text>
         <Button onPress={onPressPendToComplete} title="임시" />
-      </View>
+      </View> */}
       {/* 현재 계정의 팬딩을 컴플리트로 옮기는 코드*/}
     </View>
 

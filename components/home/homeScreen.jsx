@@ -8,7 +8,7 @@ import {
   searchFilteredProduct,
 } from "../../util/product";
 import Loading from "../common/loading";
-
+import { Ionicons } from "@expo/vector-icons";
 import MainHeader from "../mainheader";
 import Header from "../mainheader";
 import Category from "./category";

@@ -28,7 +28,7 @@ function AddQnaModal({ modalVisible, setModalVisible, onSubmit }) {
       {
         text: "OK",
         onPress: () => {
-          setQnaText("")
+          // setQnaText("")
           onSubmit(qnaText);
         },
       },
@@ -53,7 +53,6 @@ function AddQnaModal({ modalVisible, setModalVisible, onSubmit }) {
               <TextInput
                 onChangeText={(text) => setQnaText(text)}
                 style={styles.txtInput}
-                value={qnaText}
               />
               <View style={{flexDirection:"row"}}>
               <CustomButton

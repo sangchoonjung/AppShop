@@ -95,14 +95,6 @@ function MypageScreen({ navigation }) {
             refreshOneProduct={refreshOneProduct}
           />
         )}
-
-        {
-          (!pendingList.length > 0 && !completeList.length > 0) && (
-            <View style={styles.textContai}>
-              <Text style={styles.exceptText}>No Products in Progress</Text>
-            </View>
-          )
-        }
       </View>
     </View>
   );
@@ -126,20 +118,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderColor: "#999999"
   },
-  textContai: {
-    justifyContent: "center",
-    height: "65%",
-
-  },
-  exceptText: {
-    textAlign: "center",
-    fontSize: 32,
-    textShadowColor: "#1663be",
-    textShadowRadius: 5,
-    color: "#222222",
-    fontWeight:"500"
-
-  }
 });
 
 export default MypageScreen;

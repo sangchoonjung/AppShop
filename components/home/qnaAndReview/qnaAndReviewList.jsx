@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { Button, FlatList, View } from "react-native";
 import { AppContext } from "../../../context/auth";
@@ -15,20 +14,15 @@ function QnaAndReviewList({ item, type, data }) {
     setQnaModalOpen((current) => !current);
   };
 
-  const navigation = useNavigation()
-
   const addQnaRequestHandle = async (qna) => {
     if (qna === "") {
       return;
     }
     try {
       console.log(data.key);
-      const response = await requestAddQna(qna, data.key, ctx.auth.id);
-      console.log(response,"?????????????????????????????????")
+      const respone = await requestAddQna(qna, data.key, ctx.auth.id);
+
       // 리턴값으로 after document 받아서 list에 updateOne 해주기
-      setQnaModalOpen(false);
-      navigation.navigate("detail", { tag: response.updateProduct });
-    
     } catch (e) {
       console.log(e.message);
     }
@@ -42,7 +36,7 @@ function QnaAndReviewList({ item, type, data }) {
       <FlatList
         data={item}
         renderItem={({ item }) => (
-          <QnaAndReview type={type} item={item} key={item?.reviewDate} />
+          <QnaAndReview item={item} key={item?.reviewDate} />
         )}
         showsVerticalScrollIndicator={false}
       />

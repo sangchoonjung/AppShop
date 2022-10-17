@@ -12,7 +12,6 @@ export function AppContextProvider({ children }) {
 
     const [completeReview,setCompleteReview]=useState([])
 
-    const [loading, setLoading] = useState(false)
 
     const login = (id, token, email, data) => {
         setAuth({ id: id, token: token, email: email });
@@ -43,8 +42,7 @@ export function AppContextProvider({ children }) {
     return (
         <AppContext.Provider value={{
             auth, login, logout, userInfo, zzimList, setZzim, pendingList, setPendingList
-            , completeList, setCompleteList,completeReview,setCompleteReviewList,
-            loading, setLoading
+            , completeList, setCompleteList,completeReview,setCompleteReviewList
         }}>
             {children}
         </AppContext.Provider>

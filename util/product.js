@@ -111,9 +111,7 @@ export async function requestAddQna(qna,productId,userId){
                 userId:userId
             }
         )
-        if(response.data){
-            return response.data
-        }
+        return response.data
     } catch (e) {
         console.log(e.message);
     }

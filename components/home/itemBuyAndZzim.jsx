@@ -7,16 +7,16 @@ import { sendZzimUpdateRequest } from "../../util/userInfo";
 import { sendProductPendingAddRequest } from "../../util/account";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../custom/customButton";
-function ItemBuyAndZzim({ modalVisible, setModalVisible, data ,disable}) {
+function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   const [heartOnOff, setHeartOnOff] = useState(false);
   const [productCount, setProductCount] = useState(1);
   const [pend, setPend] = useState(false);
-
+  const [complete, setComplete] = useState(false);
   const ctx = useContext(AppContext);
   const zzimList = ctx.zzimList;
   const setZzim = ctx.setZzim;
   const pendingList = ctx.pendingList;
-
+  const completeList = ctx.completeList
   const navigation = useNavigation();
   // console.log(pendingList)
   /*
@@ -25,8 +25,11 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data ,disable}) {
   서버로 업데이트 하는김에 찜 목록을 재작성해서 ctx에 올려둠
   */
   useEffect(() => {
-    if (pendingList.some((e) => e.productId === data.key)) {
+    if (pendingList?.some((e) => e?.productId === data.key)) {
       setPend(true);
+    }
+    if (completeList.some((e) => e?.productId === data.key)) {
+      setComplete(true)
     }
   }, [pendingList]);
 
@@ -99,6 +102,25 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data ,disable}) {
     }
   };
 
+
+let footer = <></>
+if(pend){
+footer =                   <View style={[styles.button, styles.buttonOpen]}>
+<BaseFont style={[styles.textStyle]}>already pending</BaseFont>
+</View>
+}else if (complete){
+  footer = <View style={[styles.button, styles.buttonOpen]}>
+  <BaseFont style={[styles.textStyle]}>already complete</BaseFont>
+</View>
+}else{
+footer =               <Pressable
+style={[styles.button, styles.buttonOpen]}
+onPress={() => setModalVisible(true)}
+>
+<BaseFont style={styles.modalButton}>pending now</BaseFont>
+</Pressable>
+}
+
   return (
     <>
       <Modal
@@ -130,13 +152,13 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data ,disable}) {
             {/* 모달 버튼 */}
 
             <View style={styles.modalButtonContain}>
-              
-                <CustomButton
-                  style={styles.modalButton}
-                  onPress={modalConfirmButton}
-                >
-                  pend
-                </CustomButton>
+
+              <CustomButton
+                style={styles.modalButton}
+                onPress={modalConfirmButton}
+              >
+                pend
+              </CustomButton>
 
               <CustomButton
                 style={styles.modalButton}
@@ -152,25 +174,40 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data ,disable}) {
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
         {
-        
-        disable?
-        <View style={[styles.button, styles.buttonOpen]}>
-        <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
-        </View>
 
-        :
-        !pend ? (
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <BaseFont style={styles.modalButton}>pending now</BaseFont>
-          </Pressable>
-        ) : (
-          <View style={[styles.button, styles.buttonOpen]}>
-            <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
-          </View>
-        )}
+          disable ?
+            <View style={[styles.button, styles.buttonOpen]}>
+              <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
+            </View>
+
+            :footer
+
+            /*
+            !pend ? (
+              !complete ?
+              (
+                <View style={[styles.button, styles.buttonOpen]}>
+                  <BaseFont style={[styles.textStyle]}>already complete</BaseFont>
+                </View>
+              )
+              :
+              <Pressable
+                style={[styles.button, styles.buttonOpen]}
+                onPress={() => setModalVisible(true)}
+              >
+                <BaseFont style={styles.modalButton}>pending now</BaseFont>
+              </Pressable>
+            ) :
+              (
+
+
+                  <View style={[styles.button, styles.buttonOpen]}>
+                    <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
+                  </View>
+              )
+              */
+        }
+
 
         {/* 찜 on/off */}
         <Pressable style={styles.heartLayout}>
@@ -263,7 +300,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 8,
     paddingHorizontal: 15,
-    color:"white"
+    color: "white"
   },
 });
 

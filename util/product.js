@@ -116,3 +116,17 @@ export async function requestAddQna(qna,productId,userId){
         console.log(e.message);
     }
 }
+//평점 가져오기(수정중)
+export async function requestRating(productId) {
+    try {
+        // console.log(qna,productId,userId)
+        const response = await axios.post(baseURL + "/api/product/requestProductReview",
+            {
+                productId: productId,
+            }
+        )
+        return response.data
+    } catch (e) {
+        console.log(e.message);
+    }
+}

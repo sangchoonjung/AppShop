@@ -40,11 +40,11 @@ export async function sendUploadReviewRequest(content, fileUri, auth,completeLis
             formData
         })
         console.log(response.data.message)
-        if(response.data.result){
+        if (response.data.result) {
             return response.data
-        }elseP
-        return false
-
+        } else {
+            return false
+        }
     } catch (e) {
         console.log(e.message)
     }

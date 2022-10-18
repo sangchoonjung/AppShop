@@ -16,8 +16,9 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   const zzimList = ctx.zzimList;
   const setZzim = ctx.setZzim;
   const pendingList = ctx.pendingList;
-  const completeList = ctx.completeList
+  const completeList = ctx.completeList;
   const navigation = useNavigation();
+  
   // console.log(pendingList)
   /*
   초기세팅
@@ -29,7 +30,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
       setPend(true);
     }
     if (completeList.some((e) => e?.productId === data.key)) {
-      setComplete(true)
+      setComplete(true);
     }
   }, [pendingList]);
 
@@ -102,24 +103,29 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
     }
   };
 
-
-let footer = <></>
-if(pend){
-footer =                   <View style={[styles.button, styles.buttonOpen]}>
-<BaseFont style={[styles.textStyle]}>already pending</BaseFont>
-</View>
-}else if (complete){
-  footer = <View style={[styles.button, styles.buttonOpen]}>
-  <BaseFont style={[styles.textStyle]}>already complete</BaseFont>
-</View>
-}else{
-footer =               <Pressable
-style={[styles.button, styles.buttonOpen]}
-onPress={() => setModalVisible(true)}
->
-<BaseFont style={styles.modalButton}>pending now</BaseFont>
-</Pressable>
-}
+  let footer = <></>;
+  if (pend) {
+    footer = (
+      <View style={[styles.button, styles.buttonOpen]}>
+        <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
+      </View>
+    );
+  } else if (complete) {
+    footer = (
+      <View style={[styles.button, styles.buttonOpen]}>
+        <BaseFont style={[styles.textStyle]}>already complete</BaseFont>
+      </View>
+    );
+  } else {
+    footer = (
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <BaseFont style={styles.modalButton}>pending now</BaseFont>
+      </Pressable>
+    );
+  }
 
   return (
     <>
@@ -152,7 +158,6 @@ onPress={() => setModalVisible(true)}
             {/* 모달 버튼 */}
 
             <View style={styles.modalButtonContain}>
-
               <CustomButton
                 style={styles.modalButton}
                 onPress={modalConfirmButton}
@@ -174,15 +179,15 @@ onPress={() => setModalVisible(true)}
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
         {
-
-          disable ?
+          disable ? (
             <View style={[styles.button, styles.buttonOpen]}>
               <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
             </View>
+          ) : (
+            footer
+          )
 
-            :footer
-
-            /*
+          /*
             !pend ? (
               !complete ?
               (
@@ -207,7 +212,6 @@ onPress={() => setModalVisible(true)}
               )
               */
         }
-
 
         {/* 찜 on/off */}
         <Pressable style={styles.heartLayout}>
@@ -300,7 +304,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 8,
     paddingHorizontal: 15,
-    color: "white"
+    color: "white",
   },
 });
 

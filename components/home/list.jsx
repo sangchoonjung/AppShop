@@ -23,10 +23,10 @@ function List({ item,refreshOneProduct }) {
             setRefresh(false);
           }, 1000);
         }}
+        
         data={item}
         renderItem={({ item }) => <Item data={item} key={item?.key} refreshOneProduct={refreshOneProduct} />}
         showsVerticalScrollIndicator={false} />
-      
     </View>
   );
 }

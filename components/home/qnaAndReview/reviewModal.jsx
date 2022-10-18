@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import KeyboardAvoidingView from "react-native/Libraries/Components/Keyboard/KeyboardAvoidingView";
 
 import BaseFont from "../../../assets/font/base";
 import { AppContext } from "../../../context/auth";
@@ -47,7 +48,7 @@ function ReviewModal({
       content?.rating?.length === 0
     ) {
       Alert.alert("퍼퓸", "Please wirte the message.");
-    } else if (uploadImage?.length === 0 || uploadImageBase64?.length === 0) {
+    } else if (uploadImage?.length === 0) {
       Alert.alert("퍼퓸", "Please upload the photo.");
     }
     try {
@@ -88,61 +89,66 @@ function ReviewModal({
 
   return (
     <View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={reiviewModalOpen}
-        onRequestClose={() => {
-          setReiviewModalOpen((current) => !current);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View>
-              <BaseFont style={styles.modalProductName}>{data.title}</BaseFont>
-            </View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={reiviewModalOpen}
+          onRequestClose={() => {
+            setReiviewModalOpen((current) => !current);
+          }}
+          >
+          <ScrollView style={{marginTop:20}}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <View>
+                <BaseFont style={styles.modalProductName}>
+                  {data.title}
+                </BaseFont>
+              </View>
 
-            <View style={{ flex: 1 }}>
-              <TextInput
-                onChangeText={(text) => onChangeHandle(["title", text])}
-                placeholder="Title"
-                style={styles.textInputItem}
-              />
-              <TextInput
-                onChangeText={(text) => onChangeHandle(["main", text])}
-                placeholder="One-Line-Review"
-                style={styles.textInputItem}
-              />
-              <ImagePicker
-                onPicked={imagePickedHandle}
-                onChangeHandle={onChangeHandle}
-              />
-              <Image source={{ uri: uploadImage }} />
-              {/* 이미지picker */}
-            </View>
+              <View style={{ flex: 1 }}>
+                <TextInput
+                  onChangeText={(text) => onChangeHandle(["title", text])}
+                  placeholder="Title"
+                  style={styles.textInputItem}
+                />
+                <TextInput
+                  onChangeText={(text) => onChangeHandle(["main", text])}
+                  placeholder="One-Line-Review"
+                  style={styles.textInputItem}
+                />
+                <ImagePicker
+                  onPicked={imagePickedHandle}
+                  onChangeHandle={onChangeHandle}
+                />
+                <Image source={{ uri: uploadImage }} />
+                {/* 이미지picker */}
+              </View>
 
-            {/* 모달 버튼 */}
+              {/* 모달 버튼 */}
 
-            <View style={styles.modalButtonContain}>
-              <CustomButton
-                onPress={reviewSubmitHandle}
-                style={styles.modalButton}
-              >
-                Submit
-              </CustomButton>
-              <CustomButton
-                onPress={() => {
-                  setReiviewModalOpen(!reiviewModalOpen);
-                }}
-                style={styles.modalButton}
-              >
-                Cancel
-              </CustomButton>
+              <View style={styles.modalButtonContain}>
+                <CustomButton
+                  onPress={reviewSubmitHandle}
+                  style={styles.modalButton}
+                >
+                  Submit
+                </CustomButton>
+                <CustomButton
+                  onPress={() => {
+                    setReiviewModalOpen(!reiviewModalOpen);
+                  }}
+                  style={styles.modalButton}
+                  >
+                  Cancel
+                </CustomButton>
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
-    </View>
+          </ScrollView>
+                  
+        </Modal>
+      </View>
   );
 }
 

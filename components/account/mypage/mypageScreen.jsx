@@ -14,6 +14,7 @@ import CustomButton from "../../../custom/customButton";
 import BaseFont from "../../../assets/font/base";
 
 import TabViewExample from "./tabViewNavigator";
+import { sendPendToCompleteReqDummy } from "../../../util/userInfo";
 
 function MypageScreen({ navigation }) {
   const [pendingList, setPendingList] = useState([]);
@@ -60,7 +61,14 @@ function MypageScreen({ navigation }) {
 
   // console.log(pendingList.length,"렝쓰ㅡ으으으으")
   // console.log(pendingList)
-
+  const testButton = async () => {
+    try{
+    const result = await sendPendToCompleteReqDummy(ctx.auth.id, ctx.pendingList);
+      console.log(result, "결과!")
+    } catch (e) {
+      console.log(e);
+      }
+  }
 
   const updateNavigationHandle = () => {
     navigation.navigate("update", { id: ctx.auth.id, email: ctx.auth.email });
@@ -106,6 +114,7 @@ function MypageScreen({ navigation }) {
             </View>
           )
         }
+        <Button title="테스트" onPress={testButton}/>
       </View>
     </View>
   );

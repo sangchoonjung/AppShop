@@ -9,14 +9,15 @@ function QuestionPicker({ changeHandle }) {
         <>
             <Text style={{ textAlign: "center" }}>Choose you Question.</Text>
             <Picker
-            style={style.mainContain}
+                style={style.mainContain}
+                mode='dropdown'
                 selectedValue={selected}
                 onValueChange={(itemValue, itemIndex) => {
                     changeHandle(["question", itemValue])
                     setSelected(itemValue)
                 }
                 }>
-                <Picker.Item label="기억에 남는 추억의 장소는?" value="place" />
+                <Picker.Item label="기억에 남는 추억의 장소는?" value="place"/>
                 <Picker.Item label="자신의 인생 좌우명은?" value="motto" />
                 <Picker.Item label="받았던 선물 중 기억에 남는 독특한 선물은?" value="gift" />
                 <Picker.Item label="인상 깊게 읽은 책 이름은?" value="book" />
@@ -31,7 +32,7 @@ function QuestionPicker({ changeHandle }) {
 
 const style = StyleSheet.create({
     mainContain:{
-        marginHorizontal:20
+        
     }
 })
 export default QuestionPicker;

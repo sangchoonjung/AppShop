@@ -67,12 +67,23 @@ function ZzimScreen({ navigation }) {
 
     return (
       <View style={styles.notLoginCont}>
-        <BaseFont style={styles.notLoginTitleTxt}>MEMBER ONLY!</BaseFont>
-        <Text>{"\n"}</Text>
-        <Text style={styles.notLoginTxt}>Plesae be Login!</Text>
-        <CustomButton onPress={goToLoginHandle} style={styles.btnStyle}>LOGIN</CustomButton>
+        <View style={{flex:1,marginTop:200}}>
+          <BaseFont style={styles.notLoginTitleTxt}>MEMBER ONLY!</BaseFont>
+          <Text>{"\n"}</Text>
+          <Text style={styles.notLoginTxt}>Plesae be Login!</Text>
+          <CustomButton onPress={goToLoginHandle} style={styles.btnStyle}>
+            LOGIN
+          </CustomButton>
+        </View>
+        <View><BaseFont style={{
+          fontSize: 12,
+          color: "green",
+          textShadowColor: "purple",
+          textShadowRadius: 5,
+          marginBottom:10
+        }}>Created By Han and Choon</BaseFont></View>
       </View>
-    )
+    );
   }
 
 
@@ -139,20 +150,23 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   btnStyle: {
-    paddingHorizontal: 32
+    paddingHorizontal: 32,
+    
   },
   notLoginTitleTxt: {
     fontSize: 25,
     fontWeight: "bold",
     textShadowColor: "purple",
     textShadowRadius: 5,
-    color: "#222222"
+    color: "#222222",
+    textAlign:"center"
   },
   notLoginTxt: {
     fontSize: 14,
     textShadowColor: "purple",
     textShadowRadius: 2,
-    color: "green"
+    color: "green",
+    textAlign:"center"
   }
 });
 export default ZzimScreen;

@@ -72,16 +72,16 @@ function Item({ data, refreshOneProduct }) {
   useEffect(() => {
 
     let count = 0
+    
     data.review.map(item => {
       count += Number(item.content.rating).toFixed(1);
       
     });
     const avg = count / data.review.length;
-    
 
     setRating(avg);
 
-  }, [])
+  }, [data.review])
   // console.log(rating,"레이팅");
   // console.log(data.review)
   
@@ -115,17 +115,15 @@ function Item({ data, refreshOneProduct }) {
                     Total : $ {data.price}
                   </BaseFont>
                 </View>
-                <View>
-                  {/* 모달 */}
+                {/* <View>
                   {data?.type !== "complete" &&
-                    //구매후에는 fix안되게 수정
                     <FixamountUnit
                       setModalVisible={setModalVisible}
                       modalVisible={modalVisible}
                       data={data}
                     />
                   }
-                </View>
+                </View> */}
               </View>
             ) : (
               `$ ${data.standardFee}.00`

@@ -104,7 +104,7 @@ function JoinScreen({  }) {
               keyboardType="number-pad"
               autoCapitalize="none"
               onChangeText={(text) => changeHandle(["birth", text])}
-              placeholder="birth"
+              placeholder="birth ex) 19990101"
               style={sytles.textinputContain}
             />
             <QuestionPicker changeHandle={changeHandle} />

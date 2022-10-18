@@ -101,7 +101,7 @@ export async function updateAccountRequest(data) {
             ...data
         })
         console.log(response)
-
+        return response.data
 
     } catch (e) {
         console.log(e.message);

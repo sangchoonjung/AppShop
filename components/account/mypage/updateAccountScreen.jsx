@@ -1,6 +1,6 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import BaseFont from "../../../assets/font/base";
 import BaseHeader from "../../../custom/baseHeader";
 import CustomButton from "../../../custom/customButton";
@@ -13,6 +13,7 @@ function UpdateAccountScreen() {
     const ctx = useContext(AppContext);
   const route = useRoute();
   const [updateData, setUpdateData] = useState({});
+  const navigation = useNavigation()
   // console.log(route.params)
   useEffect(() => {
     if (route?.params?.id && route?.params?.email) {
@@ -31,7 +32,7 @@ function UpdateAccountScreen() {
     });
   };
 
-  const submitHandle = () => {
+  const submitHandle = async () => {
     const data = {};
     //입력을 했다가 지워버리면 값이 "" 으로 변해서 불필요한 정보가 넘어가길래 수정
     for (let value in updateData) {
@@ -41,7 +42,14 @@ function UpdateAccountScreen() {
         data[value] = updateData[value];
       }
     }
-    updateAccountRequest(data);
+    const rst = await updateAccountRequest(data);
+    console.log(rst,"rst")
+    if (rst) {
+      Alert.alert("Ok", "바뀜")
+      navigation.goBack();
+    } else {
+      Alert.alert("Error", "Error!");
+    }
     console.log(data);
     };
     const logOutHandle = () => {

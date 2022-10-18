@@ -7,6 +7,7 @@ import CustomButton from "../../../custom/customButton";
 import { MaterialIcons } from "@expo/vector-icons";
 import { updateAccountRequest } from "../../../util/account";
 import { AppContext } from "../../../context/auth";
+import QuestionPicker from "../login/questionPicker";
 
 function UpdateAccountScreen() {
     const ctx = useContext(AppContext);
@@ -86,12 +87,9 @@ function UpdateAccountScreen() {
               placeholder="Confirm Password"
               style={styles.data}
             />
-            <TextInput
-              autoCapitalize="none"
-              onChangeText={(text) => changeHandle(["question", text])}
-              placeholder="My Question"
-              style={styles.data}
-            />
+
+            <QuestionPicker changeHandle={changeHandle} />
+
             <TextInput
               autoCapitalize="none"
               onChangeText={(text) => changeHandle(["answer", text])}

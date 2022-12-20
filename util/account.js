@@ -1,17 +1,12 @@
 import axios from "axios"
 
-
-
-const { baseURL } = require("./baseURL")
-
-
-
-
+import { baseURL } from "./baseURL"
+//로그인
 export async function sendLoginRequest(id, passWord) {
     console.log(id, passWord);
     try {
 
-        const response = await axios.post(baseURL + "/api/account/login", {
+        const response = await axios.post(baseURL + "/api/account/ConsumerLogin", {
             "id": id,
             "passWord": passWord
         })
@@ -31,7 +26,7 @@ export async function sendRegisterRequest(data) {
             return;
         }
 
-        const response = await axios.post(baseURL + "/api/account/register", {
+        const response = await axios.post(baseURL + "/api/account/ConsumerRegister", {
             "id": data.id,
             "passWord": data.passWord,
             "email": data.email,
@@ -54,13 +49,13 @@ export async function sendRegisterRequest(data) {
     }
 
 }
-
+//아이디 체크
 export async function sendIdCheck(id) {
     try {
         if (!id) {
             return;
         }
-        const response = await axios.post(baseURL + "/api/account/idCheck", {
+        const response = await axios.post(baseURL + "/api/account/ConsumerIdCheck", {
             id: id
         });
         // console.log(response.data)
@@ -114,7 +109,7 @@ export async function updateAccountRequest(data) {
 export async function setNewPassWordRequest(id, hint, passWord) {
     //비번찾기 답 받아서 비교해서 맞으면 변경(서버에서)
     try {
-        console.log(id,hint.answer,hint.question,passWord)
+        console.log(id, hint.answer, hint.question, passWord)
 
         const response = await axios.post(baseURL + "/api/account/resetPassWord", {
             id: id,
@@ -134,22 +129,22 @@ export async function setNewPassWordRequest(id, hint, passWord) {
 }
 
 
-export async function sendProductPendingAddRequest(userId, productId, unit,price) {
+export async function sendProductPendingAddRequest(userId, productId, unit, price) {
     try {
-        if (!userId || !productId || !unit||!price) {
+        if (!userId || !productId || !unit || !price) {
             return;
         }
         const response = await axios.post(baseURL + "/api/account/pendingRequest", {
             id: userId,
             productId: productId,
             unit: unit,
-            price:price,
-            date:Date.now(),
+            price: price,
+            date: Date.now(),
         });
         if (response?.data?.result) {
             return response?.data.message
         }
-        console.log(response.data,"sang")
+        console.log(response.data, "sang")
         return response.data
 
     } catch (e) {

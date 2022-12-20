@@ -21,34 +21,36 @@ function HomeScreen() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const ctx = useContext(AppContext);
 
-
   useEffect(() => {
     ctx.setLoading(true);
-    requestAllProduct().then(p => {
-      if (p) {
-        setItemList(p.message);
-      }
-    }).catch(e => console.log(e.message))
+    requestAllProduct()
+      .then((p) => {
+        if (p) {
+          setItemList(p.message);
+          // console.log(p);
+        }
+      })
+      .catch((e) => console.log(e.message))
       .finally(() => {
-        ctx.setLoading(false)
+        ctx.setLoading(false);
       });
   }, []);
 
-  // console.log(itemList)
+  console.log(itemList);
   useEffect(() => {
     if (!(searchKeyword === "")) {
       return;
     }
     //예외처리
 
-
     if (filter?.length >= 1) {
       ctx.setLoading(true);
-      categoryFilteredProduct(filter).then(p => setItemList(p?.message))
+      categoryFilteredProduct(filter)
+        .then((p) => setItemList(p?.message))
         .finally(() => {
-          ctx.setLoading(false)
-        }).catch(e => console.log(e.message));
-
+          ctx.setLoading(false);
+        })
+        .catch((e) => console.log(e.message));
     }
 
     if (filter?.length === 0) {
@@ -56,21 +58,20 @@ function HomeScreen() {
       //모든 값 제거했을 때(빈 필터) 약간의 로딩 딜레이 있음(나중에 스피너)
       ctx.setLoading(true);
 
-      requestAllProduct().then(p => {
-        if (p) {
-          setItemList(p.message);
-        }
-      }).catch(e => console.log(e.message)).finally(() => {
-        ctx.setLoading(false)
-      });
+      requestAllProduct()
+        .then((p) => {
+          if (p) {
+            setItemList(p.message);
+          }
+        })
+        .catch((e) => console.log(e.message))
+        .finally(() => {
+          ctx.setLoading(false);
+        });
     }
 
-    ctx.setLoading(false)
-
+    ctx.setLoading(false);
   }, [filter]);
-
-
-
 
   const searchHandle = (keyword) => {
     // console.log(keyword,"Keyword")
@@ -85,7 +86,6 @@ function HomeScreen() {
     <View style={{ flex: 1 }}>
       <MainHeader back={true} />
       <View style={styles.boxContain}>
-
         <SearchBar
           searchKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
   boxContain: {
     paddingBottom: 15,
     backgroundColor: "#B4FBFF",
-
   },
 });
 export default HomeScreen;

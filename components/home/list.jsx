@@ -4,12 +4,11 @@ import { AppContext } from "../../context/auth";
 import { requestAllProduct } from "../../util/product";
 import Item from "./item";
 
-function List({ item,refreshOneProduct }) {
+function List({ item, refreshOneProduct }) {
   const ctx = useContext(AppContext);
   const zzimList = ctx.zzimList;
   const setZzim = ctx.setZzim;
   // console.log(zzimList)
-  
 
   const [refresh, setRefresh] = useState(false);
   return (
@@ -23,10 +22,16 @@ function List({ item,refreshOneProduct }) {
             setRefresh(false);
           }, 1000);
         }}
-        
         data={item}
-        renderItem={({ item }) => <Item data={item} key={item?.key} refreshOneProduct={refreshOneProduct} />}
-        showsVerticalScrollIndicator={false} />
+        renderItem={({ item }) => (
+          <Item
+            data={item}
+            key={item?.key}
+            refreshOneProduct={refreshOneProduct}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }

@@ -24,10 +24,9 @@ function Item({ data, refreshOneProduct }) {
   const [rating, setRating] = useState([]);
   useEffect(() => {
     if (ctx.completeReview.includes(data.key)) {
-      setReviewButton(false)
+      setReviewButton(false);
     }
-  }, [ctx.completeReview])
-
+  }, [ctx.completeReview]);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -50,12 +49,10 @@ function Item({ data, refreshOneProduct }) {
       ]);
     }
   };
-
-
-
+  console.log(data.Image, "이미지");
   const goToReivew = () => {
-    setReiviewModalOpen(current => !current)
-  }
+    setReiviewModalOpen((current) => !current);
+  };
 
   const deleteHandler = async () => {
     const zzimList = ctx.zzimList;
@@ -70,49 +67,45 @@ function Item({ data, refreshOneProduct }) {
   // const addedDate = data?.date ? dateCutting(data?.date) : "";
 
   useEffect(() => {
+    let count = 0;
 
-    let count = 0
-    
-    data.review.map(item => {
+    data.Review.map((item) => {
       count += Number(item.content.rating).toFixed(1);
-      
     });
-    const avg = count / data.review.length;
+    const avg = count / data.Review.length;
 
     setRating(avg);
-
-  }, [data.review])
+  }, [data.Review]);
   // console.log(rating,"레이팅");
   // console.log(data.review)
-  
+
   return (
     <Pressable onPress={detailNavigation}>
       <View style={styles.itemContainer}>
         <Image
-          source={{ uri: data?.titleImage }}
+          source={{ uri: data?.Image }}
           style={styles.left}
           resizeMode={"contain"}
         />
 
         <View style={styles.right}>
-          <BaseFont>No.{data.key}</BaseFont>
           <BaseFont>
-            {data.title.length > 30
-              ? data.title.substring(0, 25) + "..."
-              : data.title}
+            {data.Name.length > 30
+              ? data.Name.substring(0, 25) + "..."
+              : data.Name}
           </BaseFont>
-          <BaseFont>평점 ({rating?rating:"0"})</BaseFont>
+          {/* <BaseFont>평점 ({rating ? rating : "0"})</BaseFont> */}
 
           <BaseFont>
             {/* 마이페이지에서 펜딩탭에서  버튼 */}
-            {data.unit ? (
+            {data.ProductQuantity ? (
               <View style={styles.mountFixContain}>
                 <View>
-                  <BaseFont>Unit : {data.unit} ea</BaseFont>
+                  <BaseFont>Unit : {data.ProductQuantity} ea</BaseFont>
                   <BaseFont
                     style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
                   >
-                    Total : $ {data.price}
+                    Total : $ {data.Price}
                   </BaseFont>
                 </View>
                 {/* <View>
@@ -126,13 +119,12 @@ function Item({ data, refreshOneProduct }) {
                 </View> */}
               </View>
             ) : (
-              `$ ${data.standardFee}.00`
+              `$ ${data.Price}.00`
             )}
           </BaseFont>
           {/* 찜에서 버튼 */}
           {data?.zzimType && (
             <View style={styles.zzimListButton}>
-
               <CustomButton
                 style={styles.zzimButtonView}
                 onPress={detailNavigation}
@@ -145,16 +137,16 @@ function Item({ data, refreshOneProduct }) {
               >
                 <Feather name="trash-2" size={20} color="white" />
               </CustomButton>
-
             </View>
           )}
           {/* 마이페이지에서 complete에서 버튼 */}
-          {(data?.type === "complete" && reviewButton) && (
+          {data?.type === "complete" && reviewButton && (
             <View style={styles.goToReivew}>
-              <CustomButton onPress={goToReivew} style={styles.zzimButtonView}>Write Review</CustomButton>
+              <CustomButton onPress={goToReivew} style={styles.zzimButtonView}>
+                Write Review
+              </CustomButton>
             </View>
-          )
-          }
+          )}
           <View>
             <ReviewModal
               reiviewModalOpen={reiviewModalOpen}
@@ -216,7 +208,7 @@ const styles = StyleSheet.create({
   mountFixButton: {
     paddingVertical: 5,
     paddingHorizontal: 5,
-    marginLeft: 30
-  }
+    marginLeft: 30,
+  },
 });
 export default Item;

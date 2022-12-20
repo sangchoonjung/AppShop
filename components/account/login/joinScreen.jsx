@@ -1,14 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 
-import { View, Text, StyleSheet, TextInput, Button, Alert, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  Alert,
+  ScrollView,
+} from "react-native";
 import CustomButton from "../../../custom/customButton";
 import { sendIdCheck, sendRegisterRequest } from "../../../util/account";
 import MainHeader from "../../mainheader";
 import QuestionPicker from "./questionPicker";
 
-function JoinScreen({  }) {
-  const navigation = useNavigation()
+function JoinScreen({}) {
+  const navigation = useNavigation();
   const [registData, setRegistData] = useState({
     id: "",
     passWord: "",
@@ -27,21 +35,21 @@ function JoinScreen({  }) {
   const submitHandle = async () => {
     console.log(registData);
     const rst = await sendRegisterRequest(registData);
-    console.log(rst)
+    console.log(rst);
     if (rst.result) {
       Alert.alert("system", "complete!", [
         {
           text: "ok",
           onPress: () => {
-            navigation.navigate("loginScreen")
-          }
-        }
-      ])
+            navigation.navigate("loginScreen");
+          },
+        },
+      ]);
     }
     if (rst?.result === false && rst?.message) {
       Alert.alert("error", rst.message);
     }
-  }
+  };
 
   const checkId = async () => {
     // console.log(registData.id)
@@ -72,7 +80,7 @@ function JoinScreen({  }) {
             keyboardType="email-address"
             autoCapitalize="none"
             onChangeText={(text) => changeHandle(["id", text])}
-            placeholder="id"
+            placeholder="가입용 이메일"
             style={[sytles.textinputContain, { marginBottom: 2 }]}
           />
           <CustomButton onPress={checkId} style={sytles.checkButton}>
@@ -96,7 +104,7 @@ function JoinScreen({  }) {
               keyboardType="email-address"
               autoCapitalize="none"
               onChangeText={(text) => changeHandle(["email", text])}
-              placeholder="email"
+              placeholder="아이디찾기용 이메일"
               style={sytles.textinputContain}
             />
             <TextInput
@@ -130,13 +138,11 @@ const sytles = StyleSheet.create({
     marginHorizontal: 30,
     borderWidth: 1,
     padding: 20,
-    borderColor: "#cccccc"
-
+    borderColor: "#cccccc",
   },
   checkButton: {
     fontSize: 20,
-    marginHorizontal: 10
-
+    marginHorizontal: 10,
   },
   textinputContain: {
     borderWidth: 1,
@@ -145,7 +151,7 @@ const sytles = StyleSheet.create({
     marginBottom: 10,
     marginHorizontal: 10,
     borderRadius: 2,
-    borderColor: "#cccccc"
+    borderColor: "#cccccc",
   },
 });
 export default JoinScreen;

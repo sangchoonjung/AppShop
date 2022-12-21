@@ -22,21 +22,24 @@ function FindAccount({ onClose, getAccount, visible }) {
     <>
       <Modal visible={visible} animationType={"slide"} transparent={true}>
         {/* 바깥쪽 눌렀을때 나가게 하기 */}
-        <Pressable style={{ flex: 1, backgroundColor: "#000", opacity: 0.2 }} onPress={onClose} />
+        <Pressable
+          style={{ flex: 1, backgroundColor: "#000", opacity: 0.2 }}
+          onPress={onClose}
+        />
         <View style={styles.modalContainer}>
-          <BaseFont style={{ fontSize: 20, textAlign: "center" }}>
-            Please enter your email
+          <BaseFont
+            style={{ fontSize: 20, textAlign: "center", paddingBottom: 10 }}
+          >
+            가입 당시 이메일
           </BaseFont>
           <TextInput
-            placeholder="Enter Your Email"
+            placeholder="이메일"
             keyboardType="default"
             onChangeText={(email) => setEmail(email)}
             value={email}
             style={styles.textInputContain}
           />
-          <CustomButton style={{ marginTop: 20 }} onPress={onClose}>
-            Cancel
-          </CustomButton>
+
           <CustomButton onPress={find}>Confirm</CustomButton>
         </View>
       </Modal>
@@ -48,10 +51,10 @@ const styles = StyleSheet.create({
   modalContainer: {
     backgroundColor: "white",
     justifyContent: "center",
-    height: 400,
+    height: 300,
     width: "100%",
     marginTop: "auto",
-    marginBottom: 50
+    marginBottom: 50,
   },
   textInputContain: {
     textAlign: "center",

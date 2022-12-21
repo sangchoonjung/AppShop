@@ -1,33 +1,16 @@
 {
   "expo": {
-    "name": "AppShop",
-    "slug": "AppShop",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "name": "AppShopConsumer",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/start.jpg",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "version": "1.0.0",
+    "slug": "your-app-slug",
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.choon.AppShop",
+      "buildNumber": "1.0.0"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "package": "com.choon.AppShop",
+      "versionCode": 1
     }
   }
 }

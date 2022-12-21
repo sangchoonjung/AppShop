@@ -71,7 +71,7 @@ export async function findIdByEmail(email) {
         if (!email) {
             return;
         }
-        const response = await axios.post(baseURL + "/api/account/findId", {
+        const response = await axios.post(baseURL + "/api/account/ConsumerFindId", {
             email: email
         })
         return response.data
@@ -111,7 +111,7 @@ export async function setNewPassWordRequest(id, hint, passWord) {
     try {
         console.log(id, hint.answer, hint.question, passWord)
 
-        const response = await axios.post(baseURL + "/api/account/resetPassWord", {
+        const response = await axios.post(baseURL + "/api/account/ConsumerResetPassWord", {
             id: id,
             answer: hint.answer,
             passWord: passWord,

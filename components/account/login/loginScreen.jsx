@@ -42,6 +42,7 @@ function LoginScreen({ navigation }) {
     });
   };
 
+  //로그인 이벤트
   const loginHandle = async () => {
     if (loginData.id.length < 1 || loginData.passWord.length < 1) {
       return;
@@ -52,6 +53,7 @@ function LoginScreen({ navigation }) {
       const recv = await sendLoginRequest(loginData.id, loginData.passWord);
       // 로그인한후 인증 셋팅
       if (recv?.result) {
+        console.log(recv.message);
         ctx.login(
           recv.message.id,
           recv.token,

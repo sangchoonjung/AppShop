@@ -12,8 +12,6 @@ import ReviewModal from "./qnaAndReview/reviewModal";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
-import FixamountUnit from "../account/mypage/fixamountUnit";
-
 function Item({ data, refreshOneProduct }) {
   const navigation = useNavigation();
   const ctx = useContext(AppContext);
@@ -27,8 +25,6 @@ function Item({ data, refreshOneProduct }) {
       setReviewButton(false);
     }
   }, [ctx.completeReview]);
-
-  const [modalVisible, setModalVisible] = useState(false);
 
   const detailNavigation = () => {
     console.log(ctx.auth);

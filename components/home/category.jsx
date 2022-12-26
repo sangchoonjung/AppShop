@@ -2,20 +2,16 @@ import { useEffect, useState } from "react";
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import CategoryListItem from "./categoryListItem";
 
-
 function Category({ filter, setFilter, setSearchKeyword }) {
-
-
   const [category, setCategory] = useState([]);
   useEffect(() => {
     function readCategory() {
-      const { categoryList } = require("../../data/data-dummy")
-      return categoryList
-    };
+      const { categoryList } = require("../../data/data-dummy");
+      return categoryList;
+    }
     const list = readCategory();
     setCategory(list);
   }, []);
-
 
   const filterhandle = (e) => {
     // console.log(e)
@@ -28,7 +24,11 @@ function Category({ filter, setFilter, setSearchKeyword }) {
   // console.log(category)
   return (
     <View style={styles.scrollContainer}>
-      <ScrollView horizontal={true} style={{ paddingHorizontal: 20 }} showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal={true}
+        style={{ paddingHorizontal: 20 }}
+        showsHorizontalScrollIndicator={false}
+      >
         {category.map((e) => (
           <CategoryListItem
             filter={filter}

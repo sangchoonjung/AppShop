@@ -18,7 +18,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   const pendingList = ctx.pendingList;
   const completeList = ctx.completeList;
   const navigation = useNavigation();
-  
+
   // console.log(pendingList)
   /*
   초기세팅
@@ -53,11 +53,12 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   const pendingHandle = async () => {
     const recv = await sendProductPendingAddRequest(
       ctx.auth.id,
-      data.key,
+      data.SKU,
       productCount,
-      productCount * data.standardFee
+      productCount * data.Price,
+      ctx.auth.token
     );
-    // console.log(recv,"pendingggg")
+    console.log(recv, "pendingggg")
     ctx.setPendingList(recv);
     setModalVisible(false);
     navigation.navigate("mypage");

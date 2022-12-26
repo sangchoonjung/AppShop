@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from 'react';
 
 export const AppContext = createContext({});
 
@@ -10,18 +10,20 @@ export function AppContextProvider({ children }) {
     const [pendingList, setPendingList] = useState([]);
     const [completeList, setCompleteList] = useState([]);
 
-    const [completeReview,setCompleteReview]=useState([])
+    const [completeReview, setCompleteReview] = useState([]);
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const login = (id, token, email, data) => {
         setAuth({ id: id, token: token, email: email });
         setUserInfo({ data: data });
         setZzimList(data.zzimList);
+        console.log(data);
         setPendingList(data.productPendingItem);
         setCompleteList(data.productCompleteItem);
-        setCompleteReview(data.completeReview)
-    }
+        setCompleteReview(data.completeReview);
+    };
+    console.log(pendingList);
     const logout = () => {
         setAuth(null);
         setUserInfo(null);
@@ -29,26 +31,35 @@ export function AppContextProvider({ children }) {
         setPendingList([]);
         setCompleteList([]);
         setCompleteReview([]);
-    }
+    };
 
     const setZzim = (list) => {
-        setZzimList(list)
-    }
+        setZzimList(list);
+    };
 
-    const setCompleteReviewList =(response)=>{
-        
+    const setCompleteReviewList = (response) => {
         setCompleteReview(response);
-
-    }
+    };
     return (
-        <AppContext.Provider value={{
-            auth, login, logout, userInfo, zzimList, setZzim, pendingList, setPendingList
-            , completeList, setCompleteList,completeReview,setCompleteReviewList,
-            loading, setLoading
-        }}>
+        <AppContext.Provider
+            value={{
+                auth,
+                login,
+                logout,
+                userInfo,
+                zzimList,
+                setZzim,
+                pendingList,
+                setPendingList,
+                completeList,
+                setCompleteList,
+                completeReview,
+                setCompleteReviewList,
+                loading,
+                setLoading,
+            }}
+        >
             {children}
         </AppContext.Provider>
-    )
-
-
+    );
 }

@@ -3,20 +3,19 @@ import axios from "axios"
 const { baseURL } = require("./baseURL")
 // import products from "../data/data-dummy";
 
+//전체 아이템리스트 요청
 export async function requestAllProduct() {
     try {
-
         const response = await axios.post(baseURL + "/api/product/allProductList", {
-
         })
-        // console.log(response.data)
+
         return response.data
     } catch (e) {
         console.log(e.message)
     }
 }
 
-
+//카테고리 선택 요청
 export async function categoryFilteredProduct(category) {
 
     try {
@@ -30,7 +29,7 @@ export async function categoryFilteredProduct(category) {
         console.log(e.message);
     }
 }
-
+//검색 요청
 export async function searchFilteredProduct(keyword) {
     try {
         console.log(keyword)

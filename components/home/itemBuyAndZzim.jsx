@@ -13,12 +13,12 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   const [pend, setPend] = useState(false);
   const [complete, setComplete] = useState(false);
   const ctx = useContext(AppContext);
-  const zzimList = ctx.zzimList;
-  const setZzim = ctx.setZzim;
+  const zzimList = ctx.zzimList; //찜한 리스트
+  const setZzim = ctx.setZzim; //찜목록 넣기
   const pendingList = ctx.pendingList;
   const completeList = ctx.completeList;
   const navigation = useNavigation();
-  
+
   // console.log(pendingList)
   /*
   초기세팅
@@ -34,9 +34,11 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
     }
   }, [pendingList]);
 
+  //찜한거 렌더링
   useEffect(() => {
     const initZzim = ctx.zzimList;
-    if (initZzim.some((e) => e.id === String(data.key))) {
+    console.log(ctx.zzimList, "??????????????????");
+    if (initZzim.some((e) => e.itemSKU === String(data.SKU))) {
       setHeartOnOff(true);
     } else {
       setHeartOnOff(false);
@@ -84,24 +86,25 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
     let zzim = zzimList;
     try {
       // 삭제
-      if (zzimList.some((e) => e.id === String(data.key))) {
-        zzim = zzimList.filter((e) => e.id !== String(data.key));
+
+      if (zzimList.some((e) => e.itemSKU === String(data.SKU))) {
+        zzim = zzimList.filter((e) => e.itemSKU !== String(data.SKU));
         // console.log(zzim)
         setZzim(zzim);
-        // 등록
       } else {
+        // 등록
         zzim = [
           ...zzim,
-          { id: String(data.key), date: Date.now(), zzimType: true },
+          { itemSKU: String(data.SKU), date: Date.now(), zzimType: true },
         ];
         setZzim(zzim);
       }
-
       const rst = await sendZzimUpdateRequest(ctx.auth.id, zzim);
     } catch (e) {
       console.log(e.message);
     }
   };
+  console.log(zzimList, "리스트");
 
   let footer = <></>;
   if (pend) {

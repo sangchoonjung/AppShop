@@ -1,4 +1,3 @@
-import { CurrentRenderContext } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { AppContext } from "../../context/auth";
@@ -8,9 +7,7 @@ import {
   searchFilteredProduct,
 } from "../../util/product";
 import Loading from "../common/loading";
-import { Ionicons } from "@expo/vector-icons";
 import MainHeader from "../mainheader";
-import Header from "../mainheader";
 import Category from "./category";
 import List from "./list";
 import SearchBar from "./searchBar";
@@ -21,13 +18,13 @@ function HomeScreen() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const ctx = useContext(AppContext);
 
+  //전체 아이템 불러오기
   useEffect(() => {
     ctx.setLoading(true);
     requestAllProduct()
       .then((p) => {
         if (p) {
           setItemList(p.message);
-          // console.log(p);
         }
       })
       .catch((e) => console.log(e.message))
@@ -36,13 +33,8 @@ function HomeScreen() {
       });
   }, []);
 
-  console.log(itemList);
+  //필터링 검색 불러오기
   useEffect(() => {
-    if (!(searchKeyword === "")) {
-      return;
-    }
-    //예외처리
-
     if (filter?.length >= 1) {
       ctx.setLoading(true);
       categoryFilteredProduct(filter)
@@ -55,7 +47,6 @@ function HomeScreen() {
 
     if (filter?.length === 0) {
       //필터 제거하면 전체목록
-      //모든 값 제거했을 때(빈 필터) 약간의 로딩 딜레이 있음(나중에 스피너)
       ctx.setLoading(true);
 
       requestAllProduct()
@@ -73,13 +64,26 @@ function HomeScreen() {
     ctx.setLoading(false);
   }, [filter]);
 
+  //서치바 검색 핸들러
   const searchHandle = (keyword) => {
     // console.log(keyword,"Keyword")
-    if (keyword === "") {
-      return;
+    if (keyword == "") {
+      requestAllProduct()
+        .then((p) => {
+          if (p) {
+            setItemList(p.message);
+          }
+        })
+        .catch((e) => console.log(e.message))
+        .finally(() => {
+          ctx.setLoading(false);
+        });
     }
     setFilter([]);
-    searchFilteredProduct(keyword).then((e) => setItemList(e.message));
+    searchFilteredProduct(keyword).then((e) => {
+      console.log(e);
+      setItemList(e.message);
+    });
   };
 
   return (

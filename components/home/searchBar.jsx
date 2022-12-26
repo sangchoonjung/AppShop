@@ -5,7 +5,9 @@ function SearchBar({ searchHandle, searchKeyword, setSearchKeyword }) {
     <View style={styles.mainContain}>
       <TextInput
         value={searchKeyword}
-        onChangeText={(text) => setSearchKeyword(text)}
+        onChangeText={(text) => {
+          setSearchKeyword(text);
+        }}
         style={styles.inputContain}
       />
       <FontAwesome
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
   },
   inputContain: {
     flex: 1,
-    paddingVertical: 5,
+    paddingVertical: 3,
   },
   button: {
     marginRight: 10,

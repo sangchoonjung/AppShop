@@ -26,6 +26,7 @@ function MypageScreen({ navigation }) {
       .then((item) => {
         if (item && item?.result && item.message.length > 0) {
           setPendingList(item.message);
+          console.log(item.message)
         }
       })
       .catch((e) => console.log(e.message));
@@ -41,8 +42,7 @@ function MypageScreen({ navigation }) {
 
 
 
-  // console.log(pendingList)
-  // console.log(completeList)
+  console.log(pendingList)
 
 
 
@@ -62,12 +62,12 @@ function MypageScreen({ navigation }) {
   // console.log(pendingList.length,"렝쓰ㅡ으으으으")
   // console.log(pendingList)
   const testButton = async () => {
-    try{
-    const result = await sendPendToCompleteReqDummy(ctx.auth.id, ctx.pendingList);
+    try {
+      const result = await sendPendToCompleteReqDummy(ctx.auth.id, ctx.pendingList);
       console.log(result, "결과!")
     } catch (e) {
       console.log(e);
-      }
+    }
   }
 
   const updateNavigationHandle = () => {
@@ -77,11 +77,11 @@ function MypageScreen({ navigation }) {
 
   const refreshOneProduct = (updateProduct) => {
     // setItemList
-    if(!updateProduct){
+    if (!updateProduct) {
       return;
     }
     console.log(updateProduct, "updateProduct")
-    const except = completeList.map(e =>{if(e.key !== updateProduct.key){return e}})
+    const except = completeList.map(e => { if (e.key !== updateProduct.key) { return e } })
     // console.log(except)
     setCompleteList(updateProduct);
   }
@@ -114,7 +114,7 @@ function MypageScreen({ navigation }) {
             </View>
           )
         }
-        <Button title="테스트" onPress={testButton}/>
+        <Button title="테스트" onPress={testButton} />
       </View>
     </View>
   );
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     textShadowColor: "#1663be",
     textShadowRadius: 5,
     color: "#222222",
-    fontWeight:"500"
+    fontWeight: "500"
 
   }
 });

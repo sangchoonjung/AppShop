@@ -74,7 +74,6 @@ function Item({ data, refreshOneProduct }) {
   }, [data.Review]);
   // console.log(rating,"레이팅");
   // console.log(data.review)
-
   return (
     <Pressable onPress={detailNavigation}>
       <View style={styles.itemContainer}>
@@ -97,11 +96,11 @@ function Item({ data, refreshOneProduct }) {
             {data.ProductQuantity ? (
               <View style={styles.mountFixContain}>
                 <View>
-                  <BaseFont>Unit : {data.ProductQuantity} ea</BaseFont>
+                  <BaseFont>Unit : {data.unit} ea x (${data.Price})</BaseFont>
                   <BaseFont
                     style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
                   >
-                    Total : $ {data.Price}
+                    Total : $ {data.Price * data.unit}
                   </BaseFont>
                 </View>
                 {/* <View>

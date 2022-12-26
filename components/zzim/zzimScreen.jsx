@@ -4,7 +4,7 @@ import { View, Text, Pressable, StyleSheet, Alert, Button } from "react-native";
 import BaseFont from "../../assets/font/base";
 import { AppContext } from "../../context/auth";
 import CustomButton from "../../custom/customButton";
-import { requestZzimProduct } from "../../util/product";
+import { authTokenSend, requestZzimProduct } from "../../util/product";
 import { sendPendToCompleteReqDummy } from "../../util/userInfo";
 import List from "../home/list";
 import MainHeader from "../mainheader";
@@ -12,62 +12,65 @@ import MainHeader from "../mainheader";
 function ZzimScreen({ navigation }) {
   const [itemList, setItemList] = useState([]);
   const ctx = useContext(AppContext);
-
   const [selected, setSelected] = useState(true);
   const focused = useIsFocused();
 
-  const onPressPendToComplete = async() => {
+  const onPressPendToComplete = async () => {
     //더미코드
     // console.log(ctx.auth.id)
     // console.log(ctx.pendingList)
-    const rst =  await sendPendToCompleteReqDummy(ctx.auth.id,ctx.pendingList)
+    const rst = await sendPendToCompleteReqDummy(ctx.auth.id, ctx.pendingList);
     // console.log(rst)
-  }
+  };
 
-  useEffect(() => {
-    requestZzimProduct(ctx.zzimList).then(list => {
-      if (list) {
-        list.message.reverse()
-        setItemList(list.message)
-        // console.log(list)
-      }
-    })
-      .catch(e => console.log(e))
-    if (!focused) {
-      return;
-    }
-    // console.log(focused);
-  }, [ctx.zzimList])
-
+  // useEffect(() => {
+  //   requestZzimProduct(ctx.zzimList)
+  //     .then((list) => {
+  //       console.log(list, " 찜한거 ");
+  //       if (list) {
+  //         list.message.reverse();
+  //         setItemList(list.message);
+  //         // console.log(list)
+  //       }
+  //     })
+  //     .catch((e) => console.log(e));
+  //   if (!focused) {
+  //     return;
+  //   }
+  // }, [ctx.zzimList]);
 
   // console.log(itemList,"?????????????????????????")
+  const test = async () => {
+    //사용자 토큰
+    const consumerToken = ctx.auth.token;
+    const consumerZzimList = ctx.zzimList;
+    const response = await requestZzimProduct(consumerToken, consumerZzimList);
+  };
 
   const newestHandle = () => {
     if (selected) {
       return;
     }
     setSelected(true);
-    setItemList(current => current.sort((b, a) => a.date - b.date));
-
-  }
-
+    setItemList((current) => current.sort((b, a) => a.date - b.date));
+  };
 
   const oldestHandle = () => {
     if (!selected) {
       return;
     }
     setSelected(false);
-    setItemList(current => current.sort((a, b) => a.date - b.date));
-
-  }
+    setItemList((current) => current.sort((a, b) => a.date - b.date));
+  };
   const goToLoginHandle = () => {
-    navigation.navigate("account")
-  }
-  if (!ctx.auth) {
+    navigation.navigate("account");
+  };
 
+  //로그인 안됬을때 화면
+  if (!ctx.auth) {
     return (
       <View style={styles.notLoginCont}>
-        <View style={{flex:1,marginTop:200}}>
+        <View style={{ flex: 1, marginTop: 200 }}>
           <BaseFont style={styles.notLoginTitleTxt}>MEMBER ONLY!</BaseFont>
           <Text>{"\n"}</Text>
           <Text style={styles.notLoginTxt}>Plesae be Login!</Text>
@@ -75,19 +78,22 @@ function ZzimScreen({ navigation }) {
             LOGIN
           </CustomButton>
         </View>
-        <View><BaseFont style={{
-          fontSize: 12,
-          color: "green",
-          textShadowColor: "purple",
-          textShadowRadius: 5,
-          marginBottom:10
-        }}>Created By Han and Choon</BaseFont></View>
+        <View>
+          <BaseFont
+            style={{
+              fontSize: 12,
+              color: "green",
+              textShadowColor: "purple",
+              textShadowRadius: 5,
+              marginBottom: 10,
+            }}
+          >
+            Created By Han and Choon
+          </BaseFont>
+        </View>
       </View>
     );
   }
-
-
-
 
   return (
     <View style={styles.main}>
@@ -108,6 +114,7 @@ function ZzimScreen({ navigation }) {
             Oldest{" "}
           </Text>
         </Pressable>
+        <Button title="test" onPress={test} />
       </View>
 
       {itemList.length > 0 && <List item={itemList} />}
@@ -121,7 +128,6 @@ function ZzimScreen({ navigation }) {
       </View> */}
       {/* 현재 계정의 팬딩을 컴플리트로 옮기는 코드*/}
     </View>
-
   );
 }
 
@@ -142,16 +148,15 @@ const styles = StyleSheet.create({
   boxContain: {
     backgroundColor: "#B4FBFF",
     alignItems: "center",
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   notLoginCont: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   btnStyle: {
     paddingHorizontal: 32,
-    
   },
   notLoginTitleTxt: {
     fontSize: 25,
@@ -159,14 +164,14 @@ const styles = StyleSheet.create({
     textShadowColor: "purple",
     textShadowRadius: 5,
     color: "#222222",
-    textAlign:"center"
+    textAlign: "center",
   },
   notLoginTxt: {
     fontSize: 14,
     textShadowColor: "purple",
     textShadowRadius: 2,
     color: "green",
-    textAlign:"center"
-  }
+    textAlign: "center",
+  },
 });
 export default ZzimScreen;

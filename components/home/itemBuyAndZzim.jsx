@@ -37,7 +37,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   //찜한거 렌더링
   useEffect(() => {
     const initZzim = ctx.zzimList;
-    console.log(ctx.zzimList, "??????????????????");
+
     if (initZzim.some((e) => e.itemSKU === String(data.SKU))) {
       setHeartOnOff(true);
     } else {
@@ -60,7 +60,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
       productCount * data.Price,
       ctx.auth.token
     );
-    console.log(recv, "pendingggg")
+    console.log(recv, "pendingggg");
     ctx.setPendingList(recv);
     setModalVisible(false);
     navigation.navigate("mypage");

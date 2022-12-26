@@ -10,7 +10,7 @@ function MainHeader({ back }) {
   };
   return (
     <View style={styles.main}>
-      {!back && (
+      {back && (
         <View>
           <Ionicons
             name="arrow-back-outline"
@@ -22,9 +22,7 @@ function MainHeader({ back }) {
       )}
 
       <View>
-        <BaseFont style={{ fontSize: 20}}>
-          Beauty Shop
-        </BaseFont>
+        <BaseFont style={{ fontSize: 20 }}>Beauty Shop</BaseFont>
       </View>
     </View>
   );
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     flexDirection: "row",
     justifyContent: "center",
-  alignItems:"center"
+    alignItems: "center",
   },
 });
 

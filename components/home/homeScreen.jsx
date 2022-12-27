@@ -31,7 +31,7 @@ function HomeScreen() {
       .finally(() => {
         ctx.setLoading(false);
       });
-  }, []);
+  }, [ctx.pendingList]);
 
   //필터링 검색 불러오기
   useEffect(() => {

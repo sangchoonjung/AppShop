@@ -25,7 +25,6 @@ function Item({ data, refreshOneProduct }) {
       setReviewButton(false);
     }
   }, [ctx.completeReview]);
-
   const detailNavigation = () => {
     console.log(ctx.auth);
     if (ctx.auth) {
@@ -100,7 +99,16 @@ function Item({ data, refreshOneProduct }) {
                   <BaseFont
                     style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
                   >
-                    Total : $ {data.Price * data.unit}
+
+                    Total :
+                    <BaseFont
+                      style={{ color: "gray", fontSize: 18, marginTop: 10, textDecorationLine: "line-through" }}
+                    >
+                      $ {data.Price * data.unit}
+                    </BaseFont>
+                    {"\n"}
+                    &nbsp;&nbsp;=&gt; ${data.FinalPrice * data.unit}
+
                   </BaseFont>
                 </View>
 
@@ -111,8 +119,13 @@ function Item({ data, refreshOneProduct }) {
                   {/* <BaseFont>Unit : ea x (${data.Price})</BaseFont> */}
                   <BaseFont
                     style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
-                  >
-                    $ {data.Price} / Unit
+                  >&nbsp;
+                    <BaseFont
+                      style={{ color: "gray", fontSize: 18, marginTop: 10, textDecorationLine: "line-through" }}
+                    >
+                      $ {data.Price}
+                    </BaseFont>
+                    &nbsp;&nbsp;=&gt; ${data.FinalPrice}
                   </BaseFont>
                 </View>
               </View>

@@ -159,7 +159,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
                 </Text>
               </View>
               <BaseFont style={styles.modalTotalPrice}>
-                Total $ {data.standardFee * productCount}
+                Total $ {data.Price * productCount}
               </BaseFont>
             </View>
             {/* 모달 버튼 */}

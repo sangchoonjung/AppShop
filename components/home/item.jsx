@@ -4,10 +4,7 @@ import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import BaseFont from "../../assets/font/base";
 import { AppContext } from "../../context/auth";
 import CustomButton from "../../custom/customButton";
-import { dateCutting } from "../../util/function";
-import { requestZzimProduct } from "../../util/product";
 import { sendZzimUpdateRequest } from "../../util/userInfo";
-import ItemBuyAndZzim from "./itemBuyAndZzim";
 import ReviewModal from "./qnaAndReview/reviewModal";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -15,18 +12,17 @@ import { AntDesign } from "@expo/vector-icons";
 function Item({ data, refreshOneProduct }) {
   const navigation = useNavigation();
   const ctx = useContext(AppContext);
-
   const [reiviewModalOpen, setReiviewModalOpen] = useState(false);
-
   const [reviewButton, setReviewButton] = useState(true);
   const [rating, setRating] = useState([]);
+
   useEffect(() => {
     if (ctx.completeReview.includes(data.key)) {
       setReviewButton(false);
     }
   }, [ctx.completeReview]);
+
   const detailNavigation = () => {
-    console.log(ctx.auth);
     if (ctx.auth) {
       navigation.navigate("detail", { tag: data });
     } else {
@@ -81,7 +77,6 @@ function Item({ data, refreshOneProduct }) {
           style={styles.left}
           resizeMode={"contain"}
         />
-
         <View style={styles.right}>
           <BaseFont>
             {data.Name.length > 30
@@ -103,23 +98,32 @@ function Item({ data, refreshOneProduct }) {
             {data.unit ? (
               <View style={styles.mountFixContain}>
                 <View>
-                  <BaseFont>Unit : {data.unit} ea x (${data.Price})</BaseFont>
+                  <BaseFont>
+                    Unit : {data.unit} ea x (${data.Price})
+                  </BaseFont>
                   <BaseFont
                     style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
                   >
-
                     Total :
                     <BaseFont
-                      style={{ color: "gray", fontSize: 18, marginTop: 10, textDecorationLine: "line-through" }}
+                      style={{
+                        color: "gray",
+                        fontSize: 18,
+                        marginTop: 10,
+                        textDecorationLine: "line-through",
+                      }}
                     >
                       $ {data.Price * data.unit}
                     </BaseFont>
                     {"\n"}
+
+
+
                     &nbsp;&nbsp;=&gt; ${(data.FinalPrice * data.unit)?.toFixed(3)}
+
 
                   </BaseFont>
                 </View>
-
               </View>
             ) : (
               <View style={styles.mountFixContain}>
@@ -127,9 +131,15 @@ function Item({ data, refreshOneProduct }) {
                   {/* <BaseFont>Unit : ea x (${data.Price})</BaseFont> */}
                   <BaseFont
                     style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
-                  >&nbsp;
+                  >
+                    &nbsp;
                     <BaseFont
-                      style={{ color: "gray", fontSize: 18, marginTop: 10, textDecorationLine: "line-through" }}
+                      style={{
+                        color: "gray",
+                        fontSize: 18,
+                        marginTop: 10,
+                        textDecorationLine: "line-through",
+                      }}
                     >
                       $ {data.Price}
                     </BaseFont>

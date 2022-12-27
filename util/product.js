@@ -57,7 +57,7 @@ export async function requestZzimProduct(token, zzimList) {
       },
       { headers: { "x-access-token": token } }
     );
-    console.log(response.data, "ssssssssss");
+
     return response.data;
   } catch (e) {
     console.log(e.message);

@@ -5,14 +5,8 @@ import {
   requestCompleteProductList,
   requestPendingProductList,
 } from "../../../util/product";
-
-import List from "../../home/list";
-import MainHeader from "../../mainheader";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import CustomButton from "../../../custom/customButton";
 import BaseFont from "../../../assets/font/base";
-
 import TabViewExample from "./tabViewNavigator";
 import { sendPendToCompleteReqDummy } from "../../../util/userInfo";
 
@@ -26,7 +20,7 @@ function MypageScreen({ navigation }) {
       .then((item) => {
         if (item && item?.result && item.message.length > 0) {
           setPendingList(item.message);
-          console.log(item.message)
+          // console.log(item.message)
         }
       })
       .catch((e) => console.log(e.message));
@@ -40,12 +34,7 @@ function MypageScreen({ navigation }) {
       .catch((e) => console.log(e.message));
   }, [ctx.pendingList, ctx.completeList]);
 
-
-
-  console.log(pendingList)
-
-
-
+  console.log(pendingList);
 
   useEffect(() => {
     requestCompleteProductList(ctx.completeList)
@@ -58,45 +47,60 @@ function MypageScreen({ navigation }) {
       .catch((e) => console.log(e.message));
   }, [ctx.completeList]);
 
-
   // console.log(pendingList.length,"렝쓰ㅡ으으으으")
   // console.log(pendingList)
   const testButton = async () => {
     try {
-      const result = await sendPendToCompleteReqDummy(ctx.auth.id, ctx.pendingList);
-      console.log(result, "결과!")
+      const result = await sendPendToCompleteReqDummy(
+        ctx.auth.id,
+        ctx.pendingList
+      );
+      console.log(result, "결과!");
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   const updateNavigationHandle = () => {
     navigation.navigate("update", { id: ctx.auth.id, email: ctx.auth.email });
   };
-
 
   const refreshOneProduct = (updateProduct) => {
     // setItemList
     if (!updateProduct) {
       return;
     }
-    console.log(updateProduct, "updateProduct")
-    const except = completeList.map(e => { if (e.key !== updateProduct.key) { return e } })
+    console.log(updateProduct, "updateProduct");
+    const except = completeList.map((e) => {
+      if (e.key !== updateProduct.key) {
+        return e;
+      }
+    });
     // console.log(except)
     setCompleteList(updateProduct);
-  }
+  };
   return (
     <View style={styles.mainContain}>
       <View style={styles.accountSetting}>
         <Pressable
-          style={({ pressed }) => (pressed ? { opacity: 0.5 } : null)}
+          style={[({ pressed }) => (pressed ? { opacity: 0.5 } : null)]}
           onPress={updateNavigationHandle}
         >
-          <MaterialCommunityIcons name="account" size={50} color="#1E90FF" style={{ marginTop: 10 }} />
+          <View>
+            <MaterialCommunityIcons
+              name="account"
+              size={50}
+              color="#1E90FF"
+              style={{ marginTop: 10 }}
+            />
+            <Text>내정보 수정</Text>
+          </View>
         </Pressable>
       </View>
       <View>
-        <BaseFont style={{ marginLeft: 30, marginBottom: 5 }}>Welcome, {ctx.auth.id} !</BaseFont>
+        <BaseFont style={{ marginLeft: 30, marginBottom: 5 }}>
+          Welcome, {ctx.auth.id} !
+        </BaseFont>
       </View>
       <View style={{ flex: 1 }}>
         {(pendingList.length > 0 || completeList.length > 0) && (
@@ -107,13 +111,11 @@ function MypageScreen({ navigation }) {
           />
         )}
 
-        {
-          (!pendingList.length > 0 && !completeList.length > 0) && (
-            <View style={styles.textContai}>
-              <Text style={styles.exceptText}>No Products in Progress</Text>
-            </View>
-          )
-        }
+        {!pendingList.length > 0 && !completeList.length > 0 && (
+          <View style={styles.textContai}>
+            <Text style={styles.exceptText}>No Products in Progress</Text>
+          </View>
+        )}
         <Button title="테스트" onPress={testButton} />
       </View>
     </View>
@@ -129,19 +131,18 @@ const styles = StyleSheet.create({
     margin: 30,
   },
   accountSetting: {
-    flexDirection: "row",
+    flexDirection: "column",
     margin: 20,
-    marginBottom: 5,
+    marginBottom: 10,
     borderBottomWidth: 1,
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 10,
-    borderColor: "#999999"
+    borderColor: "#999999",
   },
   textContai: {
     justifyContent: "center",
     height: "65%",
-
   },
   exceptText: {
     textAlign: "center",
@@ -149,9 +150,8 @@ const styles = StyleSheet.create({
     textShadowColor: "#1663be",
     textShadowRadius: 5,
     color: "#222222",
-    fontWeight: "500"
-
-  }
+    fontWeight: "500",
+  },
 });
 
 export default MypageScreen;

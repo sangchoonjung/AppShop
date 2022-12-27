@@ -33,7 +33,7 @@ function JoinScreen({}) {
   };
 
   const submitHandle = async () => {
-    console.log(registData);
+    // console.log(registData);
     const rst = await sendRegisterRequest(registData);
     console.log(rst);
     if (rst.result) {

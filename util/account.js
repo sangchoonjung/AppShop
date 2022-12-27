@@ -92,7 +92,6 @@ export async function updateAccountRequest(data) {
     }
 
     try {
-        console.log(data);
         const response = await axios.post(
             baseURL + '/api/account/updateAccount',
             {

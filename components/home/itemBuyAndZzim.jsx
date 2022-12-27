@@ -114,28 +114,22 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
 
   // 찜버튼 (하트 온오프)
   const heartHandler = async () => {
-    let zzim = zzimList;
-    try {
-      // 삭제
-
-      if (zzimList.some((e) => e.itemSKU === String(data.SKU))) {
-        zzim = zzimList.filter((e) => e.itemSKU !== String(data.SKU));
-        // console.log(zzim)
-        setZzim(zzim);
-      } else {
-        // 등록
-        zzim = [
-          ...zzim,
-          { itemSKU: String(data.SKU), date: Date.now(), zzimType: true },
-        ];
-        setZzim(zzim);
-      }
-      const rst = await sendZzimUpdateRequest(ctx.auth.id, zzim);
-    } catch (e) {
-      console.log(e.message);
+    let zzim;
+    // 삭제
+    if (zzimList.some((e) => e.itemSKU === String(data.SKU))) {
+      zzim = zzimList.filter((e) => e.itemSKU !== String(data.SKU));
+      // console.log(zzim)
+      setZzim(zzim);
+    } else {
+      // 등록
+      zzim = [
+        ...zzim,
+        { itemSKU: String(data.SKU), zzimDate: new Date(), zzimType: true },
+      ];
+      setZzim(zzim);
     }
+    const rst = await sendZzimUpdateRequest(ctx.auth.id, zzim);
   };
-  console.log(zzimList, "리스트");
 
   // let footer = <></>;
 

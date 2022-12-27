@@ -18,7 +18,6 @@ export function AppContextProvider({ children }) {
         setAuth({ id: id, token: token, email: email });
         setUserInfo({ data: data });
         setZzimList(data.zzimList);
-        console.log(data);
         setPendingList(data.productPendingItem);
         setCompleteList(data.productCompleteItem);
         setCompleteReview(data.completeReview);

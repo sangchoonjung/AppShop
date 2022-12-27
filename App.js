@@ -15,6 +15,7 @@ import { AppContext, AppContextProvider } from './context/auth';
 import { useContext } from 'react';
 import UpdateAccountScreen from './components/account/mypage/updateAccountScreen';
 import ItemDetailScreen from './components/home/itemDetailScreen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 const Tab = createBottomTabNavigator();
@@ -90,11 +91,13 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <AppContextProvider>
-        <NavigationContainer>
-          <DefaultNavigator />
-        </NavigationContainer>
-      </AppContextProvider>
+      <SafeAreaProvider>
+        <AppContextProvider>
+          <NavigationContainer>
+            <DefaultNavigator />
+          </NavigationContainer>
+        </AppContextProvider>
+      </SafeAreaProvider>
     </>
   );
 }

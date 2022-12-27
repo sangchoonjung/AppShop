@@ -10,10 +10,10 @@ import { AppContext } from "../../../context/auth";
 import QuestionPicker from "../login/questionPicker";
 
 function UpdateAccountScreen() {
-    const ctx = useContext(AppContext);
+  const ctx = useContext(AppContext);
   const route = useRoute();
   const [updateData, setUpdateData] = useState({});
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   // console.log(route.params)
   useEffect(() => {
     if (route?.params?.id && route?.params?.email) {
@@ -43,19 +43,19 @@ function UpdateAccountScreen() {
       }
     }
     const rst = await updateAccountRequest(data);
-    console.log(rst,"rst")
+    // console.log(rst,"rst")
     if (rst) {
-      Alert.alert("Ok", "바뀜")
+      Alert.alert("Ok", "바뀜");
       navigation.goBack();
     } else {
       Alert.alert("Error", "Error!");
     }
-    console.log(data);
-    };
-    const logOutHandle = () => {
-        ctx.logout();
-    }
-    
+    // console.log(data);
+  };
+  const logOutHandle = () => {
+    ctx.logout();
+  };
+
   return (
     <>
       <View style={styles.mainContainer}>

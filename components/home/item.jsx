@@ -93,7 +93,7 @@ function Item({ data, refreshOneProduct }) {
 
           <BaseFont>
             {/* 마이페이지에서 펜딩탭에서  버튼 */}
-            {data.ProductQuantity ? (
+            {data.unit ? (
               <View style={styles.mountFixContain}>
                 <View>
                   <BaseFont>Unit : {data.unit} ea x (${data.Price})</BaseFont>
@@ -103,18 +103,20 @@ function Item({ data, refreshOneProduct }) {
                     Total : $ {data.Price * data.unit}
                   </BaseFont>
                 </View>
-                {/* <View>
-                  {data?.type !== "complete" &&
-                    <FixamountUnit
-                      setModalVisible={setModalVisible}
-                      modalVisible={modalVisible}
-                      data={data}
-                    />
-                  }
-                </View> */}
+
               </View>
             ) : (
-              `$ ${data.Price}.00`
+              <View style={styles.mountFixContain}>
+                <View>
+                  {/* <BaseFont>Unit : ea x (${data.Price})</BaseFont> */}
+                  <BaseFont
+                    style={{ color: "#006699", fontSize: 18, marginTop: 10 }}
+                  >
+                    $ {data.Price} / Unit
+                  </BaseFont>
+                </View>
+              </View>
+              // `$ ${data.Price}.00`
             )}
           </BaseFont>
           {/* 찜에서 버튼 */}

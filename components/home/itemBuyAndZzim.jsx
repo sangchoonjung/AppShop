@@ -7,7 +7,8 @@ import { sendZzimUpdateRequest } from "../../util/userInfo";
 import { sendProductPendingAddRequest } from "../../util/account";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../custom/customButton";
-function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
+import { format } from "date-fns";
+function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
   const [heartOnOff, setHeartOnOff] = useState(false);
   const [productCount, setProductCount] = useState(1);
   const [pend, setPend] = useState(false);
@@ -19,6 +20,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   const completeList = ctx.completeList;
   const navigation = useNavigation();
 
+  const [footer, setFooter] = useState(<></>)
   // console.log(pendingList)
   /*
   초기세팅
@@ -33,7 +35,35 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
       setComplete(true);
     }
   }, [pendingList]);
-
+  useEffect(() => {
+    if (deadline <= format(Date.now(), "yyyy-MM-dd")
+    ) {
+      setFooter(<View style={[styles.button, styles.buttonOpen]}>
+        <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
+      </View>)
+    } else if (pend) {
+      setFooter(
+        <View style={[styles.button, styles.buttonOpen]}>
+          <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
+        </View>
+      );
+    } else if (complete) {
+      setFooter(
+        <View style={[styles.button, styles.buttonOpen]}>
+          <BaseFont style={[styles.textStyle]}>already complete</BaseFont>
+        </View>
+      );
+    } else {
+      setFooter(
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}
+        >
+          <BaseFont style={styles.modalButton}>pending now</BaseFont>
+        </Pressable>
+      );
+    }
+  }, [pend, complete, deadline])
   //찜한거 렌더링
   useEffect(() => {
     const initZzim = ctx.zzimList;
@@ -107,29 +137,8 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
   };
   console.log(zzimList, "리스트");
 
-  let footer = <></>;
-  if (pend) {
-    footer = (
-      <View style={[styles.button, styles.buttonOpen]}>
-        <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
-      </View>
-    );
-  } else if (complete) {
-    footer = (
-      <View style={[styles.button, styles.buttonOpen]}>
-        <BaseFont style={[styles.textStyle]}>already complete</BaseFont>
-      </View>
-    );
-  } else {
-    footer = (
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <BaseFont style={styles.modalButton}>pending now</BaseFont>
-      </Pressable>
-    );
-  }
+  // let footer = <></>;
+
 
   return (
     <>
@@ -182,7 +191,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
 
       {/* 모달 띄우기 */}
       <View style={styles.blockLayout}>
-        {
+        {/* {
           disable ? (
             <View style={[styles.button, styles.buttonOpen]}>
               <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
@@ -191,32 +200,10 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, disable }) {
             footer
           )
 
-          /*
-            !pend ? (
-              !complete ?
-              (
-                <View style={[styles.button, styles.buttonOpen]}>
-                  <BaseFont style={[styles.textStyle]}>already complete</BaseFont>
-                </View>
-              )
-              :
-              <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => setModalVisible(true)}
-              >
-                <BaseFont style={styles.modalButton}>pending now</BaseFont>
-              </Pressable>
-            ) :
-              (
 
+        } */}
 
-                  <View style={[styles.button, styles.buttonOpen]}>
-                    <BaseFont style={[styles.textStyle]}>already pending</BaseFont>
-                  </View>
-              )
-              */
-        }
-
+        {footer}
         {/* 찜 on/off */}
         <Pressable style={styles.heartLayout}>
           <Entypo

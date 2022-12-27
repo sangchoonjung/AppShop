@@ -84,7 +84,15 @@ function Item({ data, refreshOneProduct }) {
               : data.Name}
           </BaseFont>
           {/* <BaseFont>평점 ({rating ? rating : "0"})</BaseFont> */}
-
+          {data.FinalPrice / data.Price !== 1 &&
+            <BaseFont style={{
+              fontStyle: 'italic', fontSize: 15,
+              color: "purple", textShadowColor: "violet",
+              textShadowRadius: 2,
+            }}>
+              {((1 - (data.FinalPrice / data.Price)) * 100)?.toFixed(3)}% Discount!
+            </BaseFont>
+          }
           <BaseFont>
             {/* 마이페이지에서 펜딩탭에서  버튼 */}
             {data.unit ? (
@@ -108,7 +116,12 @@ function Item({ data, refreshOneProduct }) {
                       $ {data.Price * data.unit}
                     </BaseFont>
                     {"\n"}
-                    &nbsp;&nbsp;=&gt; ${data.FinalPrice * data.unit}
+
+
+
+                    &nbsp;&nbsp;=&gt; ${(data.FinalPrice * data.unit)?.toFixed(3)}
+
+
                   </BaseFont>
                 </View>
               </View>
@@ -130,7 +143,7 @@ function Item({ data, refreshOneProduct }) {
                     >
                       $ {data.Price}
                     </BaseFont>
-                    &nbsp;&nbsp;=&gt; ${data.FinalPrice}
+                    &nbsp;&nbsp;=&gt; ${data.FinalPrice?.toFixed(3)}
                   </BaseFont>
                 </View>
               </View>

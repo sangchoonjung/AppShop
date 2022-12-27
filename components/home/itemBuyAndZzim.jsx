@@ -28,10 +28,10 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
   서버로 업데이트 하는김에 찜 목록을 재작성해서 ctx에 올려둠
   */
   useEffect(() => {
-    if (pendingList?.some((e) => e?.productId === data.key)) {
+    if (pendingList?.some((e) => e?.productId === data.SKU)) {
       setPend(true);
     }
-    if (completeList.some((e) => e?.productId === data.key)) {
+    if (completeList.some((e) => e?.productId === data.SKU)) {
       setComplete(true);
     }
   }, [pendingList]);
@@ -160,9 +160,28 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
                   +
                 </Text>
               </View>
-              <BaseFont style={styles.modalTotalPrice}>
-                Total $ {data.Price * productCount}
-              </BaseFont>
+              {data.FinalPrice / data.Price !== 1 ?
+                <BaseFont style={styles.modalTotalPrice}>
+                  <BaseFont style={{
+                    fontStyle: 'italic', fontSize: 15,
+                    color: "purple", textShadowColor: "violet",
+                    textShadowRadius: 2, textAlign: "center"
+                  }}>
+                    {"\n"}
+                    {((1 - (data.FinalPrice / data.Price)) * 100)?.toFixed(3)}% Discount!
+                    {"\n"}
+                  </BaseFont>
+                  Total $ <Text style={{ textDecorationLine: "line-through" }}>{data.Price * productCount}</Text>
+                  {"\n"}
+                  =&gt; $ {(data.FinalPrice * productCount).toFixed(3)}
+                </BaseFont>
+                :
+                <BaseFont style={styles.modalTotalPrice}>
+                  Total $ {data.Price * productCount}
+
+                </BaseFont>
+
+              }
             </View>
             {/* 모달 버튼 */}
 
@@ -280,7 +299,7 @@ const styles = StyleSheet.create({
   },
   modalTotalPrice: {
     fontSize: 25,
-    marginTop: 20,
+    marginTop: 10,
     textAlign: "center",
   },
   modalButtonContain: {

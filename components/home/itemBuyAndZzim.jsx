@@ -20,7 +20,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
   const completeList = ctx.completeList;
   const navigation = useNavigation();
 
-  const [footer, setFooter] = useState(<></>)
+  const [footer, setFooter] = useState(<></>);
   // console.log(pendingList)
   /*
   초기세팅
@@ -36,11 +36,12 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
     }
   }, [pendingList]);
   useEffect(() => {
-    if (deadline <= format(Date.now(), "yyyy-MM-dd")
-    ) {
-      setFooter(<View style={[styles.button, styles.buttonOpen]}>
-        <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
-      </View>)
+    if (deadline <= format(Date.now(), "yyyy-MM-dd")) {
+      setFooter(
+        <View style={[styles.button, styles.buttonOpen]}>
+          <BaseFont style={styles.modalButton}>Time Out!</BaseFont>
+        </View>
+      );
     } else if (pend) {
       setFooter(
         <View style={[styles.button, styles.buttonOpen]}>
@@ -63,8 +64,10 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
         </Pressable>
       );
     }
-  }, [pend, complete, deadline])
-  //찜한거 렌더링
+  }, [pend, complete, deadline]);
+  console.log(ctx.zzimList, "리스튼ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ");
+
+  //찜하는 하트아이콘 렌더링
   useEffect(() => {
     const initZzim = ctx.zzimList;
 
@@ -114,7 +117,7 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
 
   // 찜버튼 (하트 온오프)
   const heartHandler = async () => {
-    let zzim;
+    let zzim = ctx.zzimList;
     // 삭제
     if (zzimList.some((e) => e.itemSKU === String(data.SKU))) {
       zzim = zzimList.filter((e) => e.itemSKU !== String(data.SKU));
@@ -132,7 +135,6 @@ function ItemBuyAndZzim({ modalVisible, setModalVisible, data, deadline }) {
   };
 
   // let footer = <></>;
-
 
   return (
     <>

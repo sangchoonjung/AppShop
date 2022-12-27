@@ -23,7 +23,6 @@ import SetTime from "./setTime";
 function ItemDetailScreen() {
   const route = useRoute();
   const data = route.params.tag;
-  console.log(data);
   // console.log(data,"datas");
   const [modalVisible, setModalVisible] = useState(false);
   const [qnaReviewModalVisible, setQnaReviewModalVisible] = useState(false);
@@ -44,8 +43,8 @@ function ItemDetailScreen() {
     //잔여시간 0이하로 내려가면 기능 막기
     setDisable(true);
   };
-
-  const timeLimit = "2022-10-19";
+  console.log(data.Deadline);
+  const timeLimit = data.Deadline;
   // const timeLimit = data?.dueDate
   //20분 가정
   const qnaOpenHandle = () => {

@@ -23,29 +23,21 @@ function ZzimScreen({ navigation }) {
     // console.log(rst)
   };
 
-  // useEffect(() => {
-  //   requestZzimProduct(ctx.zzimList)
-  //     .then((list) => {
-  //       console.log(list, " 찜한거 ");
-  //       if (list) {
-  //         list.message.reverse();
-  //         setItemList(list.message);
-  //         // console.log(list)
-  //       }
-  //     })
-  //     .catch((e) => console.log(e));
-  //   if (!focused) {
-  //     return;
-  //   }
-  // }, [ctx.zzimList]);
+  useEffect(() => {
+    const reLoadZzimData = async () => {
+      //사용자 토큰
+      const consumerToken = ctx.auth.token;
+      //찜한 리스트 상태배열
+      const consumerZzimList = ctx.zzimList;
+      const response = await requestZzimProduct(
+        consumerToken,
+        consumerZzimList
+      );
 
-  // console.log(itemList,"?????????????????????????")
-  const test = async () => {
-    //사용자 토큰
-    const consumerToken = ctx.auth.token;
-    const consumerZzimList = ctx.zzimList;
-    const response = await requestZzimProduct(consumerToken, consumerZzimList);
-  };
+      // setItemList(response.message);
+    };
+    reLoadZzimData();
+  }, [ctx.zzimList]);
 
   const newestHandle = () => {
     if (selected) {
@@ -114,7 +106,6 @@ function ZzimScreen({ navigation }) {
             Oldest{" "}
           </Text>
         </Pressable>
-        <Button title="test" onPress={test} />
       </View>
 
       {itemList.length > 0 && <List item={itemList} />}

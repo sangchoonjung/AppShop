@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import BaseFont from "../../assets/font/base";
 import { timeCutting } from "../../util/function";
 
-function SetTime({ timeLimit, setDisableHandle }) {
+function SetTime({ timeLimit }) {
   const [leftTime, setLeftTime] = useState(new Date(timeLimit) - new Date());
   useEffect(() => {
     if (!timeLimit) { return; }
@@ -14,7 +14,7 @@ function SetTime({ timeLimit, setDisableHandle }) {
       setLeftTime(left)
       if (leftTime <= 0) {
         clearInterval(interval);
-        setDisableHandle();
+        // setDisableHandle();
       }
     }, 1000)
   }, [timeLimit]);

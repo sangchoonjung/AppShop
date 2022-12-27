@@ -28,13 +28,12 @@ function ItemDetailScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [qnaReviewModalVisible, setQnaReviewModalVisible] = useState(false);
   const [rating, setRating] = useState([]);
-  const [disable, setDisable] = useState(false);
   const [deadline, setDeadline] = useState()
 
   useEffect(() => {
     // console.log(route.params.tag.Deadline)
-    setDeadline(format(new Date(route.params.tag.Deadline), "yyyy-MM-dd"))
-    // setDeadline("2022-12-30")
+    // setDeadline(format(new Date(route.params.tag.Deadline), "yyyy-MM-dd"))
+    setDeadline("2022-12-30")
   }, [route.params.tag.deadline])
 
   useEffect(() => {
@@ -47,10 +46,6 @@ function ItemDetailScreen() {
     setRating(avg);
   }, []);
 
-  const setDisableHandle = () => {
-    //잔여시간 0이하로 내려가면 기능 막기
-    setDisable(true);
-  };
 
   console.log(data.Deadline);
   const timeLimit = data.Deadline;
@@ -76,7 +71,7 @@ function ItemDetailScreen() {
             {/* {available === "able" ? */}
             <SetTime
               timeLimit={deadline}
-              setDisableHandle={() => setDisableHandle(data?.key)}
+            // setDisableHandle={() => setDisableHandle(data?.key)}
             />
           </View>
           <Image

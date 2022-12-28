@@ -33,8 +33,7 @@ function ZzimScreen({ navigation }) {
         consumerToken,
         consumerZzimList
       );
-
-      // setItemList(response.message);
+      setItemList(response.message);
     };
     reLoadZzimData();
   }, [ctx.zzimList]);

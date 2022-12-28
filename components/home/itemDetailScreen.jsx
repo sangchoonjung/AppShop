@@ -28,13 +28,13 @@ function ItemDetailScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [qnaReviewModalVisible, setQnaReviewModalVisible] = useState(false);
   const [rating, setRating] = useState([]);
-  const [deadline, setDeadline] = useState()
+  const [deadline, setDeadline] = useState();
 
   useEffect(() => {
     // console.log(route.params.tag.Deadline)
     // setDeadline(format(new Date(route.params.tag.Deadline), "yyyy-MM-dd"))
-    setDeadline("2022-12-30")
-  }, [route.params.tag.deadline])
+    setDeadline("2022-12-30");
+  }, [route.params.tag.deadline]);
 
   useEffect(() => {
     let count = 0;
@@ -45,7 +45,6 @@ function ItemDetailScreen() {
 
     setRating(avg);
   }, []);
-
 
   console.log(data.Deadline);
   const timeLimit = data.Deadline;
@@ -71,7 +70,7 @@ function ItemDetailScreen() {
             {/* {available === "able" ? */}
             <SetTime
               timeLimit={deadline}
-            // setDisableHandle={() => setDisableHandle(data?.key)}
+              // setDisableHandle={() => setDisableHandle(data?.key)}
             />
           </View>
           <Image
@@ -129,13 +128,20 @@ function ItemDetailScreen() {
               QnA / Review
             </CustomButton>
           </View>
-
           <View style={styles.detailImgContain}>
-            {/* <Image
-              source={{ uri: data.detailImage }}
-              style={styles.detailImg}
-              resizeMode={"contain"}
-            /> */}
+            <Text>{data.Description}</Text>
+          </View>
+          <View style={styles.detailImgContain}>
+            {data.SubImage.length > 0 &&
+              data.SubImage.map((i) => {
+                return (
+                  <Image
+                    source={{ uri: i }}
+                    style={styles.titleImageContain}
+                    resizeMode={"contain"}
+                  />
+                );
+              })}
           </View>
         </View>
       </ScrollView>
